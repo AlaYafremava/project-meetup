@@ -1,7 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
-// import Img from './models/img.js'
+import peopleRouter from './routes/people'
 
 const app = express()
 
@@ -11,11 +11,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
 
-// app.get('/cat', async (req, res) => {
-//   const imgs = await Img.find()
-//   const randomCat = imgs[Math.floor(imgs.length * Math.random())]
-//   console.log(randomCat);
-//   res.status(200).json(randomCat)
-// })
+app.use('/people', peopleRouter)
 
 export default app
