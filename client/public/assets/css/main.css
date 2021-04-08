@@ -3969,12 +3969,12 @@ input, select, textarea {
 
 		#footer a {
 			color: #717981;
-			border-bottom-color: rgba(113, 121, 129, 0.5);
+			border-bottom-color: #18bfef;
 		}
 
 			#footer a:hover {
 				border-bottom-color: transparent;
-				color: #18bfef !important;
+				color: #717981 !important;
 			}
 
 		#footer strong, #footer b {
