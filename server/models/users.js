@@ -2,14 +2,15 @@ import mongoose from 'mongoose'
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
-  surname: { type: String, required: true, trim: true },
+  surname: { type: String, trim: true },
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  bday: { type: Date, required: true },
+  bday: { type: Date },
   phone: { type: Number },
-  sex: { type: String, required: true },
+  sex: { type: String },
   city: { type: String },
   profession: { type: String },
+  about: { type: String },
   regDate: { type: Date, default: Date.now() },
   tags: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -34,6 +35,10 @@ const userSchema = new mongoose.Schema({
   futureTravels: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Travel'
+  }],
+  friends: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }],
 })
 

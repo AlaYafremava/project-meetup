@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-// import Img from './models/img.js'
+import User from './models/users.js'
 
 async function seed() {
   await mongoose.connect('mongodb://localhost:27017/meetup', {
@@ -9,19 +9,27 @@ async function seed() {
     useFindAndModify: false
   });
 
-  // const imgs = [
-  //   {
-  //     src: 'http://c.files.bbci.co.uk/CD5E/production/_109447525_catsmaincoonunfriendly.jpg',
-  //   },
-  //   {
-  //     src: 'https://ichef.bbci.co.uk/news/640/cpsprodpb/42E2/production/_96522171_gettyimages-450864271.jpg',
-  //   },
-  //   {
-  //     src: 'https://habrastorage.org/webt/0f/h4/nr/0fh4nrc5alhzwwns40cej0duwec.jpeg',
-  //   },
-  // ]
-  // await Img.insertMany(imgs);
-  // await mongoose.connection.close();
+  const users = [
+    {
+      name: 'Oleg',
+      surname: 'Jut',
+      email: 'hdvfgd@mail.ru',
+      password: '625523',
+
+    },
+    {
+      name: 'jkhbhjg',
+      surname: 'kg',
+      email: 'hdvhggd@mail.ru',
+      password: '62557623',    },
+    {
+      name: 'lk',
+      surname: 'llll',
+      email: 'kjgiygkj@mail.ru',
+      password: '62559823',    },
+  ]
+  await User.insertMany(users);
+  await mongoose.connection.close();
 }
 
-// seed()
+seed()
