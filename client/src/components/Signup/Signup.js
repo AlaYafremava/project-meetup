@@ -9,6 +9,16 @@ function Signup({ authHandler }) {
             <label>Name</label>
             <input type="text" name="name" required autoFocus />
           </div>
+          <div className="field" style={{display: 'flex'}}>
+            <div className="col-4 col-12-small">
+              <input type="radio" id="demo-priority-low" name="sex" checked />
+              <label htmlFor="demo-priority-low">Woman</label>
+            </div>
+            <div className="col-4 col-12-small">
+              <input type="radio" id="demo-priority-normal" name="sex" />
+              <label htmlFor="demo-priority-normal">Man</label>
+            </div>
+          </div>
           <div className="field">
             <label>Email</label>
             <input type="email" name="email" required />
