@@ -17,7 +17,7 @@ function FormEdit({ }) {
 
           <div id='sexDiv' className="field">
             <div className="col-4 col-12-small">
-              <input type="radio" id="demo-priority-low" name="sex" checked />
+              <input type="radio" id="demo-priority-low" name="sex" dafaultChecked />
               <label htmlFor="demo-priority-low">Woman</label>
             </div>
             <div className="col-4 col-12-small">
