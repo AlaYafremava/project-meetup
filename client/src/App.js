@@ -5,13 +5,16 @@ import Profile from './components/Profile/Profile'
 import Auth from './components/Auth/Auth'
 import Main from './components/Profile/Profile'
 import store from './redux/store'
-import { Provider } from 'react-redux'
+import { Provider, useSelector } from 'react-redux'
 import Travels from './components/Travels/Travels'
 import CardUser from './components/CardUser/CardUser'
 import FormEdit from './components/FormEdit/FormEdit'
 
 
 function App() {
+
+  // const isAuth = useSelector(store => store.user.isAuth)
+
   return (
     <Provider store={store}>
       <Router>
