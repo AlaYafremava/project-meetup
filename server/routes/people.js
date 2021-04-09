@@ -1,6 +1,5 @@
 import Router from 'express'
 const router = new Router()
-
 import User from '../models/users.js'
 
 // router.route('/:id')
