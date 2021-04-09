@@ -7,6 +7,7 @@ import Main from './components/Profile/Profile'
 import store from './redux/store'
 import { Provider } from 'react-redux'
 import Travels from './components/Travels/Travels'
+import FormEdit from './components/FormEdit/FormEdit'
 
 function App() {
   return (
@@ -28,6 +29,11 @@ function App() {
           <Route path="/profile">
             <Profile />
           </Route>
+    
+            <Route path="/profile/edit">
+              <FormEdit />
+            </Route>
+
         </Switch>
       </Router>
     </Provider>

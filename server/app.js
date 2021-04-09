@@ -1,7 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
-import peopleRouter from './routes/people'
+import peopleRouter from './routes/people.js'
 
 const app = express()
 

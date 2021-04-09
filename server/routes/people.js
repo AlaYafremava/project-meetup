@@ -1,6 +1,6 @@
 import router from 'express'
 router.Router()
-import User from '../models/users'
+import User from '../models/users.js'
 
 router.route('/:id')
   .get(async (req, res) => {
