@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import './Login.css'
 
 function Login({authHandler}) {
@@ -21,9 +22,9 @@ function Login({authHandler}) {
             <input type="submit" value="Login" />
           </li>
           <li className='signupLi'>
-            <a className='signupA' href='#!' onClick={authHandler}>
+            <Link className='signupA' to='/' onClick={authHandler}>
               SignUp
-            </a>
+            </Link>
           </li>
         </ul>
       </form>
