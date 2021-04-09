@@ -1,0 +1,32 @@
+.media {
+  display: flex;
+}
+
+#intro {
+  display: 'flex';
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+}
+
+#footer {
+  width: 40%
+}
+
+
+@media (max-width: 980px) {
+  .media {
+    flex-direction: column;
+    width: 100%;
+ 
+  }
+
+  #intro {
+    align-self: center;
+    width: 90%;
+  }
+
+  #footer {
+    width: 90%
+  }
+}

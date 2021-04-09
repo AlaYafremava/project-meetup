@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
 import Login from '../Login/Login'
 import Signup from '../Signup/Signup'
+import './Auth.css'
 
 function Auth(props) {
   const [state, setState] = useState(true)
+
+  // console.log(styles);
 
   const authHandler = () => {
     setState(!state)
   }
 
   return (
-    <section style={{display: 'flex'}}>
-      <div id="intro" style={{width: '60%', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+    <section className="media">
+      <div id="intro">
         <h1>MeetUp</h1>
         <p>
           A free app that connects members to a global community of travelers. Use MeetUp to find
@@ -25,7 +28,7 @@ function Auth(props) {
           </li>
         </ul> */}
       </div>
-      <div id="footer" style={{width: '40%'}}>
+      <div id="footer">
 
         {state ? <Login authHandler={authHandler}/> : <Signup authHandler={authHandler}/> }
        
