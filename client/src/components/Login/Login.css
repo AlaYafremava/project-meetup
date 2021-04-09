@@ -1,0 +1,33 @@
+.sectionLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.formLogin {
+  margin: 0 auto;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.signupLi {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+
+.signupA {
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  color: #18bfef;
+}
+
+@media (max-width: 980px) {
+  .sectionLogin {
+    width: 100%;
+
+  }
+}
