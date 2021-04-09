@@ -9,7 +9,7 @@ function Login({authHandler}) {
         <div className="fields">
           <div className="field">
             <label>Email</label>
-            <input type="email" name="email" required autoFocus />
+            <input type="email" name="email" required autoFocus/>
           </div>
           <div className="field">
             <label>Password</label>
