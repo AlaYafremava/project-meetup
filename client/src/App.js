@@ -7,7 +7,9 @@ import Main from './components/Profile/Profile'
 import store from './redux/store'
 import { Provider } from 'react-redux'
 import Travels from './components/Travels/Travels'
+import CardUser from './components/CardUser/CardUser'
 import FormEdit from './components/FormEdit/FormEdit'
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Auth />
+            {/* <CardUser /> */}
           </Route>
 
           <Route path="/dashboard">
