@@ -16,5 +16,6 @@
   "bugs": {
     "url": "https://github.com/Alla-Yefremova/project-meetup/issues"
   },
-  "homepage": "https://github.com/Alla-Yefremova/project-meetup#readme"
+  "homepage": "https://github.com/Alla-Yefremova/project-meetup#readme",
+  "dependencies": {}
 }
