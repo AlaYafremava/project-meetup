@@ -7,6 +7,7 @@ import Main from './components/Main/Main'
 import store from './redux/store'
 import { Provider } from 'react-redux'
 import Travels from './components/Travels/Travels'
+import CardUser from './components/CardUser/CardUser'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Auth />
+            {/* <CardUser /> */}
           </Route>
           <div id="main">
             <Route path="/dashboard">
