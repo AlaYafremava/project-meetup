@@ -32,4 +32,4 @@ async function seed() {
   await mongoose.connection.close();
 }
 
-seed()
+// seed()

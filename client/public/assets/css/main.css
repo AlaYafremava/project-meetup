@@ -3515,8 +3515,8 @@ input, select, textarea {
 		-webkit-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
-		height: 20rem;
-		padding-bottom: 8rem;
+		height: 10rem;
+		padding-bottom: 5rem;
 		position: relative;
 		text-align: center;
 		z-index: 2;
@@ -3567,11 +3567,11 @@ input, select, textarea {
 			border-color: #ffffff;
 			border-width: 5px !important;
 			font-family: "Source Sans Pro", Helvetica, sans-serif;
-			font-size: 2.25rem;
+			font-size: 1.7rem;
 			font-weight: 900;
 			letter-spacing: 0.075em;
-			line-height: 1;
-			padding: 1rem 1.75rem;
+			/* line-height: 1; */
+			padding: 0.5rem 0.7rem;
 			text-transform: uppercase;
 			visibility: visible;
 		}
@@ -3756,6 +3756,7 @@ input, select, textarea {
 /* Main */
 
 	#main {
+    /* height: 100vh; */
 		background-color: #ffffff;
 		position: relative;
 		margin: 0 auto;
@@ -3779,7 +3780,7 @@ input, select, textarea {
 		}
 
 		#main > .post {
-			padding: 8rem 8rem 6rem 8rem ;
+			padding: 5rem 2rem 5rem 2rem ;
 		}
 
 			#main > .post header.major > .date {
@@ -3953,8 +3954,7 @@ input, select, textarea {
 		display: -webkit-flex;
 		display: -ms-flex;
 		display: flex;
-		background-color: #f5f5f5;
-		color: #909498;
+		background-color: #ffffff;
 		cursor: default;
 		position: relative;
 		margin: 0 auto;
@@ -3968,7 +3968,7 @@ input, select, textarea {
 		}
 
 		#footer a {
-			color: #717981;
+			/* color: #717981; */
 			border-bottom-color: #18bfef;
 		}
 

@@ -1,0 +1,29 @@
+.sectionSignup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.formSignup {
+  margin: 0 auto;
+}
+
+#sexDiv {
+  display: flex;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.loginLi {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loginA {
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  color: #18bfef;
+}
