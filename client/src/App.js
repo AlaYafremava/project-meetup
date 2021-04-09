@@ -7,6 +7,7 @@ import Main from './components/Main/Main'
 import store from './redux/store'
 import { Provider } from 'react-redux'
 import Travels from './components/Travels/Travels'
+import FormEdit from './components/FormEdit/FormEdit'
 
 function App() {
   return (
@@ -24,6 +25,10 @@ function App() {
 
             <Route path="/travels">
               <Travels />
+            </Route>
+
+            <Route path="/edit">
+              <FormEdit />
             </Route>
           </div>
         </Switch>
