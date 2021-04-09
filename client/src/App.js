@@ -1,33 +1,42 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css'
-import Header from './components/Header/Header'
+import Profile from './components/Profile/Profile'
 import Auth from './components/Auth/Auth'
-import Main from './components/Main/Main'
+import Main from './components/Profile/Profile'
 import store from './redux/store'
 import { Provider } from 'react-redux'
 import Travels from './components/Travels/Travels'
 import CardUser from './components/CardUser/CardUser'
+import FormEdit from './components/FormEdit/FormEdit'
+
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Header />
         <Switch>
           <Route exact path="/">
             <Auth />
             {/* <CardUser /> */}
           </Route>
-          <div id="main">
-            <Route path="/dashboard">
-              <Main />
+
+          <Route path="/dashboard">
+            <Main />
+          </Route>
+
+          <Route path="/travels">
+            <Travels />
+          </Route>
+
+          <Route path="/profile">
+            <Profile />
+          </Route>
+    
+            <Route path="/profile/edit">
+              <FormEdit />
             </Route>
 
-            <Route path="/travels">
-              <Travels />
-            </Route>
-          </div>
         </Switch>
       </Router>
     </Provider>
