@@ -4,26 +4,52 @@ import './Navbar.css'
 
 function Navbar(props) {
   return (
-    <nav id="navbar">
-      <ul className="links">
+    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+      <ul className="actions">
         <li>
-          <Link to="/profile">About</Link>
+          <a href="/profile" class="button">
+            About
+          </a>
         </li>
         <li>
-          <Link to="/profile/mytravels">My Travels</Link>
+          <a href="#" class="button">
+          My Travels
+          </a>
         </li>
-        <li class="active">
-          <Link to="/profile/myfriends">My Friends</Link>
+        <li>
+          <a href="/profile/myfriends" class="button">
+          My Friends
+          </a>
         </li>
       </ul>
-      <ul className="links">
-        <li>
-          <Link to="/profile" className="button primary">
+      <ul className="links" style={{ marginRight: '0' }}>
+        <li style={{listStyleType: 'none'}}>
+          <a href="/profile" className="button primary">
             Edit profile
-          </Link>
+          </a>
         </li>
       </ul>
-    </nav>
+    </div>
+    // <nav id="navbar" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+    //   <ul className="links">
+    //     <li>
+    //       <Link to="/profile">About</Link>
+    //     </li>
+    //     <li>
+    //       <Link to="/profile/mytravels">My Travels</Link>
+    //     </li>
+    //     <li className="active">
+    //       <Link to="/profile/myfriends">My Friends</Link>
+    //     </li>
+    //   </ul>
+    //   <ul className="links" style={{marginRight: '0'}}>
+    //     <li>
+    //       <Link to="/profile" className="button primary">
+    //         Edit profile
+    //       </Link>
+    //     </li>
+    //   </ul>
+    // </nav>
   )
 }
 

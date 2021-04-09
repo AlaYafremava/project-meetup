@@ -18,7 +18,7 @@
   .media {
     flex-direction: column;
     width: 100%;
- 
+
   }
 
   #intro {
@@ -29,4 +29,14 @@
   #footer {
     width: 90%
   }
+}
+
+.authLogo {
+  margin-bottom: 5rem
+}
+
+.authLogo_link {
+  font-size: inherit;
+  border: solid 0.4rem;
+  padding: 1.5rem 2rem 4.5rem 2rem;
 }
