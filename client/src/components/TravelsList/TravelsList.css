@@ -15,5 +15,5 @@ header > .date {
 }
 
 #main > .posts > article  {
-  border-top: 0;
+  border: 0;
 }

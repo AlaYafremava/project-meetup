@@ -1,10 +1,11 @@
 import React from 'react';
 
-function UserInterests(props) {
+function Map(props) {
   return (
     <div>
+      
     </div>
   );
 }
 
-export default UserInterests;
+export default Map;

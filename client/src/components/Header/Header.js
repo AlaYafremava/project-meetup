@@ -20,13 +20,13 @@ function Header(props) {
         <ul className="links headersLinks">
           <li>
 
-            <a href="/dashboard" className="links">Hangouts</a>
+            <a href="/hangouts" className="links">Hangouts</a>
           </li>
           <li>
             <a href="/travels">Travels</a>
           </li>
           <li>
-            <a href="/people/:id">My Profile</a>
+            <a href="/profile">My Profile</a>
           </li>
 
           <li /*className="active"*/>
