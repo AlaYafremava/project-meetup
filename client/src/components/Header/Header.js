@@ -1,8 +1,15 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import './Header.css'
+import { LOGOUT } from '../../redux/actionTypes/actionTypes'
 
 function Header(props) {
+const dispatch = useDispatch()
+const LogOutHandler = () => {
+  dispatch(LOGOUT)
+}
+
   return (
     <header id="header">
       <nav id="nav">
@@ -22,7 +29,7 @@ function Header(props) {
             <Link to="/people/:id">My Profile</Link>
           </li>
           <li class="active">
-            <Link to="/logout">LogOut</Link>
+            <Link onClick={LogOutHandler} to="/logout">LogOut</Link>
           </li>
         </ul>
       </nav>

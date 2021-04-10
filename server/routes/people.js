@@ -1,9 +1,10 @@
 import Router from 'express'
 const router = new Router()
 import User from '../models/users.js'
+import verToken from "../../server/middlware/auth.js"
 
 // router.route('/:id')
-//   .get(async (req, res) => {
+//   .get(verToken, async (req, res) => {
 //     let user
 //     try {
 //       const { id } = req.params
@@ -13,7 +14,7 @@ import User from '../models/users.js'
 //     }
 //     res.status(201).json(user)
 //   })
-  // .post(async (req, res) => {
+  // .post(verToken, async (req, res) => {
   //   const { name, surname, email, password, bday, phone, sex, city, profession, regDate, tags, languages, socials, userTravels, pastTravels, futureTravels } = req.body
 
   //   if (name && surname && email && password && bday && sex) {
@@ -24,7 +25,7 @@ import User from '../models/users.js'
   //     res.status(400).json({ create: false })
   //   }
   // })
-  // .put(async (req, res) => {
+  // .put(verToken, async (req, res) => {
   //   let user;
   //   const { id } = req.params
   //   const { name, surname, email, password, bday, phone, sex, city, profession, regDate, tags, languages, socials, userTravels, pastTravels, futureTravels } = req.body
