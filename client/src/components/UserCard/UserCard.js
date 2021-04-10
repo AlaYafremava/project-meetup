@@ -1,12 +1,13 @@
-import React from 'react'
+import React from 'react';
 import './UserCard.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams } from "react-router-dom"
 
 function UserCard(props) {
   const dispatch = useDispatch()
   const user = useSelector(store => store.auth.user)
-  console.log(user)
+  // console.log(user)
+
   return (
     <div className="card">
       <img src="avatar.jpeg" alt="avatar" className="avatar" />
@@ -38,7 +39,6 @@ function UserCard(props) {
         </li>
       </ul>
     </div>
-  )
+  );
 }
-
-export default UserCard
+export default UserCard;

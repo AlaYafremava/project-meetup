@@ -1,0 +1,13 @@
+input[type="submit"],
+.tags {
+  border-radius: 10px;
+  background-color: transparent;
+  box-shadow: inset 0 0 0 2px #18bfef;
+  color: #18bfef !important;
+  cursor: default;
+}
+
+input[type="submit"],
+.tags:active {
+  outline: none ;
+}

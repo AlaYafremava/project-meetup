@@ -2,9 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../Header/Header'
 import Navbar from '../Navbar/Navbar'
-// import UserAbout from '../UserAbout/UserAbout'
+import UserAbout from '../UserAbout/UserAbout'
 import UserCard from '../UserCard/UserCard'
-import UserTravels from '../UserTravels/UserTravels'
+// import UserTravels from '../UserTravels/UserTravels'
 
 function Profile(props) {
   return (
@@ -18,8 +18,8 @@ function Profile(props) {
             </div>
             <div className="col-9 col-12-small">
               <Navbar />
-              {/* <UserAbout /> */}
-              <UserTravels />
+              <UserAbout />
+              {/* <UserTravels /> */}
             </div>
           </div>
         </section>

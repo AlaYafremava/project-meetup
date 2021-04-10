@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import peopleRouter from './routes/people.js'
+import profileRouter from './routes/profileRouter.js'
 
 import authRouter from './routes/authRouter.js'
 
@@ -18,6 +19,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/people', peopleRouter)
+app.use('/', profileRouter)
 app.use(authRouter)
 
 export default app
