@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import './Header.css'
 import { LOGOUT } from '../../redux/actionTypes/actionTypes'
 
@@ -14,22 +15,26 @@ const LogOutHandler = () => {
     <header id="header">
       <nav id="nav">
         <div className="linkLogo">
-          <Link to="/" class="logo">
+          <a href="/" className="logo">
+
             Meetup
-          </Link>
+          </a>
         </div>
         <ul className="links headersLinks">
           <li>
-            <Link to="/dashboard">Hangouts</Link>
+
+            <a href="/hangouts" className="links">Hangouts</a>
           </li>
           <li>
-            <Link to="/travels">Travels</Link>
+            <a href="/travels">Travels</a>
           </li>
           <li>
-            <Link to="/people/:id">My Profile</Link>
+            <a href="/profile">My Profile</a>
           </li>
-          <li class="active">
-            <Link onClick={LogOutHandler} to="/logout">LogOut</Link>
+
+          <li /*className="active"*/>
+            <a href="/logout" onClick={logOutHandler}>LogOut</a>
+
           </li>
         </ul>
       </nav>

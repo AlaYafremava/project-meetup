@@ -1,55 +1,40 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import './Navbar.css'
 
 function Navbar(props) {
   return (
-    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+    <div className="nav_div">
       <ul className="actions">
         <li>
-          <a href="/profile" class="button">
+          <a href="/profile" class="button nav_btn nav-active">
             About
           </a>
         </li>
         <li>
-          <a href="#" class="button">
-          My Travels
+          <a href="/profile/travels" class="button nav_btn">
+            My Travels
           </a>
         </li>
         <li>
-          <a href="/profile/myfriends" class="button">
-          My Friends
+          <a href="/profile/friends" class="button nav_btn">
+            My Friends
           </a>
         </li>
       </ul>
-      <ul className="links" style={{ marginRight: '0' }}>
-        <li style={{listStyleType: 'none'}}>
-          <a href="/profile" className="button primary">
+      <ul className="links nav-ul_editbtn">
+        {/* <li className="nav-li_editbtn">
+          <a href="/profile/edit" className="button primary">
             Edit profile
+          </a>
+        </li> */}
+        <li className="nav-li_editbtn">
+          <a href="/profile/travels/new" className="button primary">
+            Create new travel
           </a>
         </li>
       </ul>
     </div>
-    // <nav id="navbar" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-    //   <ul className="links">
-    //     <li>
-    //       <Link to="/profile">About</Link>
-    //     </li>
-    //     <li>
-    //       <Link to="/profile/mytravels">My Travels</Link>
-    //     </li>
-    //     <li className="active">
-    //       <Link to="/profile/myfriends">My Friends</Link>
-    //     </li>
-    //   </ul>
-    //   <ul className="links" style={{marginRight: '0'}}>
-    //     <li>
-    //       <Link to="/profile" className="button primary">
-    //         Edit profile
-    //       </Link>
-    //     </li>
-    //   </ul>
-    // </nav>
   )
 }
 

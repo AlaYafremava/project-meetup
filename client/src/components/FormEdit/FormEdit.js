@@ -1,7 +1,7 @@
 import React from 'react'
 import './FormEdit.css'
 
-function FormEdit({ }) {
+function FormEdit() {
   return (
     <section className='sectionSignup'>
       <form className='formSignup'>

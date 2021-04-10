@@ -9,8 +9,11 @@ const userSchema = new mongoose.Schema({
   phone: { type: Number },
   sex: { type: String },
   city: { type: String },
+  homeTown: { type: String },
+  education: { type: String },
   profession: { type: String },
   about: { type: String },
+  avatar: {type: String},
   regDate: { type: Date, default: Date.now() },
   tags: [{
     type: mongoose.Schema.Types.ObjectId,
