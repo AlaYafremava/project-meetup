@@ -9,24 +9,34 @@ function UserCard(props) {
   console.log(user)
   return (
     <div className="card">
-      <img src={user.avatar} alt="" style={{ borderRadius: '100px' }} />
+      <img src="avatar.jpeg" alt="avatar" className="avatar" />
       <p className="userName">
-        {user.name} {user.surname}
+        <i>Alla Yefremova</i>
       </p>
-      <p className="title">{user.city}</p>
-      <a href="#">
-        <i className="fa fa-dribbble"></i>
-      </a>
-      <a href="#">
-        <i className="fa fa-twitter"></i>
-      </a>
-      <a href="#">
-        <i className="fa fa-linkedin"></i>
-      </a>
-      <a href="#">
-        <i className="fa fa-facebook"></i>
-      </a>
-      {/* <p><button>Contact</button></p> */}
+      <p className="title">
+        <i>
+          Saint-Petersburg, <br />
+          Russian Federation
+        </i>
+      </p>
+      <hr />
+      <ul className="icons alt">
+        <li>
+          <a href="#" className="icon brands alt fa-telegram">
+            <span class="label">Telegram</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" className="icon brands alt fa-facebook-f">
+            <span class="label">Facebook</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" className="icon brands alt fa-instagram">
+            <span class="label">Instagram</span>
+          </a>
+        </li>
+      </ul>
     </div>
   )
 }
