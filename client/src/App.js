@@ -10,7 +10,6 @@ import Travels from './components/Travels/Travels'
 import UserCard from './components/UserCard/UserCard'
 import FormEdit from './components/FormEdit/FormEdit'
 
-
 function App() {
 
   // const isAuth = useSelector(store => store.user.isAuth)
@@ -32,7 +31,7 @@ function App() {
             <Travels />
           </Route>
 
-          <Route path="/profile">
+          <Route exact path="/profile">
             <Profile />
           </Route>
     

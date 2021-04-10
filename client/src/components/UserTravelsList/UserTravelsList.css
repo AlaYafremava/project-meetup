@@ -1,0 +1,19 @@
+#main > .posts > * {
+  padding: 1rem;
+}
+
+.title-travels {
+  margin: 0 0 0.5rem 0;
+}
+
+.image.fit {
+    margin: 0.5rem 0;
+}
+
+header > .date {
+  margin: 0 ;
+}
+
+#main > .posts > article  {
+  border-top: 0;
+}
