@@ -1,0 +1,51 @@
+.element-icon {
+  position: relative;
+}
+
+/*replace the content value with the
+corresponding value from the list below*/
+
+.element-icon:before {
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+/*--adjust as necessary--*/
+  color: #000;
+  font-size: 18px;
+  padding-right: 0.5em;
+  left: 0;
+}
+
+.fa-venus-mars {
+  content: "\f228";
+}
+
+.fa-comments-o {
+  content: "\f0e6";
+}
+
+.fa-user {
+  content: "\f007";
+}
+
+.fa-suitcase {
+  content: "\f0f2";
+}
+
+.fa-graduation-cap {
+  content: "\f19d";
+}
+
+.fa-home {
+  content: "\f015";
+}
+
+.ul-overview {
+  list-style: none;
+  padding: 0;
+}
+
+.li-overview {
+  padding: 0;
+}

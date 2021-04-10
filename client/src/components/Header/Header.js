@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import './Header.css'
 
 function Header(props) {
@@ -7,22 +7,22 @@ function Header(props) {
     <header id="header">
       <nav id="nav">
         <div className="linkLogo">
-          <Link to="/" class="logo">
+          <a href="/" class="logo">
             Meetup
-          </Link>
+          </a>
         </div>
         <ul className="links headersLinks">
           <li>
-            <Link to="/dashboard">Hangouts</Link>
+            <a href="/dashboard" className="links">Hangouts</a>
           </li>
           <li>
-            <Link to="/travels">Travels</Link>
+            <a href="/travels">Travels</a>
           </li>
           <li>
-            <Link to="/people/:id">My Profile</Link>
+            <a href="/people/:id">My Profile</a>
           </li>
-          <li class="active">
-            <Link to="/logout">LogOut</Link>
+          <li className="active">
+            <a href="/logout">LogOut</a>
           </li>
         </ul>
       </nav>
