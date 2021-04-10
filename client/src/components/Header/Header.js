@@ -3,16 +3,23 @@ import React from 'react'
 import './Header.css'
 
 function Header(props) {
+
+  const logoutHandler = () => {
+    window.localStorage.removeItem('token')
+  }
+
   return (
     <header id="header">
       <nav id="nav">
         <div className="linkLogo">
-          <a href="/" class="logo">
+          <a href="/" className="logo">
+
             Meetup
           </a>
         </div>
         <ul className="links headersLinks">
           <li>
+
             <a href="/dashboard" className="links">Hangouts</a>
           </li>
           <li>
@@ -21,8 +28,10 @@ function Header(props) {
           <li>
             <a href="/people/:id">My Profile</a>
           </li>
-          <li className="active">
-            <a href="/logout">LogOut</a>
+
+          <li /*className="active"*/>
+            <a href="/logout" onClick={logoutHandler}>LogOut</a>
+
           </li>
         </ul>
       </nav>
