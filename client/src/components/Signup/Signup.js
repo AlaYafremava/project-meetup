@@ -15,7 +15,10 @@ function Signup({ authHandler }) {
       body: JSON.stringify({ name: name.value, sex: sex.value, email: email.value, password: password.value })
     })
     .then(res=>res.json())
-    .then(data=>console.log(data))
+    .then(data=> {
+        localStorage.setItem("token",data.token)
+      
+    })
   }
 
   return (

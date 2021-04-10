@@ -13,15 +13,16 @@ const generateToken = (id) => {
 router.route("/signup")
     .post(async (req, res) => {
         try {
-            const { name, email, password } = req.body
+            const { name, sex, email, password } = req.body
             const account = await User.findOne({ email })
             if (account) {
                 return res.status(400).json({ message: "Email already exist" })
             }
             const hashPassword = bcrypt.hashSync(password, 3)
-            const newAccount = new User({ name,email, password: hashPassword })
+            const newAccount = new User({ name,email,sex, password: hashPassword })
             newAccount.save()
-            return res.status(200).json({ message: "Account's registration done" })
+            const token = generateToken(newAccount._id)
+            return res.status(200).json({token})
         } catch (e) {
             res.status(400).json({ message: "signup error" })
         }
@@ -36,10 +37,13 @@ router.route("/login")
                 return res.status(400).json({ message: "Wrong email" })
             }
             const truePassword = bcrypt.compareSync(password, account.password)
+            console.log(truePassword);
             if (!truePassword) {
+                console.log(123);
                 return res.status(400).json({ message: "Wrong password" })
             }
-            const token = generateToken(account._id)
+            // const token = generateToken(account._id)
+            console.log(145);
             return res.status(200).json({token})
         } catch (e) {
             res.status(400).json({ message: "login error" })
