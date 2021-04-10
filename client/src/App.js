@@ -7,6 +7,7 @@ import Main from './components/Profile/Profile'
 import store from './redux/store'
 import { Provider, useSelector } from 'react-redux'
 import Travels from './components/Travels/Travels'
+import UserCard from './components/UserCard/UserCard'
 import FormEdit from './components/FormEdit/FormEdit'
 
 
@@ -19,7 +20,8 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            {/* <Auth /> */}
+            <Auth />
+            {/* <UserCard /> */}
           </Route>
 
           <Route path="/dashboard">
