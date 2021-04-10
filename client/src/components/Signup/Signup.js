@@ -12,7 +12,6 @@ function Signup({ authHandler }) {
   const signupHandler = (e) => {
     e.preventDefault()
     const { name, sex, email, password } = e.target
-    // console.log(e.target.sex.value);
     fetch('http://localhost:4000/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'Application/json' },
@@ -22,8 +21,7 @@ function Signup({ authHandler }) {
       .then(data => {
         if (data.success === true) {
           localStorage.setItem('token', data.token);
-          console.log(data);
-          dispatch({ type: SIGNUP, payload: data });
+          dispatch({ type: SIGNUP, payload: data.user });
           return history.push('/profile')
         } else {
           alert('Не удалось зарегистрировать пользователя')

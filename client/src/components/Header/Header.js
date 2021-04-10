@@ -1,12 +1,15 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 // import { Link } from 'react-router-dom'
 import './Header.css'
+import { LOGOUT } from '../../redux/actionTypes/actionTypes'
 
 function Header(props) {
-
-  const logoutHandler = () => {
-    window.localStorage.removeItem('token')
-  }
+const dispatch = useDispatch()
+const LogOutHandler = () => {
+  dispatch(LOGOUT)
+}
 
   return (
     <header id="header">
@@ -30,7 +33,7 @@ function Header(props) {
           </li>
 
           <li /*className="active"*/>
-            <a href="/logout" onClick={logoutHandler}>LogOut</a>
+            <a href="/logout" onClick={logOutHandler}>LogOut</a>
 
           </li>
         </ul>
