@@ -6,7 +6,8 @@ import { useParams } from "react-router-dom"
 function CardUser(props) {
   const dispatch = useDispatch()
   const user = useSelector(store => store.auth.user)
-  console.log(user)
+  // console.log(user)
+
   return (
     <div className="card">
       <img src={user.avatar} alt="" style={{ borderRadius: '100px' }} />
