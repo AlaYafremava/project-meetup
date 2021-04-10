@@ -31,7 +31,7 @@ function Login({ authHandler }) {
           alert('Не удалось войти в аккаунт')
         };
       })
-    console.log(store);
+    // console.log(store);
   }
 
   return (
