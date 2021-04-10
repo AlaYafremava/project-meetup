@@ -1,0 +1,16 @@
+header.major > .date {
+  margin: 0 0 1rem 0;
+}
+
+#main > .post header.major h2 {
+  font-size: 2.5rem;
+  margin: 0 0 1rem 0;
+}
+
+header.major {
+  margin: 0 0 1rem 0;
+}
+
+.image.main {
+  margin: 1rem 0;
+}

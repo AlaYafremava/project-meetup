@@ -14,7 +14,6 @@ function Login({ authHandler }) {
   const loginHandler = (e) => {
     e.preventDefault()
     const { email, password } = e.target
-    // console.log(email.value, password.value);
     fetch('http://localhost:4000/login', {
       method: 'POST',
       headers: { 'Content-Type': 'Application/json' },
@@ -23,7 +22,6 @@ function Login({ authHandler }) {
       .then(res => res.json())
       .then(data => {
         if (data.success === true) {
-          // console.log(data);
           localStorage.setItem('token', data.token);
           dispatch({ type: LOGIN, payload: data.user });
           history.push('/profile')

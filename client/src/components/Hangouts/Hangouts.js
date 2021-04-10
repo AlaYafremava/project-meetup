@@ -1,9 +1,10 @@
 import React from 'react'
-import Header from '../Header/Header'
 import UserCardSmall from '../UserCardSmall/UserCardSmall'
-import TravelsListBig from '../TravelsListBig/TravelsListBig'
+import Map from '../Map/Map'
+import Header from '../Header/Header'
+import './Hangouts.css'
 
-function Travels(props) {
+function Hangouts(props) {
   return (
     <>
       <Header />
@@ -14,9 +15,11 @@ function Travels(props) {
               <UserCardSmall />
             </div>
             <div className="col-9 col-12-small">
-              <div id="main">
-                <TravelsListBig />
+              <div>
+                <input type="checkbox" id="demo-copy" name="demo-copy" />
+                <label htmlFor="demo-copy">Become available for others</label>
               </div>
+              <Map />
             </div>
           </div>
         </section>
@@ -25,4 +28,4 @@ function Travels(props) {
   )
 }
 
-export default Travels
+export default Hangouts

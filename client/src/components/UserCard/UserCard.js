@@ -3,22 +3,42 @@ import './UserCard.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from "react-router-dom"
 
-function CardUser(props) {
+function UserCard(props) {
   const dispatch = useDispatch()
   const user = useSelector(store => store.auth.user)
   // console.log(user)
 
   return (
     <div className="card">
-      <img src={user.avatar} alt="" style={{ borderRadius: '100px' }} />
-      <p className='userName'>{user.name} {user.surname}</p>
-      <p className="title">{user.city}</p>
-      <a href="#"><i className="fa fa-dribbble"></i></a>
-      <a href="#"><i className="fa fa-twitter"></i></a>
-      <a href="#"><i className="fa fa-linkedin"></i></a>
-      <a href="#"><i className="fa fa-facebook"></i></a>
-      {/* <p><button>Contact</button></p> */}
+      <img src="avatar.jpeg" alt="avatar" className="avatar" />
+      <p className="userName">
+        <i>Alla Yefremova</i>
+      </p>
+      <p className="title">
+        <i>
+          Saint-Petersburg, <br />
+          Russian Federation
+        </i>
+      </p>
+      <hr />
+      <ul className="icons alt">
+        <li>
+          <a href="#" className="icon brands alt fa-telegram">
+            <span class="label">Telegram</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" className="icon brands alt fa-facebook-f">
+            <span class="label">Facebook</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" className="icon brands alt fa-instagram">
+            <span class="label">Instagram</span>
+          </a>
+        </li>
+      </ul>
     </div>
   );
 }
-export default CardUser;
+export default UserCard;

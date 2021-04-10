@@ -30,6 +30,7 @@ function UserInterests(props) {
           {store.auth.user.tags && store.auth.user.tags.map((el, i) => <input className='tags' type='submit' value={el[i] === true} />)}
         </li>
       </ul>
+
     </div>
   );
 }

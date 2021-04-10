@@ -8,12 +8,11 @@ import authRouter from './routes/authRouter.js'
 
 const app = express()
 
-mongoose.connect("mongodb+srv://alex:alex123@meetup.4dhze.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+mongoose.connect(`mongodb+srv://alex:alex123@meetup.4dhze.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+ })
 
-// mongoose.connect('mongodb://localhost:27017/meetup', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// })
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
