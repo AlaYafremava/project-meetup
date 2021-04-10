@@ -7,7 +7,7 @@ import Main from './components/Profile/Profile'
 import store from './redux/store'
 import { Provider, useSelector } from 'react-redux'
 import Travels from './components/Travels/Travels'
-import CardUser from './components/CardUser/CardUser'
+import UserCard from './components/UserCard/UserCard'
 import FormEdit from './components/FormEdit/FormEdit'
 
 
@@ -21,7 +21,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Auth />
-            {/* <CardUser /> */}
+            {/* <UserCard /> */}
           </Route>
 
           <Route path="/dashboard">
