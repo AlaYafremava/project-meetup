@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css'
 import Profile from './components/Profile/Profile'
@@ -13,15 +13,16 @@ import TravelPageCreate from './components/TravelPageCreate/TravelPageCreate'
 
 function App() {
   const token = window.localStorage.getItem('token')
-  useEffect(()=>{
-    fetch(process.env.REACT_APP_URL,{
+  
+  useEffect(() => {
+    fetch('http://localhost:4000', {
       method: 'GET',
       headers: {
-        'Content-type':'application/json',
-        'Authorization':`Bearer ${token}`
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${token}`
       }
     })
-  },[])
+  }, [])
 
   // const isAuth = useSelector(store => store.user.isAuth)
 
