@@ -1,44 +1,49 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { logoutAC } from '../../redux/actionCreators/actionCreators'
 // import { Link } from 'react-router-dom'
 import './Header.css'
-import { LOGOUT } from '../../redux/actionTypes/actionTypes'
 
 function Header(props) {
-const dispatch = useDispatch()
-const LogOutHandler = () => {
-  dispatch(LOGOUT)
-}
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const logOutHandler = () => {
+    dispatch(logoutAC())
+    history.push('/')
+  }
 
   return (
-    <header id="header">
-      <nav id="nav">
-        <div className="linkLogo">
-          <a href="/" className="logo">
+    <>
+      <header id="header">
+        <nav id="nav">
+          <div className="linkLogo">
+            <a href="/" className="logo">
 
-            Meetup
+              Meetup
           </a>
-        </div>
-        <ul className="links headersLinks">
-          <li>
+          </div>
+          <ul className="links headersLinks">
+            <li>
 
-            <a href="/hangouts" className="links">Hangouts</a>
-          </li>
-          <li>
-            <a href="/travels">Travels</a>
-          </li>
-          <li>
-            <a href="/profile">My Profile</a>
-          </li>
+              <a href="/hangouts" className="links">Hangouts</a>
+            </li>
+            <li>
+              <a href="/travels">Travels</a>
+            </li>
+            <li>
+              <a href="/profile">My Profile</a>
+            </li>
 
-          <li /*className="active"*/>
-            <a href="/logout" onClick={logOutHandler}>LogOut</a>
-
-          </li>
-        </ul>
-      </nav>
-    </header>
+            <li /*className="active"*/>
+              {/* <a href="/logout" onClick={logOutHandler}>LogOut</a> */}
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <button onClick={logOutHandler}>ВЫЙТИИИИИИИИИ</button>
+    </>
   )
 }
 
