@@ -7,7 +7,7 @@ import { LOGOUT } from '../../redux/actionTypes/actionTypes'
 
 function Header(props) {
 const dispatch = useDispatch()
-const LogOutHandler = () => {
+const logOutHandler = () => {
   dispatch(LOGOUT)
 }
 
@@ -15,7 +15,7 @@ const LogOutHandler = () => {
     <header id="header">
       <nav id="nav">
         <div className="linkLogo">
-          <a href="/" className="logo">
+          <a href="/hangouts" className="logo">
 
             Meetup
           </a>

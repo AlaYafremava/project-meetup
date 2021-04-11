@@ -24,7 +24,6 @@ function UserInterests(props) {
 
   return (
     <div>
-      <h3> Interests </h3>
       <ul className='actions'>
         <li>
           {store.auth.user.tags && store.auth.user.tags.map((el, i) => <input className='tags' type='submit' value={el[i] === true} />)}
