@@ -29,7 +29,7 @@ function Navbar(props) {
           </a>
         </li> */}
         <li className="nav-li_editbtn">
-          <a href="/profile/travels/new" className="button primary">
+          <a href="/travels/new" className="button primary">
             Create new travel
           </a>
         </li>

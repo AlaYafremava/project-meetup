@@ -2333,6 +2333,8 @@ input, select, textarea {
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
+  input[type="date"],
+  input[type="number"],
 	select,
 	textarea {
 		-moz-appearance: none;
@@ -2353,6 +2355,8 @@ input, select, textarea {
 		input[type="text"]:invalid,
 		input[type="password"]:invalid,
 		input[type="email"]:invalid,
+    input[type="date"]:invalid,
+    input[type="number"]:invalid,
 		select:invalid,
 		textarea:invalid {
 			box-shadow: none;
@@ -2378,6 +2382,8 @@ input, select, textarea {
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
+  input[type="date"],
+  input[type="number"],
 	select {
 		height: 3rem;
 	}
@@ -2481,6 +2487,8 @@ input, select, textarea {
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
+  input[type="date"],
+  input[type="number"],
 	select,
 	textarea {
 		border-color: #eeeeee;
@@ -3780,7 +3788,7 @@ input, select, textarea {
 		}
 
 		#main > .post {
-			padding: 1.5rem 1rem 5rem 1.5rem ;
+			padding: 5rem;
 		}
 
 			#main > .post header.major > .date {

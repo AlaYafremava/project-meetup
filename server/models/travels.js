@@ -7,6 +7,7 @@ const travelSchema = new mongoose.Schema({
   city: { type: String, required: true },
   startDate: { type: Date, required: true },
   finishDate: { type: Date, required: true },
+  number: { type: Number, required: true },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

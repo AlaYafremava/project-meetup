@@ -1,0 +1,13 @@
+#main > * {
+  border-top: 0;
+  padding: 2rem 0 0 0;
+}
+
+.title-h2-travels {
+  color: #18bfef;
+  text-align: center;
+}
+
+.li-travels {
+  margin: 0 auto;
+}

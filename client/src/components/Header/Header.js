@@ -19,7 +19,6 @@ function Header(props) {
       <header id="header">
         <nav id="nav">
           <div className="linkLogo">
-            <a href="/" className="logo">
 
               Meetup
           </a>
