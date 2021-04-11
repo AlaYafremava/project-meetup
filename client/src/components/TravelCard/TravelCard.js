@@ -1,14 +1,14 @@
 import React from 'react'
-import './TravelsList.css'
+import './TravelCard.css'
 
-function TravelsList(props) {
+function TravelCard(props) {
   return (
     <>
       <article>
         <header>
           <span className="date">April 24, 2017</span>
           <h3 className="title-travels">
-            <a href="/profile/:id">Sed magna ipsum faucibus</a>
+            <a href="/profile/:id">Sed magna ipsum ipsum ipsum ipsum faucibus</a>
           </h3>
         </header>
         <a href="/profile/:id" className="image fit">
@@ -41,4 +41,4 @@ function TravelsList(props) {
   )
 }
 
-export default TravelsList
+export default TravelCard

@@ -8,7 +8,7 @@ function UserInterests(props) {
   // const params = useParams()
   const token = window.localStorage.getItem('token')
   const store = useSelector(store => store)
-  console.log(store.auth.user);
+  // console.log(store.auth.user);
 
   useEffect(() => {
     fetch('/profile', {
@@ -24,10 +24,9 @@ function UserInterests(props) {
 
   return (
     <div>
-      <h3> Interests </h3>
       <ul className='actions'>
         <li>
-          {store.auth.user.tags && store.auth.user.tags.map((el, i) => <input className='tags' type='submit' value={el[i] === true} />)}
+          {/* {store.auth.user.tags ? store.auth.user.tags.map((el, i) => <input className='tags' type='submit' value={el} />): 'Здесь будут теги'} */}
         </li>
       </ul>
 
