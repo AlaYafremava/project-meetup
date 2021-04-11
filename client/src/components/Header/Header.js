@@ -7,7 +7,7 @@ import { LOGOUT } from '../../redux/actionTypes/actionTypes'
 
 function Header(props) {
 const dispatch = useDispatch()
-const LogOutHandler = () => {
+const logOutHandler = () => {
   dispatch(LOGOUT)
 }
 

@@ -36,9 +36,13 @@ function App() {
             <Hangouts />
           </Route>
 
-          <Route path="/travels">
+          <Route exact path="/travels">
             <Travels />
           </Route>
+
+          {/* <Route path="/travels/new">
+            <TravelForm />
+          </Route> */}
 
           <Route exact path="/profile">
             <Profile />

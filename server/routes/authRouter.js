@@ -14,7 +14,7 @@ const generateToken = (id) => {
 }
 
 router.get('/', verToken, async (req, res) => {
-    console.log(req.user);
+    // console.log(req.user);
 })
 
 router.route("/signup")
