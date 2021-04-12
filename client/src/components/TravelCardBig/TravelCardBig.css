@@ -14,3 +14,7 @@ header.major {
 .image.main {
   margin: 1rem 0;
 }
+
+#main > .post.featured {
+  padding: 2rem 5rem
+}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './FormEdit.css'
 import { useDispatch, useSelector } from 'react-redux'
 
-
 function FormEdit() {
   const user = useSelector(store => store.auth.user)
   // console.log(user);
@@ -24,6 +23,7 @@ function FormEdit() {
       .then(data => console.log(data))
   }
 
+
   return (
     <section className='sectionSignup'>
       <form className='formSignup' onSubmit={formHandler}>
@@ -40,6 +40,7 @@ function FormEdit() {
           <div id='sexDiv' className="field">
             <div className="col-4 col-12-small">
               <input type="radio" id="demo-priority-low" name="sex" value="woman" dafaultchecked />
+
               <label htmlFor="demo-priority-low">Woman</label>
             </div>
             <div className="col-4 col-12-small">
@@ -52,10 +53,10 @@ function FormEdit() {
             </div>
           </div>
 
-          {/* <div className="field">
+          {<div className="field">
             <label>Email</label>
-            <input type="email" name="email" defaultValue ={user.email} required />
-          </div> */}
+            <input type="email" name="email" value={user.email} required />
+          </div>}
 
           <div className="field">
             <label>BirthDay</label>

@@ -4,6 +4,7 @@
   max-width: 300px;
   margin: 0 auto;
   text-align: center;
+  overflow: hodden
 }
 
 .userName {
@@ -25,9 +26,14 @@
 .avatar {
   border-radius: 50%;
   padding: 1rem;
+  position: relfative;
+  top: -3px;
+  max-height: 100%;
+  max-width: 100%;
+  vertical-align: middle;
 }
 
-.card > hr {
+.card>hr {
   margin: 0.5rem 0 2rem;
 }
 

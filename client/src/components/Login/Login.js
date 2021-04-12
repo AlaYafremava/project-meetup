@@ -32,6 +32,24 @@ function Login({ authHandler }) {
     // console.log(store);
   }
 
+  // const loadImageHandler = (event) => {
+  //     event.preventDefault();
+  //     const data = new FormData();
+  //     console.log(event.target.files[0]);
+  //     data.append('photo',event.target.files[0] );
+  //     // data.append('name', 'Test Name');
+  //     // data.append('desc', 'Test description');
+  //     fetch("http://localhost:4000/upload", {
+  //          method: 'POST',
+  //          headers: {
+  //              'Accept': 'application/json',
+  //          },
+  //          body: data
+  //     }).then((response) =>  {
+  //        return response.text();
+  //     })
+  // }
+
   return (
     <section className='sectionLogin'>
       <form onSubmit={loginHandler} className='formLogin' >
@@ -56,6 +74,11 @@ function Login({ authHandler }) {
           </li>
         </ul>
       </form>
+      {/* <form  enctype="multipart/form-data" method="post">
+   <p>Загрузите ваши фотографии на сервер</p>
+   <p><input type="file" name="photo" accept="image/*,image/jpeg" onChange={loadImageHandler}/>
+   <input type="submit" value="Отправить"/></p>
+   </form> */}
     </section>
   )
 }

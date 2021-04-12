@@ -3,12 +3,15 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css'
 import Profile from './components/Profile/Profile'
 import Auth from './components/Auth/Auth'
-import Main from './components/Profile/Profile'
 import store from './redux/store'
 import { Provider, useSelector } from 'react-redux'
 import Travels from './components/Travels/Travels'
-import FormEdit from './components/FormEdit/FormEdit'
+import UserFormEdit from './components/UserFormEdit/UserFormEdit'
 import Hangouts from './components/Hangouts/Hangouts'
+import TravelPage from './components/TravelPage/TravelPage'
+import TravelPageCreate from './components/TravelPageCreate/TravelPageCreate'
+import TravelPageEdit from './components/TravelPageEdit/TravelPageEdit'
+import Map from './components/Map/Map'
 
 function App() {
   const token = window.localStorage.getItem('token')
@@ -29,6 +32,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
+
           <Route exact path="/">
             <Auth />
           </Route>
@@ -37,8 +41,24 @@ function App() {
             <Hangouts />
           </Route>
 
-          <Route path="/travels">
+          <Route exact path="/travels">
             <Travels />
+          </Route>
+
+          <Route exact path="/travels/:id">
+            <TravelPage />
+          </Route>
+
+           <Route path="/map">
+              <Map />
+            </Route>
+
+         <Route path="/travels/new">
+            <TravelPageCreate />
+          </Route>
+
+          <Route path="/travels/:id/edit">
+            <TravelPageEdit />
           </Route>
 
           <Route exact path="/profile">
@@ -46,7 +66,7 @@ function App() {
           </Route>
 
           <Route path="/profile/edit">
-            <FormEdit />
+            <UserFormEdit />
           </Route>
         </Switch>
       </Router>
@@ -62,6 +82,9 @@ function App() {
         </ul>
       </div>
     </Provider>
+    // <>
+    // <Map />
+    // </>
   )
 }
 

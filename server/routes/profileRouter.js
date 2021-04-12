@@ -7,13 +7,14 @@ import app from "../app.js"
 import verToken from '../middlware/auth.js'
 
 router.get('/profile', verToken, async (req, res) => {
-  // console.log(req.user);
+  // console.log(req.headers.authorization);
 
-  const user = await User.findOne({ _id: req.user.id })
-  if (user) {
-    res.status(201).json(user)
-  }
-  res.status(400).json({ success: false })
+
+  // const user = await User.findOne({ _id: req.user.id })
+  // if (user) {
+  //   res.status(201).json(user)
+  // }
+  // res.status(400).json({ success: false })
 })
 
 router.patch('/profile/edit', async (req, res) => {
