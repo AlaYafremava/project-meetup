@@ -20,7 +20,7 @@ function Header(props) {
       <header id="header">
         <nav id="nav">
           <div className="linkLogo">
-
+            <a href="/hangouts" className="linkLogo">
               Meetup
           </a>
           </div>

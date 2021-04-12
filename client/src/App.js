@@ -41,14 +41,15 @@ function App() {
           <Route exact path="/travels">
             <Travels />
           </Route>
-
-          {/* <Route path="/travel">
-            <TravelPage />
-          </Route> */}
-
+          
           <Route path="/travels/new">
             <TravelPageCreate />
           </Route>
+
+          <Route path="/travels/:id">
+            <TravelPage />
+          </Route>
+
 
           <Route exact path="/profile">
             <Profile />
