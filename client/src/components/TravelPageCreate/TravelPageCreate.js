@@ -65,7 +65,7 @@ function TravelPageCreate(props) {
               <div className="col-6 col-12-xsmall">
                 <label>Country</label>
 
-                <select className="form-control" required>
+                <select className="form-control" name="country" required>
                   <option>AALAND ISLANDS</option>
                   <option>AFGHANISTAN</option>
                   <option>ALBANIA</option>

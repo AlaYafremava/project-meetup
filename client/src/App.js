@@ -45,6 +45,10 @@ function App() {
             <Travels />
           </Route>
 
+         <Route path="/travels/new">
+            <TravelPageCreate />
+          </Route>
+          
           <Route exact path="/travels/:id">
             <TravelPage />
           </Route>
@@ -53,9 +57,6 @@ function App() {
               <Map />
             </Route>
 
-         <Route path="/travels/new">
-            <TravelPageCreate />
-          </Route>
 
           <Route path="/travels/:id/edit">
             <TravelPageEdit />
