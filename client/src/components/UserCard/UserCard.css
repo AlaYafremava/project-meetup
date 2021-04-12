@@ -1,0 +1,43 @@
+.card {
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hodden
+}
+
+.userName {
+  width: 0 auto;
+  font-weight: 800;
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1rem;
+  text-align: center;
+  line-height: 1.5rem;
+  padding-bottom: 1rem;
+
+}
+
+.avatar {
+  border-radius: 50%;
+  padding: 1rem;
+  position: relfative;
+  top: -3px;
+  max-height: 100%;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.card>hr {
+  margin: 0.5rem 0 2rem;
+}
+
+ul.icons {
+  margin: 0;
+  padding-bottom: 1rem;
+}
