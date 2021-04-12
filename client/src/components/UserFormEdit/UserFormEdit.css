@@ -10,6 +10,8 @@
 
 #sexDiv {
   display: flex;
+  position:absolute; /* добавили */
+	bottom:0;
 }
 
 .actions {
@@ -26,4 +28,13 @@
 .loginA {
   font-family: "Source Sans Pro", Helvetica, sans-serif;
   color: #18bfef;
+}
+
+.sexDivEdit {
+  position:relative;
+}
+
+.travel-btn {
+  text-align: center;
+  margin-top: 4rem;
 }

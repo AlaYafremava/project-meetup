@@ -8,7 +8,9 @@ const userSchema = new mongoose.Schema({
   bday: { type: Date },
   phone: { type: Number },
   sex: { type: String },
+  country: { type: String },
   city: { type: String },
+  homeCountry: { type: String },
   homeTown: { type: String },
   education: { type: String },
   profession: { type: String },
@@ -27,6 +29,7 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Social'
   }],
+  // socials: [socialSchema],
   userTravels: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Travel'

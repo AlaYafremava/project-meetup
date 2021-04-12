@@ -1,16 +1,17 @@
 import React from 'react'
-import TravelsList from '../TravelsList/TravelsList'
+import TravelCard from '../TravelCard/TravelCard'
+import './UserTravels.css'
 
 function UserTravels(props) {
   return (
     <div id="main">
-      <h2 style={{ color: '#18bfef', textAlign: 'center' }}>Travels planned by me</h2>
+      <h2 className="title-h2-travels">Travels planned by me</h2>
       <section className="posts">
-        <TravelsList />
+        <TravelCard />
       </section>
-      <div style={{ display: 'block' }}>
+      <div>
         <ul className="actions">
-          <li>
+          <li className="li-travels">
             <a href="/" className="button icon solid solo fa-arrow-down scrolly">
               Continue
             </a>
@@ -18,15 +19,33 @@ function UserTravels(props) {
         </ul>
       </div>
 
-      <h2 style={{ color: '#18bfef', textAlign: 'center' }}>Future travels</h2>
+      <h2 className="title-h2-travels">Future travels</h2>
       <section className="posts">
-        <TravelsList />
+        <TravelCard />
       </section>
+      <div>
+        <ul className="actions">
+          <li className="li-travels">
+            <a href="/" className="button icon solid solo fa-arrow-down scrolly">
+              Continue
+            </a>
+          </li>
+        </ul>
+      </div>
 
-      <h2 style={{ color: '#18bfef', textAlign: 'center' }}>Past travels</h2>
+      <h2 className="title-h2-travels">Past travels</h2>
       <section className="posts">
-        <TravelsList />
+        <TravelCard />
       </section>
+      <div>
+        <ul className="actions">
+          <li className="li-travels">
+            <a href="/" className="button icon solid solo fa-arrow-down scrolly">
+              Continue
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   )
 }

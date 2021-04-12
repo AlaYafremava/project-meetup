@@ -1,9 +1,19 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Header from '../Header/Header'
 import UserCardSmall from '../UserCardSmall/UserCardSmall'
-import TravelsListBig from '../TravelsListBig/TravelsListBig'
+import TravelCardBig from '../TravelCardBig/TravelCardBig'
+import { useDispatch, useSelector } from 'react-redux'
+import {fetchInitTravels} from "../../redux/reduxThunk/asyncFuncs"
 
 function Travels(props) {
+
+  const dispatch = useDispatch
+   const store = useSelector(store => store)
+
+  //   useEffect(() => {
+  //  dispatch(fetchInitTravels())
+  //   }, [dispatch])
+
   return (
     <>
       <Header />
@@ -15,7 +25,16 @@ function Travels(props) {
             </div>
             <div className="col-9 col-12-small">
               <div id="main">
-                <TravelsListBig />
+                <TravelCardBig />
+              </div>
+              <div>
+                <ul className="actions">
+                  <li className="li-travels">
+                    <a href="/" className="button icon solid solo fa-arrow-down scrolly">
+                      Continue
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

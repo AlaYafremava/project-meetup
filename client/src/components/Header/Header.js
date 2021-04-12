@@ -19,15 +19,17 @@ function Header(props) {
       <header id="header">
         <nav id="nav">
           <div className="linkLogo">
-            <a href="/" className="logo">
+
+            <a href="/hangouts" className="logo">
 
               Meetup
-          </a>
+            </a>
           </div>
           <ul className="links headersLinks">
             <li>
-
-              <a href="/hangouts" className="links">Hangouts</a>
+              <a href="/hangouts" className="links">
+                Hangouts
+              </a>
             </li>
             <li>
               <a href="/travels">Travels</a>
