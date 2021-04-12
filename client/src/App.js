@@ -10,6 +10,8 @@ import UserFormEdit from './components/UserFormEdit/UserFormEdit'
 import Hangouts from './components/Hangouts/Hangouts'
 import TravelPage from './components/TravelPage/TravelPage'
 import TravelPageCreate from './components/TravelPageCreate/TravelPageCreate'
+import TravelPageEdit from './components/TravelPageEdit/TravelPageEdit'
+
 
 function App() {
   const token = window.localStorage.getItem('token')
@@ -42,12 +44,16 @@ function App() {
             <Travels />
           </Route>
 
-          {/* <Route path="/travel">
+          <Route exact path="/travels/:id">
             <TravelPage />
-          </Route> */}
+          </Route>
 
           <Route path="/travels/new">
             <TravelPageCreate />
+          </Route>
+
+          <Route path="/travels/:id/edit">
+            <TravelPageEdit />
           </Route>
 
           <Route exact path="/profile">
