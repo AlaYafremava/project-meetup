@@ -10,6 +10,8 @@ import UserFormEdit from './components/UserFormEdit/UserFormEdit'
 import Hangouts from './components/Hangouts/Hangouts'
 import TravelPage from './components/TravelPage/TravelPage'
 import TravelPageCreate from './components/TravelPageCreate/TravelPageCreate'
+import TravelPageEdit from './components/TravelPageEdit/TravelPageEdit'
+import Map from './components/Map/Map'
 
 function App() {
   const token = window.localStorage.getItem('token')
@@ -30,6 +32,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
+
           <Route exact path="/">
             <Auth />
           </Route>
@@ -41,15 +44,22 @@ function App() {
           <Route exact path="/travels">
             <Travels />
           </Route>
-          
-          <Route path="/travels/new">
-            <TravelPageCreate />
-          </Route>
 
-          <Route path="/travels/:id">
+          <Route exact path="/travels/:id">
             <TravelPage />
           </Route>
 
+           <Route path="/map">
+              <Map />
+            </Route>
+
+         <Route path="/travels/new">
+            <TravelPageCreate />
+          </Route>
+
+          <Route path="/travels/:id/edit">
+            <TravelPageEdit />
+          </Route>
 
           <Route exact path="/profile">
             <Profile />
