@@ -1,15 +1,29 @@
 import React from 'react'
-import './TravelPageCreate.css'
+import './TravelPageEdit.css'
 import Header from '../Header/Header'
+import { useParams } from 'react-router'
 
-function TravelPageCreate(props) {
+const trip = {
+  id: 1,
+  title: 'Some trip',
+  description:
+    'Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.',
+  country: 'AFGHANISTAN',
+  city: 'Brest',
+  startDate: { type: Date, required: true },
+  finishDate: { type: Date, required: true },
+  number: 5,
+}
+
+function TravelPageEdit(props) {
+  const { id } = useParams()
   return (
     <>
       <Header />
       <div id="main">
         <section className="post">
-          <h2>Create your amazing trip</h2>
-          <form className="formSignup">
+          <h2>Edit details of your trip</h2>
+          <form>
             <div className="row gtr-uniform">
               <div className="col-12">
                 <label>Title</label>
@@ -18,8 +32,8 @@ function TravelPageCreate(props) {
                   name="title"
                   autoComplete="off"
                   placeholder="Title your trip"
+                  defaultValue={trip.title}
                   required
-                  autoFocus
                 />
               </div>
 
@@ -28,12 +42,14 @@ function TravelPageCreate(props) {
                 <textarea
                   name="description"
                   placeholder="Put interesting and important information about this trip..."
+                  defaultValue={trip.description}
                   rows="3"></textarea>
               </div>
 
               <div className="col-6 col-12-xsmall">
                 <label>Country</label>
                 <select className="form-control" required>
+                  <option>{trip.country}</option>
                   <option>AALAND ISLANDS</option>
                   <option>AFGHANISTAN</option>
                   <option>ALBANIA</option>
@@ -262,24 +278,51 @@ function TravelPageCreate(props) {
               </div>
               <div className="col-6 col-12-xsmall">
                 <label>City</label>
-                <input type="text" name="city" autoComplete="off" required />
+                <input
+                  type="text"
+                  name="city"
+                  autoComplete="off"
+                  defaultValue={trip.city}
+                  required
+                />
               </div>
               <div className="col-6 col-12-xsmall">
                 <label>Start date</label>
-                <input type="date" name="startDate" min={Date.now()} max="2030-12-31" required />
+                <input
+                  type="date"
+                  name="startDate"
+                  min={Date.now()}
+                  max="2030-12-31"
+                  defaultValue={trip.startDate}
+                  required
+                />
               </div>
 
               <div className="col-6 col-12-xsmall">
                 <label>End date</label>
-                <input type="date" name="finishDate" min={Date.now()} max="2030-12-31" required />
+                <input
+                  type="date"
+                  name="finishDate"
+                  min={Date.now()}
+                  max="2030-12-31"
+                  defaultValue={trip.finishDate}
+                  required
+                />
               </div>
               <div className="col-6 col-12-xsmall">
                 <label>Number of persons for this trip</label>
-                <input type="number" name="number" min="1" max="100" required />
+                <input
+                  type="number"
+                  name="number"
+                  min="1"
+                  max="100"
+                  defaultValue={trip.number}
+                  required
+                />
               </div>
             </div>
             <div className="col-12 travel-btn">
-              <button className="button large">Create new travel</button>
+              <button className="button large">Save changes</button>
             </div>
           </form>
         </section>
@@ -288,4 +331,4 @@ function TravelPageCreate(props) {
   )
 }
 
-export default TravelPageCreate
+export default TravelPageEdit

@@ -6,7 +6,6 @@ import { logoutAC } from '../../redux/actionCreators/actionCreators'
 import './Header.css'
 
 function Header(props) {
-
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -20,14 +19,15 @@ function Header(props) {
       <header id="header">
         <nav id="nav">
           <div className="linkLogo">
-
+            <a href="/hangouts" className="logo">
               Meetup
-          </a>
+            </a>
           </div>
           <ul className="links headersLinks">
             <li>
-
-              <a href="/hangouts" className="links">Hangouts</a>
+              <a href="/hangouts" className="links">
+                Hangouts
+              </a>
             </li>
             <li>
               <a href="/travels">Travels</a>

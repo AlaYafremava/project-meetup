@@ -2334,6 +2334,7 @@ input, select, textarea {
 	input[type="password"],
 	input[type="email"],
   input[type="date"],
+  input[type="tel"],
   input[type="number"],
 	select,
 	textarea {
@@ -2357,6 +2358,7 @@ input, select, textarea {
 		input[type="email"]:invalid,
     input[type="date"]:invalid,
     input[type="number"]:invalid,
+    input[type="tel"]:invalid,
 		select:invalid,
 		textarea:invalid {
 			box-shadow: none;
@@ -2383,6 +2385,7 @@ input, select, textarea {
 	input[type="password"],
 	input[type="email"],
   input[type="date"],
+  input[type="tel"],
   input[type="number"],
 	select {
 		height: 3rem;
@@ -2488,6 +2491,7 @@ input, select, textarea {
 	input[type="password"],
 	input[type="email"],
   input[type="date"],
+  input[type="tel"],
   input[type="number"],
 	select,
 	textarea {

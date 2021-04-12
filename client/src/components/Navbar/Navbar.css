@@ -8,15 +8,16 @@
 }
 
 .nav_div {
-display: flex;
-justify-content: space-between;
-align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-ul_editbtn {
   margin-right: 0;
 }
 
-.nav-li_editbtn {
-  list-style-type: none;
+.nav-actions {
+  display: flex;
+  flex-flow: row wrap;
 }

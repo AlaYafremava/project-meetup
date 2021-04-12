@@ -4,7 +4,7 @@ import './Navbar.css'
 
 function Navbar(props) {
   return (
-    <div className="nav_div">
+    <div className="nav_div nav-actions">
       <ul className="actions">
         <li>
           <a href="/profile" class="button nav_btn nav-active">
@@ -22,18 +22,15 @@ function Navbar(props) {
           </a>
         </li>
       </ul>
-      <ul className="links nav-ul_editbtn">
-        {/* <li className="nav-li_editbtn">
-          <a href="/profile/edit" className="button primary">
-            Edit profile
-          </a>
-        </li> */}
-        <li className="nav-li_editbtn">
-          <a href="/travels/new" className="button primary">
-            Create new travel
-          </a>
-        </li>
-      </ul>
+      <div>
+        {/* <a href="/profile/edit" className="button primary">
+          Edit profile
+        </a> */}
+
+        <a href="/travels/new" className="button primary">
+          Create new travel
+        </a>
+      </div>
     </div>
   )
 }
