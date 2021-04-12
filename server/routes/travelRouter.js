@@ -1,4 +1,4 @@
-import Router from "express"
+import Router from 'express'
 const router = new Router()
 import User from "../models/users.js"
 import Travel from "../models/travels.js"
@@ -29,23 +29,34 @@ import multer from 'multer'
 //     console.log(req.file)
 //     })
 
-
-
-router.get("/travels", verToken, (async (req, res) => {
-    try {
-        const travels = await Travel.find()
-        if (!travels) {
-            return res.status(400).json({
-                message: "Travels not found"
-            })
-        }
-        return res.status(200).json({ travels, success: true })
-    } catch (e) {
-        res.status(400).json({ message: "travels load error" })
+router.get('/travels', verToken, async (req, res) => {
+  try {
+    const travels = await Travel.find()
+    if (!travels) {
+      return res.status(400).json({
+        message: 'Travels not found',
+      })
     }
+    return res.status(200).json({ travels, success: true })
+  } catch (e) {
+    res.status(400).json({ message: 'travels load error' })
+  }
 })
-)
 
+router.post('/travels/new', verToken, async (req, res) => {
+  try {
+    const { title, description, country, city, startDate, finishDate, number } = req.body
+    // console.log(country, startDate)
+    const newTravel = await Travel.create({
+      title,
+      description,
+      country,
+      city,
+      startDate,
+      finishDate,
+      number,
+      owner: req.user._id,
+    })
 
 router.post('/travels/new', verToken, async (req, res) => {
     try {
@@ -84,8 +95,7 @@ router.get("/travels/:id", (async (req, res) => {
     } catch (e) {
         res.status(400).json({ message: "travels load error" })
     }
-})
-)
+}))
 
 // router.put("/travels/:id", async function (req, res, next) {
 //     const { id } = req.params
@@ -95,7 +105,7 @@ router.get("/travels/:id", (async (req, res) => {
 //         country,
 //         city,
 //         startDate,
-//         finishDate, 
+//         finishDate,
 //         number
 //     } = req.body
 //     try {
@@ -117,17 +127,15 @@ router.get("/travels/:id", (async (req, res) => {
 //     }
 // })
 
-router.delete("/travels", async function (req, res, next) {
-    const { id } = req.body
-    // console.log(id);
-    try {
-        await Travel.findByIdAndDelete(id)
-        res.status(200).json({ success: true, id })
-    }
-    catch {
-        res.status(404).json({ message: "travel delete error" })
-    }
+router.delete('/travels', async function (req, res, next) {
+  const { id } = req.body
+  // console.log(id);
+  try {
+    await Travel.findByIdAndDelete(id)
+    res.status(200).json({ success: true, id })
+  } catch {
+    res.status(404).json({ message: 'travel delete error' })
+  }
 })
-
 
 export default router

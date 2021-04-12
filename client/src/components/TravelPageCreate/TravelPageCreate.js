@@ -6,11 +6,11 @@ import { useHistory } from 'react-router-dom'
 function TravelPageCreate(props) {
   const history = useHistory()
   const token = window.localStorage.getItem('token')
-  const travelHandler = (e) => {
+  const travelHandler = e => {
     e.preventDefault()
-    fetch("http://localhost:4000/travels/new", {
-      method: "POST",
-      headers: { "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
+    fetch('http://localhost:4000/travels/new', {
+      method: 'POST',
+      headers: { 'Content-Type': 'Application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({
         title: e.target.title.value,
         description: e.target.description.value,
@@ -29,8 +29,15 @@ function TravelPageCreate(props) {
         alert('Не удалось cоздать travel')
       }
     })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success === true) {
+          return history.push(`/travels/${data.travel._id}`)
+        } else {
+          alert('Не удалось cоздать travel')
+        }
+      })
   }
-
 
   return (
     <>
@@ -40,7 +47,6 @@ function TravelPageCreate(props) {
           <h2>Create your amazing trip</h2>
 
           <form onSubmit={travelHandler} method="post" className="formSignup">
-
             <div className="row gtr-uniform">
               <div className="col-12">
                 <label>Title</label>

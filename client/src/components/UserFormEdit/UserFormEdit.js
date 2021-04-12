@@ -43,7 +43,7 @@ function UserFormEdit() {
               </div>
 
               <div className="col-6 col-12-xsmall sexDivEdit">
-                <div id="sexDiv" className="field">
+                <div id="sexDiv" className="field sexDivclass">
                   <div className="col-4 col-12-small">
                     <input type="radio" id="demo-priority-low" name="sex" dafaultChecked />
                     <label htmlFor="demo-priority-low">Woman</label>
@@ -583,15 +583,15 @@ function UserFormEdit() {
               <div className="col-12">
                 <label>Your interests or hobbies</label>
               </div>
-              <div class="col-4 col-12-small">
+              <div className="col-4 col-12-small">
                 <input type="checkbox" id="demo-copy" name="demo-copy" />
                 <label htmlFor="demo-copy">running</label>
               </div>
-              <div class="col-4 col-12-small">
+              <div className="col-4 col-12-small">
                 <input type="checkbox" id="demo-copy" name="demo-copy" />
                 <label htmlFor="demo-copy">reading</label>
               </div>
-              <div class="col-4 col-12-small">
+              <div className="col-4 col-12-small">
                 <input type="checkbox" id="demo-copy" name="demo-copy" />
                 <label htmlFor="demo-copy">travelling</label>
               </div>
@@ -599,15 +599,15 @@ function UserFormEdit() {
               <div className="col-12">
                 <label>Languages you speak</label>
               </div>
-              <div class="col-4 col-12-small">
+              <div className="col-4 col-12-small">
                 <input type="checkbox" id="demo-copy" name="demo-copy" />
                 <label htmlFor="demo-copy">russian</label>
               </div>
-              <div class="col-4 col-12-small">
+              <div className="col-4 col-12-small">
                 <input type="checkbox" id="demo-copy" name="demo-copy" />
                 <label htmlFor="demo-copy">english</label>
               </div>
-              <div class="col-4 col-12-small">
+              <div className="col-4 col-12-small">
                 <input type="checkbox" id="demo-copy" name="demo-copy" />
                 <label htmlFor="demo-copy">spain</label>
               </div>
@@ -615,7 +615,7 @@ function UserFormEdit() {
               <div className="col-12">
                 <label>Your socials</label>
               </div>
-              <div class="col-4 col-12-small">
+              <div className="col-4 col-12-small">
                 <span>
                   <i className="element-icon fa-telegram"></i>
                 </span>
@@ -626,7 +626,7 @@ function UserFormEdit() {
                   defaultValue={user.socials ? '@' + user.socials : '@'}
                 />
               </div>
-              <div class="col-4 col-12-small">
+              <div className="col-4 col-12-small">
                 <span>
                   <i className="element-icon fa-instagram"></i>
                 </span>
@@ -637,7 +637,7 @@ function UserFormEdit() {
                   defaultValue={user.socials ? '@' + user.socials : '@'}
                 />
               </div>
-                  <div class="col-4 col-12-small">
+                  <div className="col-4 col-12-small">
                 <span>
                   <i className="element-icon fa-facebook"></i>
                 </span>

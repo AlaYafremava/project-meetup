@@ -12,17 +12,18 @@ import TravelPage from './components/TravelPage/TravelPage'
 import TravelPageCreate from './components/TravelPageCreate/TravelPageCreate'
 import TravelPageEdit from './components/TravelPageEdit/TravelPageEdit'
 import Map from './components/Map/Map'
+import Header from './components/Header/Header'
 
 function App() {
   const token = window.localStorage.getItem('token')
-  
+
   useEffect(() => {
     fetch('http://localhost:4000', {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
   }, [])
 
@@ -31,8 +32,9 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Switch>
+        {/* <Header/> */}
 
+        <Switch>
           <Route exact path="/">
             <Auth />
           </Route>
@@ -45,18 +47,17 @@ function App() {
             <Travels />
           </Route>
 
-         <Route path="/travels/new">
+          <Route path="/travels/new">
             <TravelPageCreate />
           </Route>
-          
-          <Route exact path="/travels/:id">
+
+          <Route path="/travels/:id">
             <TravelPage />
           </Route>
 
-           <Route path="/map">
-              <Map />
-            </Route>
-
+          <Route path="/map">
+            <Map />
+          </Route>
 
           <Route path="/travels/:id/edit">
             <TravelPageEdit />
