@@ -74,7 +74,6 @@ router.get("/travels/:id", (async (req, res) => {
     const { id } = req.params
     try {
         const travel = await Travel.findOne({ _id: id })
-        console.log(travel);
         if (!travel) {
             return res.status(400).json({
                 message: "Travels not found"
