@@ -1,15 +1,46 @@
 import React from 'react'
 import './TravelPageCreate.css'
 import Header from '../Header/Header'
+import { useHistory } from 'react-router-dom'
 
 function TravelPageCreate(props) {
+  const history = useHistory()
+  const token = window.localStorage.getItem('token')
+  const travelHandler = (e) => {
+    e.preventDefault()
+    fetch("http://localhost:4000/travels/new", {
+      method: "POST",
+      headers: { "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify({
+        title: e.target.title.value,
+        description: e.target.description.value,
+        country: e.target.country.value,
+        city: e.target.city.value,
+        startDate: e.target.startDate.value,
+        finishDate: e.target.finishDate.value,
+        number: e.target.number.value
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success === true) {
+        return history.push(`/travels/${data.travel._id}`)
+      } else {
+        alert('Не удалось cоздать travel')
+      }
+    })
+  }
+
+
   return (
     <>
       <Header />
       <div id="main">
         <section className="post">
           <h2>Create your amazing trip</h2>
-          <form className="formSignup">
+
+          <form onSubmit={travelHandler} method="post" className="formSignup">
+
             <div className="row gtr-uniform">
               <div className="col-12">
                 <label>Title</label>
@@ -33,6 +64,7 @@ function TravelPageCreate(props) {
 
               <div className="col-6 col-12-xsmall">
                 <label>Country</label>
+
                 <select className="form-control" required>
                   <option>AALAND ISLANDS</option>
                   <option>AFGHANISTAN</option>
@@ -278,6 +310,7 @@ function TravelPageCreate(props) {
                 <input type="number" name="number" min="1" max="100" required />
               </div>
             </div>
+
             <div className="col-12 travel-btn">
               <button className="button large">Create new travel</button>
             </div>

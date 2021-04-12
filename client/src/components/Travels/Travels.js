@@ -1,9 +1,19 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Header from '../Header/Header'
 import UserCardSmall from '../UserCardSmall/UserCardSmall'
 import TravelCardBig from '../TravelCardBig/TravelCardBig'
+import { useDispatch, useSelector } from 'react-redux'
+import {fetchInitTravels} from "../../redux/reduxThunk/asyncFuncs"
 
 function Travels(props) {
+
+  const dispatch = useDispatch
+   const store = useSelector(store => store)
+
+  //   useEffect(() => {
+  //  dispatch(fetchInitTravels())
+  //   }, [dispatch])
+
   return (
     <>
       <Header />

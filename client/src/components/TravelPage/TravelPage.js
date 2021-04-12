@@ -1,16 +1,32 @@
 import React from 'react'
 import './TravelPage.css'
 import Header from '../Header/Header'
+import {useEffect, useState} from 'react'
+import {useParams} from "react-router-dom"
 
 function TravelPage(props) {
+  const token = window.localStorage.getItem('token')
+  const {id} = useParams()
+const [state, setState] = useState({})
+
+
+  useEffect( async() => {
+    const response = await fetch(`http://localhost:4000/travels/${id}`, {
+      method: "GET",
+      // headers: {  "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` }
+    })
+    const result = await response.json()
+    setState(result)
+  },[])
+
   return (
     <>
       <Header />
       <div id="main">
         <section className="post">
           <header className="major">
-            <span className="date">April 25, 2017</span>
-            <h1>This is a Generic Page</h1>
+            <span className="date">{state?.travel?.startDate.slice(0,10)}</span>
+            <h1>{state?.travel?.title}</h1>
             <p>
               The world is a book
               <br /> and those who do not travel read only one page...
@@ -20,14 +36,7 @@ function TravelPage(props) {
             <img src="pic01.jpg" alt="pic" />
           </div>
           <p>
-            Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-            Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam,
-            vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit
-            amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex,
-            lacinia in purus ac, pretium pulvinar mauris. Nunc lorem mauris, fringilla in aliquam
-            at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et
-            malesuada fames ac turpis egestas. Curabitur sapien risus, commodo eget turpis at,
-            elementum convallis enim turpis, lorem ipsum dolor sit amet nullam.
+          {state?.travel?.description}
           </p>
           <ul className="actions fit small">
             <li>
@@ -62,13 +71,24 @@ function TravelPage(props) {
         <section className="split contact footer-post-sect">
           <section className="alt">
             <h3>Creator</h3>
-            <p>
-              <a href="/people/:id">Alla Yefremova</a>
+            <a href="/people/:id">
+
+            <p>Alla Yefremova <br />
+            Saint-Petersburg
             </p>
+            </a>
           </section>
           <section>
-            <h3>City</h3>
-            <p>Saint-Petersburg</p>
+            <h3>Travel to</h3>
+            <p>{state?.travel?.country}, {state?.travel?.city}</p>
+          </section>
+          <section>
+            <h3>Dates</h3>
+            <p>From {state?.travel?.startDate.slice(0,10)} to {state?.travel?.finishDate.slice(0,10)}</p>
+          </section>
+          <section>
+            <h3>Number of travellers</h3>
+            <p>  {state?.travel?.number}</p>
           </section>
         </section>
       </footer>

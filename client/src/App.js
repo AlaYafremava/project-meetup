@@ -82,9 +82,6 @@ function App() {
         </ul>
       </div>
     </Provider>
-    // <>
-    // <Map />
-    // </>
   )
 }
 
