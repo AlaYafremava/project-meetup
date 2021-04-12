@@ -11,6 +11,7 @@ const app = express()
 mongoose.connect(`mongodb+srv://alex:alex123@meetup.4dhze.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false
  })
 
 

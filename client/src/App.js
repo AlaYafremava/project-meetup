@@ -12,7 +12,7 @@ import Hangouts from './components/Hangouts/Hangouts'
 
 function App() {
   const token = window.localStorage.getItem('token')
-  
+
   useEffect(() => {
     fetch('http://localhost:4000', {
       method: 'GET',

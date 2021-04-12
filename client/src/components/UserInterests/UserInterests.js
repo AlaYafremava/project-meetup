@@ -26,7 +26,8 @@ function UserInterests(props) {
     <div>
       <ul className='actions'>
         <li>
-          {/* {store.auth.user.tags ? store.auth.user.tags.map((el, i) => <input className='tags' type='submit' value={el} />): 'Здесь будут теги'} */}
+          {store.auth.user.tags ? store.auth.user.tags.map((el, i) => <input className='tags' type='submit' value={el} />): 'Здесь будут теги'}
+          
         </li>
       </ul>
 

@@ -24,17 +24,17 @@ function UserCard(props) {
       <ul className="icons alt">
         <li>
           <a href="#" className="icon brands alt fa-telegram">
-            <span class="label">Telegram</span>
+            <span className="label">Telegram</span>
           </a>
         </li>
         <li>
           <a href="#" className="icon brands alt fa-facebook-f">
-            <span class="label">Facebook</span>
+            <span className="label">Facebook</span>
           </a>
         </li>
         <li>
           <a href="#" className="icon brands alt fa-instagram">
-            <span class="label">Instagram</span>
+            <span className="label">Instagram</span>
           </a>
         </li>
       </ul>
