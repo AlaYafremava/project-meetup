@@ -8,6 +8,7 @@ import store from './redux/store'
 import { Provider } from 'react-redux'
 import Travels from './components/Travels/Travels'
 import FormEdit from './components/FormEdit/FormEdit'
+import Map from './components/Map/Map'
 
 function App() {
   return (
@@ -15,9 +16,11 @@ function App() {
       <Router>
         <Header />
         <Switch>
+
           <Route exact path="/">
             <Auth />
           </Route>
+
           <div id="main">
             <Route path="/dashboard">
               <Main />
@@ -30,10 +33,17 @@ function App() {
             <Route path="/edit">
               <FormEdit />
             </Route>
+
+            <Route path="/map">
+              <Map />
+            </Route>
           </div>
         </Switch>
       </Router>
     </Provider>
+    // <>
+    // <Map />
+    // </>
   )
 }
 
