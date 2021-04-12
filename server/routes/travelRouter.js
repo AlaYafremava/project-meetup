@@ -1,5 +1,6 @@
 import Router from "express"
 const router = new Router()
+import User from "../models/users.js"
 import Travel from "../models/travels.js"
 import verToken from "../middlware/auth.js"
 import path from "path"
@@ -46,34 +47,30 @@ router.get("/travels", verToken, (async (req, res) => {
 )
 
 
-router.post("/travels/new", verToken, (async (req, res) => {
-    const { title,
+router.post('/travels/new', verToken, async (req, res) => {
+    try {
+      const { title, description, country, city, startDate, finishDate, number } = req.body
+      // console.log(country, startDate)
+      const newTravel = await Travel.create({
+        title,
         description,
         country,
         city,
         startDate,
         finishDate,
-        number
-         } = req.body
-         console.log(country, startDate);
-    try {
-        const travel = await Travel.create({
-            title,
-            description,
-            country,
-            city,
-            startDate,
-            finishDate,
-            number,
-        })
-        console.log(travel);
-        if (travel) {
-            return res.status(200).json({ travel, success: true })
+        number,
+        owner: req.user.id,
+      })
+      console.log(newTravel);
+      const createrNewTravel = await User.findByIdAndUpdate(req.user.id, {userTravels: [newTravel._id]})
+      console.log(createrNewTravel);
+      if (newTravel) {
+          return res.status(200).json({ newTravel, success: true })
         }
     } catch (e) {
-        res.status(400).json({ message: "travel create error"})
+      res.status(400).json({ message: 'travel create error' })
     }
-}))
+  })
 
 router.get("/travels/:id", (async (req, res) => {
     const { id } = req.params

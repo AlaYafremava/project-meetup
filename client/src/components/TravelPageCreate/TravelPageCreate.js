@@ -24,7 +24,7 @@ function TravelPageCreate(props) {
     .then(res => res.json())
     .then(data => {
       if (data.success === true) {
-        return history.push(`/travels/${data.travel._id}`)
+        return history.push(`/travels/${data.newTravel._id}`)
       } else {
         alert('Не удалось cоздать travel')
       }
