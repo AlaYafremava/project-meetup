@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -49,7 +49,7 @@ function Map({ }) {
   console.log(visibility, 'visibility');
 
 
-  const createMarkers = (event) => {
+  const createMarkers = useCallback((event) => {
     dispatch({
       type: 'MY_COORDS', payload: {
         lat: event.latLng.lat(),
@@ -64,7 +64,7 @@ function Map({ }) {
       //   time: new Date(),
       // }]
     )
-  }
+  }, []);
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY,
@@ -90,9 +90,8 @@ function Map({ }) {
           // key={coords.time.toISOString()}
           position={coords}
           icon={{
-            url: '/avatar.jpeg',
+            url: '/me.png',
             scaledSize: new window.google.maps.Size(30, 30), // масштабировать иконку
-            origin: new window.google.maps.Point(0,0), 
             anchor: new window.google.maps.Point(15,15) // поставить в центр иконки
           }}
         />}
