@@ -16,14 +16,14 @@ import Header from './components/Header/Header'
 
 function App() {
   const token = window.localStorage.getItem('token')
-  
+
   useEffect(() => {
     fetch('http://localhost:4000', {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
   }, [])
 
@@ -34,9 +34,7 @@ function App() {
       <Router>
         {/* <Header/> */}
 
-
         <Switch>
-
           <Route exact path="/">
             <Auth />
           </Route>
@@ -53,15 +51,13 @@ function App() {
             <TravelPageCreate />
           </Route>
 
-          <Route exact path="/travels/:id">
+          <Route path="/travels/:id">
             <TravelPage />
           </Route>
 
-           <Route path="/map">
-              <Map />
-            </Route>
-
-         
+          <Route path="/map">
+            <Map />
+          </Route>
 
           <Route path="/travels/:id/edit">
             <TravelPageEdit />

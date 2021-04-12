@@ -1,8 +1,9 @@
 import Router from 'express'
 const router = new Router()
-import Travel from '../models/travels.js'
-import verToken from '../middlware/auth.js'
-import path from 'path'
+import User from "../models/users.js"
+import Travel from "../models/travels.js"
+import verToken from "../middlware/auth.js"
+import path from "path"
 import multer from 'multer'
 
 // const storage = multer.diskStorage({
@@ -13,8 +14,8 @@ import multer from 'multer'
 //   })
 //   const fileFilter = (req, file, cb) => {
 
-//     if(file.mimetype === "image/png" ||
-//     file.mimetype === "image/jpg"||
+//     if(file.mimetype === "image/png" || 
+//     file.mimetype === "image/jpg"|| 
 //     file.mimetype === "image/jpeg"){
 //         cb(null, true);
 //     }
@@ -57,33 +58,44 @@ router.post('/travels/new', verToken, async (req, res) => {
       owner: req.user._id,
     })
 
-    const createrNewTravel = await findOne({ _id: req.user._id })
-    createrNewTravel.userTravels.push(newTravel)
-    await createrNewTravel.save()
-    // console.log(travel)
-    if (newTravel) {
-      return res.status(200).json({ newTravel, success: true })
+router.post('/travels/new', verToken, async (req, res) => {
+    try {
+        const { title, description, country, city, startDate, finishDate, number } = req.body
+        const newTravel = await Travel.create({
+            title,
+            description,
+            country,
+            city,
+            startDate,
+            finishDate,
+            number,
+            owner: createrNewTravel,
+        })
+        await User.findByIdAndUpdate(req.user.id, { $push: { userTravels: newTravel } })
+        if (newTravel) {
+            return res.status(200).json({ newTravel, success: true })
+        }
+    } catch (e) {
+        console.error(e.message)
+        res.status(400).json({ message: 'travel create error' })
     }
-  } catch (e) {
-    res.status(400).json({ message: 'travel create error' })
-  }
 })
 
-router.get('/travels/:id', async (req, res) => {
-  const { id } = req.params
-  try {
-    const travel = await Travel.findOne({ _id: id })
-    console.log(travel)
-    if (!travel) {
-      return res.status(400).json({
-        message: 'Travels not found',
-      })
+router.get("/travels/:id", (async (req, res) => {
+    const { id } = req.params
+    try {
+        const travel = await Travel.findOne({ _id: id })
+        console.log(travel);
+        if (!travel) {
+            return res.status(400).json({
+                message: "Travels not found"
+            })
+        }
+        return res.status(200).json({ travel, success: true })
+    } catch (e) {
+        res.status(400).json({ message: "travels load error" })
     }
-    return res.status(200).json({ travel, success: true })
-  } catch (e) {
-    res.status(400).json({ message: 'travels load error' })
-  }
-})
+}))
 
 // router.put("/travels/:id", async function (req, res, next) {
 //     const { id } = req.params

@@ -18,8 +18,16 @@ function TravelPageCreate(props) {
         city: e.target.city.value,
         startDate: e.target.startDate.value,
         finishDate: e.target.finishDate.value,
-        number: e.target.number.value,
-      }),
+        number: e.target.number.value
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success === true) {
+        return history.push(`/travels/${data.newTravel._id}`)
+      } else {
+        alert('Не удалось cоздать travel')
+      }
     })
       .then(res => res.json())
       .then(data => {
