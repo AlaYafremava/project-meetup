@@ -88,7 +88,7 @@ const [state, setState] = useState({})
           </section>
           <section>
             <h3>Number of travellers</h3>
-            <p>  {state?.travel?.number}</p>
+            <p>{state?.travel?.number}</p>
           </section>
         </section>
       </footer>

@@ -1,31 +1,32 @@
 import React, { useEffect, useState } from "react";
+
 import {
   GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow,
   MarkerClusterer,
-} from "@react-google-maps/api";
-import { useDispatch, useSelector } from "react-redux";
+} from '@react-google-maps/api'
+import { useDispatch, useSelector } from 'react-redux'
 
 const containerStyle = {
-  width: "70vw",
-  height: "70vh",
-  borderRadius: "4px",
-};
+  width: '70vw',
+  height: '70vh',
+  borderRadius: '4px',
+}
 const options = {
   disableDefaultUI: true,
   zoomControl: true,
   streetViewControl: true,
   navigation: true,
   fullscreenControl: true,
-};
+}
 
 function Map({ }) {
   const center = {
-    lat: 59.938480,
-    lng: 30.312481
-  };
+    lat: 59.93848,
+    lng: 30.312481,
+  }
 
   // const [ selected, setSelected ] = useState(false);
   const dispatch = useDispatch();
@@ -64,11 +65,12 @@ function Map({ }) {
       //   time: new Date(),
       // }]
     )
+
   }
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY,
-  });
+  })
 
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading maps";
@@ -105,6 +107,7 @@ function Map({ }) {
             }
           />) : null}
         {/* // ))} */}
+
         {/* <Marker
           position={center}
           onClick={() => {
@@ -132,8 +135,8 @@ function Map({ }) {
       </span> */}
     </>
   ) : (
-      <div></div>
-    );
+    <div></div>
+  )
 }
 
-export default React.memo(Map);
+export default React.memo(Map)

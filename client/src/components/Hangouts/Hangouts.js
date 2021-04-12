@@ -19,7 +19,9 @@ function Hangouts(props) {
                 <input type="checkbox" id="demo-copy" name="demo-copy" />
                 <label htmlFor="demo-copy">Become available for others</label>
               </div>
-              <Map />
+              <div>
+                <Map />
+              </div>
             </div>
           </div>
         </section>
