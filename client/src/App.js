@@ -11,7 +11,7 @@ import Hangouts from './components/Hangouts/Hangouts'
 import TravelPage from './components/TravelPage/TravelPage'
 import TravelPageCreate from './components/TravelPageCreate/TravelPageCreate'
 import TravelPageEdit from './components/TravelPageEdit/TravelPageEdit'
-
+import Map from './components/Map/Map'
 
 function App() {
   const token = window.localStorage.getItem('token')
@@ -32,6 +32,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
+
           <Route exact path="/">
             <Auth />
           </Route>
@@ -48,7 +49,11 @@ function App() {
             <TravelPage />
           </Route>
 
-          <Route path="/travels/new">
+           <Route path="/map">
+              <Map />
+            </Route>
+
+         <Route path="/travels/new">
             <TravelPageCreate />
           </Route>
 
@@ -77,6 +82,9 @@ function App() {
         </ul>
       </div>
     </Provider>
+    // <>
+    // <Map />
+    // </>
   )
 }
 
