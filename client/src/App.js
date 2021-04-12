@@ -12,6 +12,7 @@ import TravelPage from './components/TravelPage/TravelPage'
 import TravelPageCreate from './components/TravelPageCreate/TravelPageCreate'
 import TravelPageEdit from './components/TravelPageEdit/TravelPageEdit'
 import Map from './components/Map/Map'
+import Header from './components/Header/Header'
 
 function App() {
   const token = window.localStorage.getItem('token')
@@ -31,6 +32,9 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
+        {/* <Header/> */}
+
+
         <Switch>
 
           <Route exact path="/">
@@ -45,6 +49,10 @@ function App() {
             <Travels />
           </Route>
 
+          <Route path="/travels/new">
+            <TravelPageCreate />
+          </Route>
+
           <Route exact path="/travels/:id">
             <TravelPage />
           </Route>
@@ -53,9 +61,7 @@ function App() {
               <Map />
             </Route>
 
-         <Route path="/travels/new">
-            <TravelPageCreate />
-          </Route>
+         
 
           <Route path="/travels/:id/edit">
             <TravelPageEdit />
