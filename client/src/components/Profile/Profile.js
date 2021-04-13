@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import Header from '../Header/Header'
 import Navbar from '../Navbar/Navbar'
 import UserAbout from '../UserAbout/UserAbout'
 import UserCard from '../UserCard/UserCard'
 import UserFriends from '../UserFriends/UserFriends'
 import UserTravels from '../UserTravels/UserTravels'
+import {fetchInitUser} from '../../redux/reduxThunk/asyncFuncs'
 
 function Profile(props) {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+dispatch(fetchInitUser())
+  }, [dispatch])
   return (
     <>
       <Header />
@@ -19,9 +26,9 @@ function Profile(props) {
             </div>
             <div className="col-9 col-12-small">
               <Navbar />
-              {/* <UserAbout /> */}
+              <UserAbout />
               {/* <UserTravels /> */}
-              <UserFriends />
+              {/* <UserFriends /> */}
             </div>
           </div>
         </section>

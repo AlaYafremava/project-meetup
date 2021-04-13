@@ -2,8 +2,9 @@ import React, { useRef } from 'react'
 import UserCardSmall from '../UserCardSmall/UserCardSmall'
 import Map from '../Map/Map'
 import Header from '../Header/Header'
-import './Hangouts.css'
-import { useDispatch, useSelector } from 'react-redux'
+
+import { useDispatch, useSelector } from 'react-redux';
+import module from './Hangouts.module.scss';
 
 function Hangouts() {
 
@@ -31,14 +32,14 @@ const changeVisibility = (event) => {
             <div className="col-9 col-12-small">
               <div>
                 {/* слайдер */}
-                {/* <div class="slideThree">
+                <div class="slideThree">
                   <input type="checkbox" value="None" id="slideThree" name="check" checked />
                   <label for="slideThree"></label>
-                </div> */}
-                <input type="checkbox" id="demo-copy" name="demo-copy" 
+                </div>
+                {/* <input type="checkbox" id="demo-copy" name="demo-copy" 
                 ref="visCheck"
                 onChange={changeVisibility} />
-                <label htmlFor="demo-copy">Become available for others</label>
+                <label htmlFor="demo-copy">Become available for others</label> */}
               </div>
               <div>
                 <Map />
