@@ -1,5 +1,5 @@
-const initMapCoords = {}
-//   coords: { lat: 59.938480, lng: 30.312481 },
+const initMapCoords = {
+  coords: { lat: 59.938480, lng: 30.312481 },}
 //   visibility: true,
     // добавляется в базу, когда пользователь клиепе
 //   markers: [
@@ -21,6 +21,9 @@ const mapReducer = (mapCoords = initMapCoords, action) => {
 
     case 'MY_COORDS':
       return { ...mapCoords, coords: action.payload };
+
+    case 'DEL_COORDS':
+      return { ...mapCoords, coords: {} }
 
     //перенести case в юзеров
     case 'VISIBILITY':

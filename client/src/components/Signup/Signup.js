@@ -14,14 +14,16 @@ function Signup({ authHandler }) {
   const signupHandler = (e) => {
     e.preventDefault()
     const { name, sex, email, password } = e.target
+
      if (pass.current.value === repeatPass.current.value) {
-    fetch('http://localhost:4000/signup', {
+    fetch('/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'Application/json' },
       body: JSON.stringify({ name: name.value, sex: sex.value, email: email.value, password: password.value })
     })
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         if (data.success === true) {
           localStorage.setItem('token', data.token);
           dispatch({ type: SIGNUP, payload: data.user });

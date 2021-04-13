@@ -14,7 +14,7 @@ function Login({ authHandler }) {
   const loginHandler = (e) => {
     e.preventDefault()
     const { email, password } = e.target
-    fetch('http://localhost:4000/login', {
+    fetch('/login', {
       method: 'POST',
       headers: { 'Content-Type': 'Application/json' },
       body: JSON.stringify({ email: email.value, password: password.value })
