@@ -25,11 +25,13 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Language'
   }],
-  socials: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Social'
-  }],
-  // socials: [socialSchema],
+  // socials: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Social'
+  // }],
+  telegram: {type: String},
+  instagram: {type: String},
+  facebook: {type: String},
   userTravels: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Travel'

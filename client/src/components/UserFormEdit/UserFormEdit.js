@@ -1,33 +1,39 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Header from '../Header/Header'
 import { useDispatch, useSelector } from 'react-redux'
-import {UPDATE_USER} from '../../redux/actionTypes/actionTypes'
+import { useHistory } from 'react-router-dom'
+// import DatePicker from "react-datepicker";
+
+import { UPDATE_USER } from '../../redux/actionTypes/actionTypes'
 import './UserFormEdit.css'
 
 function UserFormEdit() {
 
-  const user = useSelector(store => store.auth.user)
+  const user = useSelector(store => store.profile.user)
   const dispatch = useDispatch()
-  console.log(user);
+  const history = useHistory()
+
+  // console.log(user.sex);
 
   const formHandler = (e) => {
     e.preventDefault()
 
-    let { name, surname, sex, bday, phone, country, city, homeCountry, homeTown, occupation, education, description, socials } = e.target
+    let { name, surname, sex, bday, phone, country, city, homeCountry, homeTown, occupation, education, description, telegram, instagram, facebook } = e.target
     // console.log(name.value, surname.value, sex.value, bday.value, phone.value, country.value, city.value, homeCountry.value, homeTown.value, profession.value, education.value, about.value, socials.value)
-// console.log(socials);
+    console.log(user);
     fetch('/profile/edit', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ id: user._id, name: name.value, surname: surname.value, sex: sex.value, bday: bday.value, phone: phone.value, country: country.value, city: city.value, homeCountry: homeCountry.value, homeTown: homeTown.value, occupation: occupation.value, education: education.value, description: description.value, telegram: socials[0].value, instagram: socials[1].value, facebook: socials[2].value })
+      body: JSON.stringify({ id: user._id, name: name.value, surname: surname.value, sex: sex.value, bday: bday.value, phone: phone.value, country: country.value, city: city.value, homeCountry: homeCountry.value, homeTown: homeTown.value, occupation: occupation.value, education: education.value, description: description.value, telegram: telegram.value, instagram: instagram.value, facebook: facebook.value })
     })
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          console.log(data.user);
-          dispatch({type: UPDATE_USER, payload: data.user})
+          // console.log(data);
+          dispatch({ type: UPDATE_USER, payload: data })
+          history.push('/profile')
         }
       })
   }
@@ -65,23 +71,23 @@ function UserFormEdit() {
                   min="1949-12-31"
                   max={Date.now()}
                   defaultValue={user.bday}
-                  required
+                 
                 />
               </div>
 
               <div className="col-6 col-12-xsmall sexDivEdit">
                 <div id="sexDiv" className="field sexDivclass">
                   <div className="col-4 col-12-small">
-                    <input type="radio" id="demo-priority-low" name="sex" value="woman" dafaultchecked="true" />
-                    <label htmlFor="demo-priority-low">Woman</label>
+                    <input type="radio" id="demo-priority-low" name="sex" value="Female" defaultChecked={user.sex === 'Female' && user.sex } />
+                    <label htmlFor="demo-priority-low">Female</label>
                   </div>
                   <div className="col-4 col-12-small">
-                    <input type="radio" id="demo-priority-normal" name="sex" value="man" />
-                    <label htmlFor="demo-priority-normal">Man</label>
+                    <input type="radio" id="demo-priority-normal" name="sex" value="Male" defaultChecked={user.sex === 'Male' && user.sex}/>
+                    <label htmlFor="demo-priority-normal">Male</label>
                   </div>
                   <div className="col-4 col-12-small">
-                    <input type="radio" id="demo-priority-normal" name="sex" value="other" />
-                    <label htmlFor="demo-priority-normal">Other</label>
+                    <input type="radio" id="demo-priority-high" name="sex" value="Other" defaultChecked={user.sex === 'Other' && user.sex}/>
+                    <label htmlFor="demo-priority-high">Other</label>
                   </div>
                 </div>
               </div>
@@ -611,15 +617,15 @@ function UserFormEdit() {
                 <label>Your interests or hobbies</label>
               </div>
               <div className="col-4 col-12-small">
-                <input type="checkbox" id="demo-copy" name="demo-copy" />
+                <input type="checkbox" id="demo-copy" name="interests-running" value='running'/>
                 <label htmlFor="demo-copy">running</label>
               </div>
               <div className="col-4 col-12-small">
-                <input type="checkbox" id="demo-copy" name="demo-copy" />
+                <input type="checkbox" id="demo-copy" name="interests-reading" value='reading'/>
                 <label htmlFor="demo-copy">reading</label>
               </div>
               <div className="col-4 col-12-small">
-                <input type="checkbox" id="demo-copy" name="demo-copy" />
+                <input type="checkbox" id="demo-copy" name="interests-travelling" value='travelling'/>
                 <label htmlFor="demo-copy">travelling</label>
               </div>
 
@@ -627,15 +633,15 @@ function UserFormEdit() {
                 <label>Languages you speak</label>
               </div>
               <div className="col-4 col-12-small">
-                <input type="checkbox" id="demo-copy" name="demo-copy" />
+                <input type="checkbox" id="lang1" name="demo-languages" />
                 <label htmlFor="demo-copy">russian</label>
               </div>
               <div className="col-4 col-12-small">
-                <input type="checkbox" id="demo-copy" name="demo-copy" />
+                <input type="checkbox" id="lang2" name="demo-languages" />
                 <label htmlFor="demo-copy">english</label>
               </div>
               <div className="col-4 col-12-small">
-                <input type="checkbox" id="demo-copy" name="demo-copy" />
+                <input type="checkbox" id="lang3" name="demo-languages" />
                 <label htmlFor="demo-copy">spain</label>
               </div>
 
@@ -648,9 +654,9 @@ function UserFormEdit() {
                 </span>
                 <input
                   type="text"
-                  name="socials"
+                  name="telegram"
                   autoComplete="off"
-                  defaultValue={user.socials[0] ? '@' + user.socials[0] : '@'}
+                  defaultValue={user.telegram ? '@' + user.telegram : '@'}
                 />
               </div>
               <div className="col-4 col-12-small">
@@ -659,20 +665,20 @@ function UserFormEdit() {
                 </span>
                 <input
                   type="text"
-                  name="socials"
+                  name="instagram"
                   autoComplete="off"
-                  defaultValue={user.socials[1] ? '@' + user.socials[1] : '@'}
+                  defaultValue={user.instagram ? '@' + user.instagram : '@'}
                 />
               </div>
-                  <div className="col-4 col-12-small">
+              <div className="col-4 col-12-small">
                 <span>
                   <i className="element-icon fa-facebook"></i>
                 </span>
                 <input
                   type="text"
-                  name="socials"
+                  name="facebook"
                   autoComplete="off"
-                  defaultValue={user.socials[2] && user.social[2]}
+                  defaultValue={user.facebook ? user.facebook : ''}
                 />
               </div>
             </div>

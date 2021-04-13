@@ -18,8 +18,8 @@ function Profile(props) {
             </div>
             <div className="col-9 col-12-small">
               <Navbar />
-              {/* <UserAbout /> */}
-              <UserTravels />
+              <UserAbout />
+              {/* <UserTravels /> */}
             </div>
           </div>
         </section>

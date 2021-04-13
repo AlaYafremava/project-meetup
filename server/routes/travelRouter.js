@@ -44,21 +44,6 @@ router.get('/travels', verToken, async (req, res) => {
 })
 
 router.post('/travels/new', verToken, async (req, res) => {
-  try {
-    const { title, description, country, city, startDate, finishDate, number } = req.body
-    // console.log(country, startDate)
-    const newTravel = await Travel.create({
-      title,
-      description,
-      country,
-      city,
-      startDate,
-      finishDate,
-      number,
-      owner: req.user._id,
-    })
-
-router.post('/travels/new', verToken, async (req, res) => {
     try {
         const { title, description, country, city, startDate, finishDate, number } = req.body
         const newTravel = await Travel.create({

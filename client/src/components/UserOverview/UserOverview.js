@@ -1,7 +1,14 @@
 import React from 'react'
 import './UserOverview.css'
+import { useDispatch, useSelector } from 'react-redux'
 
 function UserOverview(props) {
+
+  const user = useSelector(store => store.profile.user)
+  // console.log(user);
+  let userAge = 2021 - user.bday.substr(0,4)
+  // console.log(userAge);
+
   return (
     <div className="row">
       <div className="col-6 col-12-small">
@@ -10,7 +17,7 @@ function UserOverview(props) {
             <span>
               <i className="element-icon fa-venus-mars"></i>
             </span>
-            &nbsp; 33, Female
+            &nbsp; {userAge}, {user.sex}
           </li>
           <li className="li-overview">
             <span>
@@ -22,7 +29,7 @@ function UserOverview(props) {
             <span>
               <i className="element-icon fa-user"></i>
             </span>
-            &nbsp; Member since 2018
+            &nbsp; Member since {user.regDate.substr(0,4)}
           </li>
         </ul>
       </div>
@@ -32,19 +39,19 @@ function UserOverview(props) {
             <span>
               <i className="element-icon fa-home"></i>
             </span>
-            &nbsp; Brest
+            &nbsp; {user.homeTown}
           </li>
           <li className="li-overview">
             <span>
               <i className="element-icon fa-graduation-cap"></i>
             </span>
-            &nbsp;Brest Univercity
+            &nbsp;{user.education}
           </li>
           <li className="li-overview">
             <span>
               <i className="element-icon fa-suitcase"></i>
             </span>
-            &nbsp; Engineer
+            &nbsp; {user.profession}
           </li>
         </ul>
       </div>

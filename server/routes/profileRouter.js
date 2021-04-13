@@ -19,12 +19,12 @@ router.patch('/profile/edit', async (req, res) => {
   console.log(req.body);
   let user
   let { name, surname, sex, bday, phone, country, city, homeCountry, homeTown, occupation, education, description, telegram, instagram, facebook } = req.body
-  // console.log(surname);
+  console.log(bday);
   if (name || surname || sex || bday || phone || country || city || homeCountry || homeTown || occupation || education || description || telegram || instagram || facebook) {
     // try {
     user = await User.findById(req.body.id)
     // user = await User.findByIdAndUpdate({ _id: req.body.id }, { name: req.body.name, surname: req.body.surname })
-    console.log(user);
+    // console.log(sex);
     user.name = name
     user.surname = surname
     user.sex = sex
@@ -37,11 +37,13 @@ router.patch('/profile/edit', async (req, res) => {
     user.profession = occupation
     user.education = education
     user.about = description
-    let userTelegram = 'https://t.me/' + telegram.substring(1)
-    user.socials[0] = await Social.create({ title: userTelegram })
-    User.findById(req.body.id).populate('socials').socials[0] = 'https://t.me/' + telegram.substring(1)
-    user.socials[1] = instagram
-    user.socials[2] = facebook
+    // if (user.telegram.includes('https://t.me/')) {
+    //   user.telegram = user.telegram.substring(13) + telegram.substring(1)
+    // } else {
+      user.telegram = 'https://t.me/' + telegram.substring(1)
+    // }
+    user.instagram = 'https://instagram.com/' + instagram.substring(1)
+    user.facebook = 'https://www.facebook.com/' + facebook
     await user.save()
     console.log(user);
     return res.status(201).json({ success: true, user })

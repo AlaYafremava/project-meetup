@@ -9,7 +9,7 @@ const profileReducer = (state = initialState, action) => {
 
     case UPDATE_USER:
       console.log(action.payload);
-      return { ...state, user: action.payload }
+      return { ...state, user: action.payload.user }
 
     case INIT_TAGS:
       console.log(action.payload);
