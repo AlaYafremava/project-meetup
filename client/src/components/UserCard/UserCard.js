@@ -15,7 +15,7 @@ function UserCard(props) {
       </p>
       <p className="title">
         <i>
-          {user.city}, <br />
+          {user.city}{user.city && ','} <br />
           {user.country}
         </i>
       </p>

@@ -14,10 +14,10 @@ try {
 })
 
 router.patch('/profile/edit', async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   let user
   let { name, surname, sex, bday, phone, country, city, homeCountry, homeTown, occupation, education, description, telegram, instagram, facebook } = req.body
-  console.log(bday);
+  // console.log(bday);
   if (name || surname || sex || bday || phone || country || city || homeCountry || homeTown || occupation || education || description || telegram || instagram || facebook) {
     // try {
     user = await User.findById(req.body.id)
@@ -43,7 +43,7 @@ router.patch('/profile/edit', async (req, res) => {
     user.instagram = 'https://instagram.com/' + instagram.substring(1)
     user.facebook = 'https://www.facebook.com/' + facebook
     await user.save()
-    console.log(user);
+    // console.log(user);
     return res.status(201).json({ success: true, user })
   } else if (!name || !surname || !sex || !bday || !phone || !country || !city || !homeCountry || !homeTown || !occupation || !education || !description || !telegram || !instagram || !facebook) {
     user = await User.findById(req.body.id)

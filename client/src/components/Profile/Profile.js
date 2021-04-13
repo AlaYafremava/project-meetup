@@ -7,14 +7,15 @@ import UserAbout from '../UserAbout/UserAbout'
 import UserCard from '../UserCard/UserCard'
 import UserFriends from '../UserFriends/UserFriends'
 import UserTravels from '../UserTravels/UserTravels'
-import {fetchInitUser} from '../../redux/reduxThunk/asyncFuncs'
+import { fetchInitUser } from '../../redux/reduxThunk/asyncFuncs'
 
 function Profile(props) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-dispatch(fetchInitUser())
+    dispatch(fetchInitUser())
   }, [dispatch])
+
   return (
     <>
       <Header />
