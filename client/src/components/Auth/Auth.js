@@ -15,7 +15,6 @@ function Auth(props) {
   return (
     <section className="media">
       <div id="intro">
-        <div></div>
         <h1 className='authLogo'>
           <button className='authLogo_link'>
             MeetUp

@@ -1,6 +1,7 @@
 .headersLinks {
   right: 0;
   position: absolute;
+  pointer-events: auto;
 }
 
 .linkLogo {
