@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 function UserInterests(props) {
   // const dispatch = useDispatch()
 
-  const user = useSelector(store => store.profile.user)
+  const user = useSelector(store => store.user.user)
   console.log(user);
 
   // useEffect(() => {

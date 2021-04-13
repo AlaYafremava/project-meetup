@@ -1,5 +1,12 @@
-import { LOGOUT } from '../actionTypes/actionTypes'
+import { INIT_USER, LOGOUT } from '../actionTypes/actionTypes'
 import {INIT_TRAVELS, ADD_TRAVELS, DEL_TRAVELS, EDIT_TRAVELS} from "../actionTypes/actionTypes"
+
+export const initUserAC = (payload) => {
+  return {
+    type: INIT_USER,
+    payload,
+  };
+};
 
 export const logoutAC = (payload) => {
   return {
