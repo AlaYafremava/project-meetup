@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from "react";
+
 import {
   GoogleMap,
   useLoadScript,
@@ -21,41 +22,58 @@ const options = {
   fullscreenControl: true,
 }
 
-function Map({ defaultCity }) {
+function Map({ }) {
   const center = {
     lat: 59.93848,
     lng: 30.312481,
   }
 
-  const [selected, setSelected] = useState(false)
-  // const dispatch = useDispatch();
+  // const [ selected, setSelected ] = useState(false);
+  const dispatch = useDispatch();
+  // const store = useSelector((store) => store)
 
-  const [markers, setMarkers] = useState([])
+  // const [markers, setMarkers] = useState([]);
 
-  const createMarkers = event => {
-    // dispatch({type: 'MY_COORDS', payload: {
-    //   lat: event.latLng.lat(),
-    //   lng: event.latLng.lng(),
-    //   time: new Date(),
-    // }}
-    setMarkers(current => [
-      ...current,
-      {
+  // useEffect(() => {
+  // dispatch({type: 'INIT_MAP', payload: { visibility: true }});
+  // dispatch({type: 'INIT_MARKS', payload: [
+  //   { lat: 59.9381841762223, lng: 30.31536517097182 }, 
+  //   { lat: 59.938017673154, lng: 30.312043967568645 },
+  //   { lat: 59.938915343840016, lng: 30.30861916384227 },
+  //   { lat: 59.94098222939891, lng: 30.314060360105106 },
+  // ]});
+  // }, [])
+
+  const { coords, visibility, markers } = useSelector((store) => store.map)
+
+  console.log(coords, 'coords');
+  console.log(visibility, 'visibility');
+
+
+  const createMarkers = (event) => {
+    dispatch({
+      type: 'MY_COORDS', payload: {
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
         time: new Date(),
-      },
-    ])
+      }
+    }
+      // setMarkers((current) => [...current,
+      // {
+      //   lat: event.latLng.lat(),
+      //   lng: event.latLng.lng(),
+      //   time: new Date(),
+      // }]
+    )
+
   }
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY,
   })
 
-  console.log(isLoaded)
-
-  if (loadError) return 'Error loading maps'
-  if (!isLoaded) return 'Loading maps'
+  if (loadError) return "Error loading maps";
+  if (!isLoaded) return "Loading maps";
 
   return isLoaded ? (
     <>
@@ -67,10 +85,29 @@ function Map({ defaultCity }) {
         mapContainerStyle={containerStyle}
         center={center}
         options={options}
-        onClick={createMarkers}>
-        {markers.map(marker => (
-          <Marker key={marker.time.toISOString()} position={{ lat: marker.lat, lng: marker.lng }} />
-        ))}
+        onClick={createMarkers}
+      >
+        {/* {markers.map((marker) => ( */}
+        {visibility && <Marker
+          // key={coords.time.toISOString()}
+          position={coords}
+          icon={{
+            url: '/avatar.jpeg',
+            scaledSize: new window.google.maps.Size(30, 30), // масштабировать иконку
+            origin: new window.google.maps.Point(0,0), 
+            anchor: new window.google.maps.Point(15,15) // поставить в центр иконки
+          }}
+        />}
+        {visibility && markers.length != 0 ? markers.map((marker) =>
+          <Marker
+            key={performance.now()}
+            position={
+              // coords
+              { lat: marker.lat, lng: marker.lng }
+            }
+          />) : null}
+        {/* // ))} */}
+
         {/* <Marker
           position={center}
           onClick={() => {
