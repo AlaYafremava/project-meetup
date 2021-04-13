@@ -1,4 +1,4 @@
-import { INIT_USER, LOGOUT } from '../actionTypes/actionTypes'
+import { INIT_USER, INIT_TAGS,CHECK_TAG, LOGOUT } from '../actionTypes/actionTypes'
 import {INIT_TRAVELS, ADD_TRAVELS, DEL_TRAVELS, EDIT_TRAVELS} from "../actionTypes/actionTypes"
 
 export const initUserAC = (payload) => {
@@ -11,6 +11,20 @@ export const initUserAC = (payload) => {
 export const logoutAC = (payload) => {
   return {
     type: LOGOUT,
+    payload,
+  };
+};
+
+export const initTagsAC = (payload) => {
+  return {
+    type: INIT_TAGS,
+    payload,
+  };
+};
+
+export const checkTagAC = (payload) => {
+  return {
+    type: CHECK_TAG,
     payload,
   };
 };
