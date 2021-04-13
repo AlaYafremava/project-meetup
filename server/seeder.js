@@ -1,34 +1,56 @@
 import mongoose from "mongoose"
-import User from './models/users.js'
+import Tag from './models/tags.js'
 
 async function seed() {
-  await mongoose.connect('mongodb://localhost:27017/meetup', {
+  await mongoose.connect(`mongodb+srv://alex:alex123@meetup.4dhze.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
     useFindAndModify: false
-  });
+   })
 
-  const users = [
+  const tags = [
     {
-      name: 'Oleg',
-      surname: 'Jut',
-      email: 'hdvfgd@mail.ru',
-      password: '625523',
-
+      title: 'vegan',
+    check: false
     },
     {
-      name: 'jkhbhjg',
-      surname: 'kg',
-      email: 'hdvhggd@mail.ru',
-      password: '62557623',    },
+      title: 'travel',
+    check: false
+    },
     {
-      name: 'lk',
-      surname: 'llll',
-      email: 'kjgiygkj@mail.ru',
-      password: '62559823',    },
+      title: 'sport',
+    check: false
+    },
+    {
+      title: 'architecture',
+    check: false
+    },
+    {
+      title: 'video games',
+    check: false
+    },
+    {
+      title: 'rock music',
+    check: false
+    },
+    {
+      title: 'classic music',
+    check: false
+    },
+    {
+      title: 'IT',
+    check: false
+    },
+    {
+      title: 'running',
+    check: false
+    },
+    {
+      title: 'science',
+    check: false
+    },
   ]
-  await User.insertMany(users);
+  await Tag.insertMany(tags);
   await mongoose.connection.close();
 }
 
