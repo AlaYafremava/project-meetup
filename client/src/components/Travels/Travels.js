@@ -1,18 +1,18 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import Header from '../Header/Header'
 import UserCardSmall from '../UserCardSmall/UserCardSmall'
 import TravelCardBig from '../TravelCardBig/TravelCardBig'
 import { useDispatch, useSelector } from 'react-redux'
-import {fetchInitTravels} from "../../redux/reduxThunk/asyncFuncs"
+import { fetchInitTravels } from "../../redux/reduxThunk/asyncFuncs"
 
 function Travels(props) {
 
   const dispatch = useDispatch()
   const store = useSelector(store => store)
 
-    useEffect(() => {
-   dispatch(fetchInitTravels())
-    }, [dispatch])
+  useEffect(() => {
+    dispatch(fetchInitTravels())
+  }, [dispatch])
 
   return (
     <>
@@ -25,7 +25,7 @@ function Travels(props) {
             </div>
             <div className="col-9 col-12-small">
               <div id="main">
-               {store.travels.travels.map(el => <TravelCardBig key={performance.now()} el={el}/>)} 
+                {store.travels.travels.map(el => <TravelCardBig key={performance.now()} el={el} />)}
               </div>
               <div>
                 <ul className="actions">
