@@ -29,14 +29,6 @@ function TravelPageCreate(props) {
         alert('Не удалось cоздать travel')
       }
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success === true) {
-          return history.push(`/travels/${data.travel._id}`)
-        } else {
-          alert('Не удалось cоздать travel')
-        }
-      })
   }
 
   return (

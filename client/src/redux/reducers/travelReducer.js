@@ -1,3 +1,5 @@
+import {INIT_TRAVELS, ADD_TRAVELS, DEL_TRAVELS, EDIT_TRAVELS} from "../actionTypes/actionTypes"
+
 const initialState = { travels: [] }
 
 const travelReducer = (state = initialState, action) => {
