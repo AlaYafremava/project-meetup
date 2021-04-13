@@ -3,6 +3,8 @@ import './TravelPage.css'
 import Header from '../Header/Header'
 import {useEffect, useState} from 'react'
 import {useParams} from "react-router-dom"
+import { fetchDelTravels} from "../../redux/reduxThunk/asyncFuncs"
+import { useDispatch } from 'react-redux'
 
 function TravelPage(props) {
   const token = window.localStorage.getItem('token')
@@ -18,6 +20,12 @@ const [state, setState] = useState({})
     const result = await response.json()
     setState(result)
   },[])
+
+  const dispatch = useDispatch()
+
+  const deleteHandler = () => {
+      dispatch(fetchDelTravels(id))
+  }
 
   return (
     <>
@@ -40,12 +48,12 @@ const [state, setState] = useState({})
           </p>
           <ul className="actions fit small">
             <li>
-              <a href="profile/travel/edit" className="button fit small">
+              <a href={`/travels/${id}/edit`} className="button fit small">
                 Edit travel
               </a>
             </li>
             <li>
-              <a href="profile/travel/delete" className="button fit small">
+              <a onClick={deleteHandler} className="button fit small">
                 Delete travel
               </a>
             </li>

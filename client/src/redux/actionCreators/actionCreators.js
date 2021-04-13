@@ -1,4 +1,5 @@
 import { LOGOUT } from '../actionTypes/actionTypes'
+import {INIT_TRAVELS, ADD_TRAVELS, DEL_TRAVELS, EDIT_TRAVELS} from "../actionTypes/actionTypes"
 
 export const logoutAC = (payload) => {
   return {
@@ -8,25 +9,25 @@ export const logoutAC = (payload) => {
 };
 
 export const initTravelsAC = (payload) => {
-  return {type: "INIT_TRAVEL",
+  return {type: INIT_TRAVELS,
   payload
   }
 }
 
 export const addTravelsAC = (payload) => {
-  return {type: "ADD_TRAVEL",
+  return {type: ADD_TRAVELS,
   payload
   }
 }
 
-export const delNotesAC = (payload) => {
-  return {type: "DEL_TRAVEL",
+export const delTravelsAC = (payload) => {
+  return {type: DEL_TRAVELS,
   payload
   }
 }
 
-export const editNotesAC = (payload) => {
-  return {type: "EDIT_TRAVEL",
+export const editTravelsAC = (payload) => {
+  return {type: EDIT_TRAVELS,
   payload
   }
 }

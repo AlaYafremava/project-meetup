@@ -50,18 +50,20 @@ function App() {
           <Route path="/travels/new">
             <TravelPageCreate />
           </Route>
+          
+          <Route path="/travels/:id/edit">
+            <TravelPageEdit />
+          </Route>
 
           <Route path="/travels/:id">
             <TravelPage />
           </Route>
+          
 
           <Route path="/map">
             <Map />
           </Route>
 
-          <Route path="/travels/:id/edit">
-            <TravelPageEdit />
-          </Route>
 
           <Route exact path="/profile">
             <Profile />

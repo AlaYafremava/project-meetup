@@ -30,22 +30,23 @@ import multer from 'multer'
 //     })
 
 router.get('/travels', verToken, async (req, res) => {
-  try {
-    const travels = await Travel.find()
-    if (!travels) {
-      return res.status(400).json({
-        message: 'Travels not found',
-      })
+    try {
+        const travels = await Travel.find()
+        if (!travels) {
+            return res.status(400).json({
+                message: 'Travels not found',
+            })
+        }
+        return res.status(200).json({ travels, success: true })
+    } catch (e) {
+        res.status(400).json({ message: 'travels load error' })
     }
-    return res.status(200).json({ travels, success: true })
-  } catch (e) {
-    res.status(400).json({ message: 'travels load error' })
-  }
 })
 
 router.post('/travels/new', verToken, async (req, res) => {
     try {
         const { title, description, country, city, startDate, finishDate, number } = req.body
+        const userAddNewTravel = await User.findOne({ _id: req.user.id })
         const newTravel = await Travel.create({
             title,
             description,
@@ -54,7 +55,7 @@ router.post('/travels/new', verToken, async (req, res) => {
             startDate,
             finishDate,
             number,
-            owner: createrNewTravel,
+            owner: userAddNewTravel,
         })
         await User.findByIdAndUpdate(req.user.id, { $push: { userTravels: newTravel } })
         if (newTravel) {
@@ -70,7 +71,6 @@ router.get("/travels/:id", (async (req, res) => {
     const { id } = req.params
     try {
         const travel = await Travel.findOne({ _id: id })
-        console.log(travel);
         if (!travel) {
             return res.status(400).json({
                 message: "Travels not found"
@@ -82,45 +82,45 @@ router.get("/travels/:id", (async (req, res) => {
     }
 }))
 
-// router.put("/travels/:id", async function (req, res, next) {
-//     const { id } = req.params
-//     const {
-//         title,
-//         description,
-//         country,
-//         city,
-//         startDate,
-//         finishDate,
-//         number
-//     } = req.body
-//     try {
-//         const travel = await Travel.findOneAndUpdate({ _id: id }, {
-//             title,
-//             description,
-//             country,
-//             city,
-//             startDate,
-//             finishDate,
-//             owner,
-//             followers,
-//             images
-//         })
-//         res.status(200).json({ success: true, travel })
-//     }
-//     catch {
-//         res.status(404).json({ success: false, message: "travel edit error" })
-//     }
-// })
+router.put("/travels/:id", verToken, async function (req, res, next) {
+    // const { id } = req.params
+    const {
+        id,
+        title,
+        description,
+        country,
+        city,
+        startDate,
+        finishDate,
+        number
+    } = req.body
+    try {
+        const travel = await Travel.findByIdAndUpdate(id, {
+            title,
+            description,
+            country,
+            city,
+            startDate,
+            finishDate,
+            number
+        })
+        console.log(travel);
+        res.status(200).json({ success: true, travel })
+    }
+    catch {
+        res.status(404).json({ success: false, message: "travel edit error" })
+    }
+})
 
-router.delete('/travels', async function (req, res, next) {
-  const { id } = req.body
-  // console.log(id);
-  try {
-    await Travel.findByIdAndDelete(id)
-    res.status(200).json({ success: true, id })
-  } catch {
-    res.status(404).json({ message: 'travel delete error' })
-  }
+router.delete('/travels', verToken, async function (req, res, next) {
+    const { id } = req.body
+    try {
+        await User.findByIdAndUpdate(req.user.id, { $pull: { userTravels: id } })
+        await Travel.findByIdAndDelete(id)
+        res.status(200).json({ success: true, id })
+    } catch {
+        res.status(404).json({ message: 'travel delete error' })
+    }
 })
 
 export default router
