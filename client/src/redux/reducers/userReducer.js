@@ -1,4 +1,4 @@
-import { SIGNUP, LOGIN, LOGOUT, INIT_USER } from '../actionTypes/actionTypes'
+import { SIGNUP, LOGIN, LOGOUT, INIT_USER, CHANGE_VISIBILITY_USER } from '../actionTypes/actionTypes'
 
 const initialState = { user: {}, isAuth: false }
 
@@ -19,6 +19,10 @@ const userReducer = (state = initialState, action) => {
       
       case INIT_USER:
         return { ...state, user: action.payload }
+
+    case CHANGE_VISIBILITY_USER:
+      return { ...state, user: {...state.user, visibility: action.payload} }
+
 
     default:
       return state

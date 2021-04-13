@@ -21,18 +21,13 @@ const options = {
   fullscreenControl: true,
 }
 
-function Map() {
-  const center = {
-    lat: 59.93848,
-    lng: 30.312481,
-  }
+function Map({ visibility }) {
 
   const [selected, setSelected] = useState(null);
   const dispatch = useDispatch();
-  // const store = useSelector((store) => store)
 
   useEffect(() => {
-    dispatch({ type: 'INIT_MAP', payload: { visibility: true } });
+    // dispatch({ type: 'INIT_MAP', payload: { visibility: true } });
     dispatch({
       type: 'INIT_MARKS', payload: [
         { lat: 59.9381841762223, lng: 30.31536517097182, user: 'Ann' },
@@ -43,32 +38,43 @@ function Map() {
     });
   }, [])
 
-  const { coords, visibility, markers } = useSelector((store) => store.map)
+  //удалить метку, если невидим
+  useEffect(() => {
+    !visibility && dispatch({ type: 'DEL_COORDS' })
+  }, [visibility]);
+
+
+
+  const { coords, markers } = useSelector((store) => store.map)
+  const store = useSelector((store) => store)
+// 
+
+  console.log(store);
+  // const center = (if (coords.lat) { coords } else {
+  //     lat: 59.93848,
+  //     lng: 30.312481,
+  //   })
+    
+    
+    const center = coords.lat ? coords : {
+      lat: 59.93848,
+      lng: 30.312481,
+    }
+    // console.log(coords);
 
   // console.log(coords, 'coords');
-  // console.log(visibility, 'visibility');
+  // console.log(center, 'center');
 
-  // const [markers, setMarkers] = useState([]);
-
-  const createMarkers =
-    useCallback(
-      (event) => {
-        dispatch({
-          type: 'MY_COORDS', payload: {
-            lat: event.latLng.lat(),
-            lng: event.latLng.lng(),
-            time: new Date(),
-          }
-        }
-          , []);
-        // setMarkers((current) => [...current,
-        // {
-        //   lat: event.latLng.lat(),
-        //   lng: event.latLng.lng(),
-        //   time: new Date(),
-        // }]
-        // )
-      })
+  // установка координат по клику и запись в store
+  const createMarker = useCallback((event) => {
+    dispatch({
+      type: 'MY_COORDS', payload: {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng(),
+        time: new Date(),
+      }
+    })
+  }, [])
 
   // установка ключа google
   const { isLoaded, loadError } = useLoadScript({
@@ -84,27 +90,33 @@ function Map() {
         <span role="img" aria-label="tent">Our logo</span>
       </h1> */}
       <GoogleMap
-        zoom={17}
+        zoom={14}
         mapContainerStyle={containerStyle}
         center={center}
         options={options}
-        onClick={createMarkers}
+        onClick={visibility && createMarker}
+
       // onLoad={} //возможно здесь будет логика при загрузке карты
+      // {visibility && 1 : 2}
       >
-        {/* {markers.map((marker) => ( */}
         {visibility && <Marker
-          // key={coords.time.toISOString()}
+          // key=
           position={coords}
           icon={{
             url: '/me.png',
             scaledSize: new window.google.maps.Size(30, 30), // масштабировать иконку
             anchor: new window.google.maps.Point(15, 15) // поставить в центр иконки
           }}
-        // onClick={(event) => {
-        //   console.log(coords);
-        //   setSelected('coords');
-        // }}
         />}
+        {/* {visibility && <Marker
+          // key=
+          position={coords}
+          icon={{
+            url: '/me.png',
+            scaledSize: new window.google.maps.Size(30, 30), // масштабировать иконку
+            anchor: new window.google.maps.Point(15, 15) // поставить в центр иконки
+          }}
+        />} */}
         {visibility && markers.length != 0 ? markers.map((marker) =>
           <Marker
             key={performance.now()}
@@ -132,22 +144,6 @@ function Map() {
             </div>
           </InfoWindow>
         ) : null}
-
-        {/* <Marker
-          position={center}
-          onClick={() => {
-            setSelected(!selected);
-          }}
-        /> */}
-        {/* {selected && defaultCity.name ? (
-          <InfoWindow position={center}>
-            <div style={{ color: "black" }}>
-              <p>{!defaultCity.address && "Концертный зал:"}</p>
-              <p>{defaultCity.name && defaultCity.name}</p>
-              <p>{defaultCity.address && defaultCity.address}</p>
-            </div>
-          </InfoWindow>
-        ) : null} */}
       </GoogleMap>
 
       {/* определение авто-координат. Пока в разработке */}

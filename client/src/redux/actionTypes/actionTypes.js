@@ -4,6 +4,7 @@ export const LOGOUT = 'LOGOUT'
 
 export const INIT_USER = 'INIT_USER'
 export const UPDATE_USER = 'UPDATE_USER'
+export const CHANGE_VISIBILITY_USER = 'CHANGE_VISIBILITY_USER'
 
 export const INIT_TRAVELS = 'INIT_TRAVELS'
 export const ADD_TRAVELS = 'ADD_TRAVELS'

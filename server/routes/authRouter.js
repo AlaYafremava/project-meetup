@@ -34,6 +34,7 @@ router.route("/signup")
       const token = generateToken(newUser._id)
       return res.status(200).json({ user: newUser, token, success: true })
     } catch (e) {
+      console.log(e.message);
       res.status(400).json({ message: "signup error" })
     }
   })

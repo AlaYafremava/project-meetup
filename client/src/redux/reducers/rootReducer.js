@@ -6,7 +6,7 @@ import travelReducer from "./travelReducer"
 
 const rootReducer = combineReducers({
   user: userReducer,
-  // profile: profileReducer,
+  profile: profileReducer,
   map: mapReducer,
   travels: travelReducer
 })

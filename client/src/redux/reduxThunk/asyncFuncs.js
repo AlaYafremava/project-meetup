@@ -9,8 +9,8 @@ export const fetchInitUser = () => {
       })
           .then(res => res.json())
           .then(data => {
-            console.log(data)})
-            // dispatch(initUserAC(data.auth))})
+            // console.log(data)})
+            dispatch(initUserAC(data))})
   }
 }
 
