@@ -1,11 +1,32 @@
-const initMapCoords = {coords: {lat: 59.938480, lng: 30.312481}};
+const initMapCoords = {}
+//   coords: { lat: 59.938480, lng: 30.312481 },
+//   visibility: true,
+//   markers: [
+//     { lat: 59.9381841762223, lng: 30.31536517097182 },
+//     { lat: 59.938017673154, lng: 30.312043967568645 },
+//     { lat: 59.938915343840016, lng: 30.30861916384227 },
+//     { lat: 59.94098222939891, lng: 30.314060360105106 },
+//   ]
+// };
 
 const mapReducer = (mapCoords = initMapCoords, action) => {
   switch (action.type) {
+
+    case 'INIT_MAP':
+      return { ...mapCoords, ...action.payload };
+
+    case 'INIT_MARKS':
+      return { ...mapCoords, markers: action.payload };
+
     case 'MY_COORDS':
-      return { coords: action.payload };
+      return { ...mapCoords, coords: action.payload };
+
+    //перенести case в юзеров
+    case 'VISIBILITY':
+      return { ...mapCoords, visibility: !action.payload }
+
     default:
-      return mapCoords;
+      return { ...mapCoords };
   }
 };
 

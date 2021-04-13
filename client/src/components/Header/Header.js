@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { logoutAC } from '../../redux/actionCreators/actionCreators'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './Header.css'
 
 function Header(props) {
@@ -19,9 +19,7 @@ function Header(props) {
       <header id="header">
         <nav id="nav">
           <div className="linkLogo">
-
             <a href="/hangouts" className="logo">
-
               Meetup
             </a>
           </div>
@@ -35,16 +33,18 @@ function Header(props) {
               <a href="/travels">Travels</a>
             </li>
             <li>
-              <a href="/profile">My Profile</a>
+              <Link to="/profile">My Profile</Link>
             </li>
 
-            <li /*className="active"*/>
-              {/* <a href="/logout" onClick={logOutHandler}>LogOut</a> */}
+            <li className="active">
+              <Link to="/" onClick={logOutHandler}>
+                LogOut
+              </Link>
             </li>
           </ul>
         </nav>
       </header>
-      <button onClick={logOutHandler}>ВЫЙТИИИИИИИИИ</button>
+      {/* <button onClick={logOutHandler}>ВЫЙТИИИИИИИИИ</button> */}
     </>
   )
 }

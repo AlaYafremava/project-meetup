@@ -10,8 +10,7 @@
 
 #sexDiv {
   display: flex;
-  position:absolute; /* добавили */
-	bottom:0;
+
 }
 
 .actions {
@@ -31,5 +30,11 @@
 }
 
 .sexDivEdit {
-  position:relative;
+  position: relative;
+
+}
+
+.sexDivclass {
+  position: absolute;
+  bottom: 0;
 }
