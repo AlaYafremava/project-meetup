@@ -26,8 +26,8 @@ dispatch(fetchInitUser())
             </div>
             <div className="col-9 col-12-small">
               <Navbar />
-              <UserAbout />
-              {/* <UserTravels /> */}
+              {/* <UserAbout /> */}
+              <UserTravels />
               {/* <UserFriends /> */}
             </div>
           </div>

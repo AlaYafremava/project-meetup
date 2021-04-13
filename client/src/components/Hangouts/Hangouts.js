@@ -4,7 +4,7 @@ import Map from '../Map/Map'
 import Header from '../Header/Header'
 
 import { useDispatch, useSelector } from 'react-redux';
-import module from './Hangouts.module.scss';
+// import module from './Hangouts.module.scss';
 
 function Hangouts() {
 

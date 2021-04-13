@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 
 function UserCardSmall(props) {
   const dispatch = useDispatch()
-  const user = useSelector(store => store.auth.user)
+  // const user = useSelector(store => store.auth.user)
   // console.log(user)
   return (
     <div className="card">

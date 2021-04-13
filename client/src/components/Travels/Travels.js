@@ -25,7 +25,7 @@ function Travels(props) {
             </div>
             <div className="col-9 col-12-small">
               <div id="main">
-                {store.travels.travels.map(el => <TravelCardBig key={performance.now()} el={el} />)}
+                {store.travels?.travels.map(el => <TravelCardBig key={performance.now()} el={el} />)}
               </div>
               <div>
                 <ul className="actions">

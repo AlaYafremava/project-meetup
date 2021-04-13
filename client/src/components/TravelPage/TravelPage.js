@@ -2,13 +2,14 @@ import React from 'react'
 import './TravelPage.css'
 import Header from '../Header/Header'
 import {useEffect, useState} from 'react'
-import {useParams} from "react-router-dom"
+import {useHistory, useParams} from "react-router-dom"
 import { fetchDelTravels} from "../../redux/reduxThunk/asyncFuncs"
 import { useDispatch } from 'react-redux'
 
 function TravelPage(props) {
   const token = window.localStorage.getItem('token')
   const {id} = useParams()
+  const history = useHistory()
 const [state, setState] = useState({})
 
 
@@ -25,6 +26,8 @@ const [state, setState] = useState({})
 
   const deleteHandler = () => {
       dispatch(fetchDelTravels(id))
+      history.push("/travels")
+
   }
 
   return (

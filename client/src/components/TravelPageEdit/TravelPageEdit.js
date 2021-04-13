@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import './TravelPageEdit.css'
 import Header from '../Header/Header'
 import { useHistory, useParams } from 'react-router'
@@ -29,8 +29,9 @@ function TravelPageEdit(props) {
   const dispatch = useDispatch()
   const history = useHistory()
   const store = useSelector(store => store)
-  const travels = store.travels.travels.filter(travel => travel.id === id)
+  const [travels] = store.travels.travels.filter(travel => travel._id === id)
 console.log(travels);
+
 
   const editTravelHandler = (e) => {
     e.preventDefault()
@@ -61,6 +62,7 @@ console.log(travels);
                   name="title"
                   autoComplete="off"
                   placeholder="Title your trip"
+                  defaultValue={travels?.title}
                   required
                 />
               </div>
@@ -68,6 +70,7 @@ console.log(travels);
               <div className="col-12">
                 <label>Description</label>
                 <textarea ref={inputDescription}
+                  defaultValue={travels?.description}
                   name="description"
                   placeholder="Put interesting and important information about this trip..."
                   rows="3"></textarea>
@@ -75,7 +78,7 @@ console.log(travels);
 
               <div className="col-6 col-12-xsmall">
                 <label>Country</label>
-                <select ref={inputCountry} className="form-control" required>
+                <select ref={inputCountry} className="form-control" defaultValue={travels?.country} required>
                   <option>AALAND ISLANDS</option>
                   <option>AFGHANISTAN</option>
                   <option>ALBANIA</option>
@@ -305,6 +308,7 @@ console.log(travels);
               <div className="col-6 col-12-xsmall">
                 <label>City</label>
                 <input ref={inputCity}
+                defaultValue={travels?.city}
                   type="text"
                   name="city"
                   autoComplete="off"
@@ -314,6 +318,7 @@ console.log(travels);
               <div className="col-6 col-12-xsmall">
                 <label>Start date</label>
                 <input ref={inputStartDate}
+                defaultValue={travels?.startDate.slice(0,10)}
                   type="date"
                   name="startDate"
                   min={Date.now()}
@@ -325,6 +330,7 @@ console.log(travels);
               <div className="col-6 col-12-xsmall">
                 <label>End date</label>
                 <input ref={inputEndDate}
+                defaultValue={travels?.finishDate.slice(0,10)}
                   type="date"
                   name="finishDate"
                   min={Date.now()}
@@ -335,6 +341,7 @@ console.log(travels);
               <div className="col-6 col-12-xsmall">
                 <label>Number of persons for this trip</label>
                 <input ref={inputNumber}
+                defaultValue={travels?.number}
                   type="number"
                   name="number"
                   min="1"
