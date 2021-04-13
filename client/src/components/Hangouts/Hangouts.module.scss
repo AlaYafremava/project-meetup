@@ -1,12 +1,19 @@
-input[type="checkbox"]+label,
-input[type="radio"]+label {
-  font-weight: 500;
-  font-size: 1.2rem;
-}
+// input[type="checkbox"]+label,
+// input[type="radio"]+label {
+//   font-weight: 500;
+//   font-size: 1.2rem;
+// }
 
+// @import "compass/css3";
+
+/* $activeColor: #c0392b; //red */
+$activeColor: #27ae60; //green
+$darkenColor: darken($activeColor, 20%);
+/* $background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/13460/dark_wall.png'); */
+$background: #3498db;
 
 /* .slideThree */
-/* .slideThree {
+.slideThree {
   width: 80px;
   height: 26px;
   background: #333;
@@ -54,5 +61,5 @@ input[type="radio"]+label {
       left: 43px;
     }
   }    
-} */
+}
 /* end .slideThree */
