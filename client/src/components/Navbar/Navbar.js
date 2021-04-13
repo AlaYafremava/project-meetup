@@ -23,13 +23,13 @@ function Navbar({ navAboutHandler, navMyTravelsHandler, navMyFriendsHandler }) {
         </li>
       </ul>
       <div>
-        <a href="/profile/edit" className="button primary">
+        {/* <a href="/profile/edit" className="button primary">
           Edit profile
-        </a>
-
-        {/* <a href="/travels/new" className="button primary">
-          Create new travel
         </a> */}
+
+        <a href="/travels/new" className="button primary">
+          Create new travel
+        </a>
 
         {/* <a href="/travels/new" className="button primary">
           Find new friends

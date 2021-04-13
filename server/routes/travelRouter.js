@@ -6,28 +6,28 @@ import verToken from "../middlware/auth.js"
 import path from "path"
 import multer from 'multer'
 
-// const storage = multer.diskStorage({
-//     destination: 'upload/images',
-//     filename: function (req, file, cb) {
-//       cb(null, path.join(Date.now() + '-' + file.originalname.replace(/\.jpg/, '')))
-//     }
-//   })
-//   const fileFilter = (req, file, cb) => {
+const storage = multer.diskStorage({
+    destination: 'upload/images',
+    filename: function (req, file, cb) {
+      cb(null, path.join(Date.now() + '-' + file.originalname.replace(/\.jpg/, '')))
+    }
+  })
+  const fileFilter = (req, file, cb) => {
 
-//     if(file.mimetype === "image/png" || 
-//     file.mimetype === "image/jpg"|| 
-//     file.mimetype === "image/jpeg"){
-//         cb(null, true);
-//     }
-//     else{
-//         cb(null, false);
-//     }
-//   }
-// const upload = multer({ storage:storage, fileFilter:fileFilter })
+    if(file.mimetype === "image/png" || 
+    file.mimetype === "image/jpg"|| 
+    file.mimetype === "image/jpeg"){
+        cb(null, true);
+    }
+    else{
+        cb(null, false);
+    }
+  }
+const upload = multer({ storage:storage, fileFilter:fileFilter })
 
-// router.post('/upload', upload.single('photo'), async (req,res) => {
-//     console.log(req.file)
-//     })
+router.post('/upload', upload.single('photo'), async (req,res) => {
+    console.log(req.file)
+    })
 
 router.get('/travels', verToken, async (req, res) => {
     try {
@@ -82,7 +82,7 @@ router.get("/travels/:id", (async (req, res) => {
     }
 }))
 
-router.put("/travels/:id", verToken, async function (req, res, next) {
+router.put("/travels/:id", verToken, upload.single('photo'), async function (req, res, next) {
     // const { id } = req.params
     const {
         id,

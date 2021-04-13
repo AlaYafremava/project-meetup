@@ -74,11 +74,6 @@ function Login({ authHandler }) {
           </li>
         </ul>
       </form>
-      {/* <form  enctype="multipart/form-data" method="post">
-   <p>Загрузите ваши фотографии на сервер</p>
-   <p><input type="file" name="photo" accept="image/*,image/jpeg" onChange={loadImageHandler}/>
-   <input type="submit" value="Отправить"/></p>
-   </form> */}
     </section>
   )
 }

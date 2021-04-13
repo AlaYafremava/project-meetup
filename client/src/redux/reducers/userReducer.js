@@ -13,8 +13,7 @@ const userReducer = (state = initialState, action) => {
       return { ...state, user: action.payload, isAuth: true }
 
     case LOGOUT:
-      window.localStorage.removeItem('token')
-      window.localStorage.removeItem('app_state')
+      window.localStorage.clear()
       return { ...state, user: {}, isAuth: false }
 
     case INIT_USER:
