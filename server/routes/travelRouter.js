@@ -43,7 +43,6 @@ router.get('/travels', verToken, async (req, res) => {
     }
 })
 
-
 router.post('/travels/new', verToken, async (req, res) => {
     try {
         const { title, description, country, city, startDate, finishDate, number } = req.body

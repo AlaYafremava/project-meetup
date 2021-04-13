@@ -38,3 +38,8 @@
   position: absolute;
   bottom: 0;
 }
+
+.travel-btn {
+  text-align: center;
+  margin-top: 4rem;
+}
