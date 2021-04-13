@@ -4,6 +4,7 @@ import Header from '../Header/Header'
 import Navbar from '../Navbar/Navbar'
 import UserAbout from '../UserAbout/UserAbout'
 import UserCard from '../UserCard/UserCard'
+import UserFriends from '../UserFriends/UserFriends'
 import UserTravels from '../UserTravels/UserTravels'
 
 function Profile(props) {
@@ -19,7 +20,8 @@ function Profile(props) {
             <div className="col-9 col-12-small">
               <Navbar />
               {/* <UserAbout /> */}
-              <UserTravels />
+              {/* <UserTravels /> */}
+              <UserFriends />
             </div>
           </div>
         </section>
