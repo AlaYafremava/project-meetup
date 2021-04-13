@@ -30,11 +30,11 @@ function TravelPageEdit(props) {
   const history = useHistory()
   const store = useSelector(store => store)
   const [travels] = store.travels.travels.filter(travel => travel._id === id)
-console.log(travels);
 
 
   const editTravelHandler = (e) => {
     e.preventDefault()
+    if (inputStartDate.current.value <= inputEndDate.current.value){
     dispatch(fetchEditTravels(id, 
       inputTitle.current.value, 
       inputDescription.current.value, 
@@ -44,7 +44,10 @@ console.log(travels);
       inputEndDate.current.value,
       inputNumber.current.value,
       ))
-    history.push("/travels")
+      history.push("/travels")
+    } else {
+      alert("Введите дату окончания позже даты старта!")
+    }
 }
 
   return (
@@ -321,7 +324,7 @@ console.log(travels);
                 defaultValue={travels?.startDate.slice(0,10)}
                   type="date"
                   name="startDate"
-                  min={Date.now()}
+                  min={`${new Date().getFullYear()}-0${new Date().getMonth() +1}-${new Date().getDate()}`}
                   max="2030-12-31"
                   required
                 />
@@ -333,7 +336,7 @@ console.log(travels);
                 defaultValue={travels?.finishDate.slice(0,10)}
                   type="date"
                   name="finishDate"
-                  min={Date.now()}
+                  min={`${new Date().getFullYear()}-0${new Date().getMonth() +1}-${new Date().getDate()}`}
                   max="2030-12-31"
                   required
                 />
