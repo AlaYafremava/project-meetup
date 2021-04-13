@@ -2,33 +2,37 @@ import React from 'react'
 // import { Link } from 'react-router-dom'
 import './Navbar.css'
 
-function Navbar(props) {
+function Navbar({ navAboutHandler, navMyTravelsHandler, navMyFriendsHandler }) {
   return (
     <div className="nav_div nav-actions">
       <ul className="actions">
         <li>
-          <a href="/profile" className="button nav_btn nav-active">
+          <button onClick={navAboutHandler} className="button nav_btn nav-active">
             About
-          </a>
+          </button>
         </li>
         <li>
-          <a href="/profile/travels" className="button nav_btn">
+          <button onClick={navMyTravelsHandler} className="button nav_btn">
             My Travels
-          </a>
+          </button>
         </li>
         <li>
-          <a href="/profile/friends" className="button nav_btn">
+          <button onClick={navMyFriendsHandler} className="button nav_btn">
             My Friends
-          </a>
+          </button>
         </li>
       </ul>
       <div>
-        <a href="/profile/edit" className="button primary">
+        {/* <a href="/profile/edit" className="button primary">
           Edit profile
+        </a> */}
+
+        <a href="/travels/new" className="button primary">
+          Create new travel
         </a>
 
         {/* <a href="/travels/new" className="button primary">
-          Create new travel
+          Find new friends
         </a> */}
       </div>
     </div>

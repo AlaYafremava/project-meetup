@@ -1,8 +1,8 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import './TravelPageEdit.css'
 import Header from '../Header/Header'
 import { useHistory, useParams } from 'react-router'
-import {fetchEditTravels} from "../../redux/reduxThunk/asyncFuncs.js"
+import { fetchEditTravels } from "../../redux/reduxThunk/asyncFuncs.js"
 import { useDispatch, useSelector } from 'react-redux'
 
 // const trip = {
@@ -29,22 +29,44 @@ function TravelPageEdit(props) {
   const dispatch = useDispatch()
   const history = useHistory()
   const store = useSelector(store => store)
-  const travels = store.travels.travels.filter(travel => travel.id === id)
-console.log(travels);
+  const [travels] = store.travels.travels.filter(travel => travel._id === id)
+
 
   const editTravelHandler = (e) => {
     e.preventDefault()
-    dispatch(fetchEditTravels(id, 
-      inputTitle.current.value, 
-      inputDescription.current.value, 
-      inputCountry.current.value,
-      inputCity.current.value,
-      inputStartDate.current.value,
-      inputEndDate.current.value,
-      inputNumber.current.value,
+    if (inputStartDate.current.value <= inputEndDate.current.value) {
+      dispatch(fetchEditTravels(id,
+        inputTitle.current.value,
+        inputDescription.current.value,
+        inputCountry.current.value,
+        inputCity.current.value,
+        inputStartDate.current.value,
+        inputEndDate.current.value,
+        inputNumber.current.value,
       ))
-    history.push("/travels")
-}
+      history.push("/travels")
+    } else {
+      alert("Введите дату окончания позже даты старта!")
+    }
+  }
+
+  const loadImageHandler = (event) => {
+    event.preventDefault();
+    const data = new FormData();
+    console.log(event.target.files[0]);
+    data.append('photo', event.target.files[0]);
+    // data.append('name', 'Test Name');
+    // data.append('desc', 'Test description');
+    fetch("http://localhost:4000/upload", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+      },
+      body: data
+    }).then((response) => {
+      return response.text();
+    })
+  }
 
   return (
     <>
@@ -61,6 +83,7 @@ console.log(travels);
                   name="title"
                   autoComplete="off"
                   placeholder="Title your trip"
+                  defaultValue={travels?.title}
                   required
                 />
               </div>
@@ -68,6 +91,7 @@ console.log(travels);
               <div className="col-12">
                 <label>Description</label>
                 <textarea ref={inputDescription}
+                  defaultValue={travels?.description}
                   name="description"
                   placeholder="Put interesting and important information about this trip..."
                   rows="3"></textarea>
@@ -75,7 +99,7 @@ console.log(travels);
 
               <div className="col-6 col-12-xsmall">
                 <label>Country</label>
-                <select ref={inputCountry} className="form-control" required>
+                <select ref={inputCountry} className="form-control" defaultValue={travels?.country} required>
                   <option>AALAND ISLANDS</option>
                   <option>AFGHANISTAN</option>
                   <option>ALBANIA</option>
@@ -305,6 +329,7 @@ console.log(travels);
               <div className="col-6 col-12-xsmall">
                 <label>City</label>
                 <input ref={inputCity}
+                  defaultValue={travels?.city}
                   type="text"
                   name="city"
                   autoComplete="off"
@@ -314,9 +339,10 @@ console.log(travels);
               <div className="col-6 col-12-xsmall">
                 <label>Start date</label>
                 <input ref={inputStartDate}
+                  defaultValue={travels?.startDate.slice(0, 10)}
                   type="date"
                   name="startDate"
-                  min={Date.now()}
+                  min={`${new Date().getFullYear()}-0${new Date().getMonth() + 1}-${new Date().getDate()}`}
                   max="2030-12-31"
                   required
                 />
@@ -325,9 +351,10 @@ console.log(travels);
               <div className="col-6 col-12-xsmall">
                 <label>End date</label>
                 <input ref={inputEndDate}
+                  defaultValue={travels?.finishDate.slice(0, 10)}
                   type="date"
                   name="finishDate"
-                  min={Date.now()}
+                  min={`${new Date().getFullYear()}-0${new Date().getMonth() + 1}-${new Date().getDate()}`}
                   max="2030-12-31"
                   required
                 />
@@ -335,12 +362,19 @@ console.log(travels);
               <div className="col-6 col-12-xsmall">
                 <label>Number of persons for this trip</label>
                 <input ref={inputNumber}
+                  defaultValue={travels?.number}
                   type="number"
                   name="number"
                   min="1"
                   max="100"
                   required
                 />
+              </div>
+              <div className="col-6 col-12-xsmall">
+                <label>Upload photo</label>
+                <form enctype="multipart/form-data" method="post">
+            <p><input type="file" name="photo" accept="image/*,image/jpeg" onChange={loadImageHandler} /></p>
+          </form>
               </div>
             </div>
             <div className="col-12 travel-btn">

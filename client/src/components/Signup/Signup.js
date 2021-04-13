@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import './Signup.css'
 import { SIGNUP } from '../../redux/actionTypes/actionTypes.js'
@@ -8,10 +8,14 @@ function Signup({ authHandler }) {
 
   const dispatch = useDispatch()
   const history = useHistory()
+  const pass = useRef()
+  const repeatPass = useRef()
 
   const signupHandler = (e) => {
     e.preventDefault()
     const { name, sex, email, password } = e.target
+
+     if (pass.current.value === repeatPass.current.value) {
     fetch('/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'Application/json' },
@@ -28,6 +32,9 @@ function Signup({ authHandler }) {
           alert('Не удалось зарегистрировать пользователя')
         }
       })
+    } else {
+      alert("Пароли не совпадают!")
+    }
   }
 
   return (
@@ -58,11 +65,11 @@ function Signup({ authHandler }) {
           </div>
           <div className="field">
             <label>Password</label>
-            <input type="password" name="password" required />
+            <input ref={pass} type="password" name="password" required />
           </div>
           <div className="field">
             <label>Repeat password</label>
-            <input type="password" name="password" required />
+            <input ref={repeatPass} type="password" name="password" required />
           </div>
         </div>
         <ul className="actions">

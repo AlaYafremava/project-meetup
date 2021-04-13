@@ -1,19 +1,25 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect } from 'react'
 import Header from '../Header/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-// import DatePicker from "react-datepicker";
-
+import { fetchInitTags } from '../../redux/reduxThunk/asyncFuncs'
 import { UPDATE_USER } from '../../redux/actionTypes/actionTypes'
 import './UserFormEdit.css'
+import UserTag from '../../components/UserTag/UserTag'
 
 function UserFormEdit() {
+  const tags = useSelector(store => store.tags.tags)
+  console.log(tags);
 
-  const user = useSelector(store => store.profile.user)
+  const user = useSelector(store => store.user.user)
   const dispatch = useDispatch()
   const history = useHistory()
 
   // console.log(user.sex);
+
+  useEffect(() => {
+    dispatch(fetchInitTags())
+  }, [dispatch])
 
   const formHandler = (e) => {
     e.preventDefault()
@@ -71,22 +77,22 @@ function UserFormEdit() {
                   min="1949-12-31"
                   max={Date.now()}
                   defaultValue={user.bday}
-                 
+
                 />
               </div>
 
               <div className="col-6 col-12-xsmall sexDivEdit">
                 <div id="sexDiv" className="field sexDivclass">
                   <div className="col-4 col-12-small">
-                    <input type="radio" id="demo-priority-low" name="sex" value="Female" defaultChecked={user.sex === 'Female' && user.sex } />
+                    <input type="radio" id="demo-priority-low" name="sex" value="Female" defaultChecked={user.sex === 'Female' && user.sex} />
                     <label htmlFor="demo-priority-low">Female</label>
                   </div>
                   <div className="col-4 col-12-small">
-                    <input type="radio" id="demo-priority-normal" name="sex" value="Male" defaultChecked={user.sex === 'Male' && user.sex}/>
+                    <input type="radio" id="demo-priority-normal" name="sex" value="Male" defaultChecked={user.sex === 'Male' && user.sex} />
                     <label htmlFor="demo-priority-normal">Male</label>
                   </div>
                   <div className="col-4 col-12-small">
-                    <input type="radio" id="demo-priority-high" name="sex" value="Other" defaultChecked={user.sex === 'Other' && user.sex}/>
+                    <input type="radio" id="demo-priority-high" name="sex" value="Other" defaultChecked={user.sex === 'Other' && user.sex} />
                     <label htmlFor="demo-priority-high">Other</label>
                   </div>
                 </div>
@@ -616,7 +622,11 @@ function UserFormEdit() {
               <div className="col-12">
                 <label>Your interests or hobbies</label>
               </div>
-              <div className="col-4 col-12-small">
+              <ul>
+              {tags && tags?.map(el => <UserTag el={el} style={{ paddingTop: 0, marginTop: 20, marginLeft: 30 }} /> )}
+              </ul>
+              {/* <input className='tags' type='submit' value='Vegan' style={{ paddingTop: 0, marginTop: 20, marginLeft: 30 }} /> */}
+              {/* <div className="col-4 col-12-small">
                 <input type="checkbox" id="demo-copy" name="interests-running" value='running'/>
                 <label htmlFor="demo-copy">running</label>
               </div>
@@ -627,7 +637,7 @@ function UserFormEdit() {
               <div className="col-4 col-12-small">
                 <input type="checkbox" id="demo-copy" name="interests-travelling" value='travelling'/>
                 <label htmlFor="demo-copy">travelling</label>
-              </div>
+              </div> */}
 
               <div className="col-12">
                 <label>Languages you speak</label>

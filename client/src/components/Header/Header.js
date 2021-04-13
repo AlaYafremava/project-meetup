@@ -5,7 +5,7 @@ import { logoutAC } from '../../redux/actionCreators/actionCreators'
 import { Link } from 'react-router-dom'
 import './Header.css'
 
-function Header(props) {
+function Header({navAboutHandler}) {
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -25,15 +25,15 @@ function Header(props) {
           </div>
           <ul className="links headersLinks">
             <li>
-              <a href="/hangouts" className="links">
+              <Link to="/hangouts" className="links">
                 Hangouts
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/travels">Travels</a>
+              <Link to="/travels">Travels</Link>
             </li>
             <li>
-              <Link to="/profile">My Profile</Link>
+              <Link to="/profile" onClick={navAboutHandler}>My Profile</Link>
             </li>
 
             <li className="active">

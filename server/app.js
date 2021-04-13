@@ -5,6 +5,7 @@ import peopleRouter from './routes/people.js'
 import profileRouter from './routes/profileRouter.js'
 import travelRouter from "./routes/travelRouter.js"
 import authRouter from './routes/authRouter.js'
+import tagsRouter from './routes/tagsRouter.js'
 
 const app = express()
 
@@ -23,5 +24,6 @@ app.use('/people', peopleRouter)
 app.use(profileRouter)
 app.use(authRouter)
 app.use(travelRouter)
+app.use(tagsRouter)
 
 export default app

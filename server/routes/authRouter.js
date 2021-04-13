@@ -14,7 +14,7 @@ const generateToken = (id) => {
 }
 
 router.get('/', verToken, async (req, res) => {
-    console.log(req.user);
+  // console.log(req.user);
 
 })
 
@@ -29,8 +29,11 @@ router.route("/signup")
         return res.status(400).json({ message: "Email already exist" })
       }
       const hashPassword = await bcrypt.hash(password, 10)
-      const newUser = await User.create({ name, sex, email, password: hashPassword })
-      // newUser.save()
+      const newUser = await User.create({
+        name, sex, email, password: hashPassword
+      })
+     
+      // await newUser.save()
       const token = generateToken(newUser._id)
       return res.status(200).json({ user: newUser, token, success: true })
     } catch (e) {

@@ -1,35 +1,42 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import './TravelPageCreate.css'
 import Header from '../Header/Header'
 import { useHistory } from 'react-router-dom'
 
 function TravelPageCreate(props) {
   const history = useHistory()
+  const inputStartDate = useRef()
+  const inputFinishDate = useRef()
   const token = window.localStorage.getItem('token')
-  const travelHandler = e => {
+  const travelHandler = (e) => {
     e.preventDefault()
-    fetch('http://localhost:4000/travels/new', {
-      method: 'POST',
-      headers: { 'Content-Type': 'Application/json', Authorization: `Bearer ${token}` },
-      body: JSON.stringify({
-        title: e.target.title.value,
-        description: e.target.description.value,
-        country: e.target.country.value,
-        city: e.target.city.value,
-        startDate: e.target.startDate.value,
-        finishDate: e.target.finishDate.value,
-        number: e.target.number.value
+    if (inputStartDate.current?.value <= inputFinishDate.current?.value) {
+      fetch('http://localhost:4000/travels/new', {
+        method: 'POST',
+        headers: { 'Content-Type': 'Application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({
+          title: e.target.title.value,
+          description: e.target.description.value,
+          country: e.target.country.value,
+          city: e.target.city.value,
+          startDate: e.target.startDate.value,
+          finishDate: e.target.finishDate.value,
+          number: e.target.number.value
+        })
       })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success === true) {
-        return history.push(`/travels/${data.newTravel._id}`)
-      } else {
-        alert('Не удалось cоздать travel')
-      }
-    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success === true) {
+          return history.push(`/travels`)
+        } else {
+          alert('Не удалось cоздать travel')
+        }
+      })
+    } else {
+      alert("Введите дату окончания позже даты старта!")
+    }
   }
+
 
   return (
     <>
@@ -296,12 +303,12 @@ function TravelPageCreate(props) {
               </div>
               <div className="col-6 col-12-xsmall">
                 <label>Start date</label>
-                <input type="date" name="startDate" min={Date.now()} max="2030-12-31" required />
+                <input type="date" name="startDate" ref={inputStartDate} min={`${new Date().getFullYear()}-0${new Date().getMonth() +1}-${new Date().getDate()}`} max="2030-12-31" required />
               </div>
 
               <div className="col-6 col-12-xsmall">
                 <label>End date</label>
-                <input type="date" name="finishDate" min={Date.now()} max="2030-12-31" required />
+                <input type="date" name="finishDate" ref={inputFinishDate} min={`${new Date().getFullYear()}-0${new Date().getMonth()+1}-${new Date().getDate()}`} max="2030-12-31" required />
               </div>
               <div className="col-6 col-12-xsmall">
                 <label>Number of persons for this trip</label>

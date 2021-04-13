@@ -3,11 +3,17 @@ import UserCardSmall from '../UserCardSmall/UserCardSmall'
 import Map from '../Map/Map'
 import Header from '../Header/Header';
 
+
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchInitUser } from '../../redux/reduxThunk/asyncFuncs';
-// import module from './Hangouts.module.scss';
+
+import './Hangouts.css'
+import MapSwitch from '../MapSwitch/MapSwitch'
+
 
 function Hangouts() {
+  // const { visibility } = useSelector(store => store.profile)
+  // const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchInitUser())
@@ -32,6 +38,7 @@ function Hangouts() {
     dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: event.target.checked })
   }
 
+
   return (
     <>
       <Header />
@@ -42,6 +49,7 @@ function Hangouts() {
               <UserCardSmall />
             </div>
             <div className="col-9 col-12-small">
+
               <div>
                 {/* слайдер */}
                 {/* <div class="slideThree">
@@ -53,9 +61,12 @@ function Hangouts() {
                   onChange={changeVisibility} />
                 <label htmlFor="demo-copy">Become available for others</label>
               </div>
-              <div>
+               <h2>Become available</h2>
+              <MapSwitch />
+             
                 <Map visibility={user.visibility} />
-              </div>
+              
+
             </div>
           </div>
         </section>
