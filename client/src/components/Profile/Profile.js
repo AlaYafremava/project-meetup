@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Header from '../Header/Header'
@@ -7,17 +7,40 @@ import UserAbout from '../UserAbout/UserAbout'
 import UserCard from '../UserCard/UserCard'
 import UserFriends from '../UserFriends/UserFriends'
 import UserTravels from '../UserTravels/UserTravels'
-import {fetchInitUser} from '../../redux/reduxThunk/asyncFuncs'
+import { fetchInitUser } from '../../redux/reduxThunk/asyncFuncs'
 
 function Profile(props) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-dispatch(fetchInitUser())
+    dispatch(fetchInitUser())
   }, [dispatch])
+
+  const [stateAbout, stateAboutSet] = useState(true)
+  const [stateMyTravels, stateMyTravelsSet] = useState(false)
+  const [stateMyFriends, stateMyFriendsSet] = useState(false)
+
+  const navAboutHandler = () => {
+    stateMyFriendsSet(false)
+    stateMyTravelsSet(false)
+    stateAboutSet(true)
+  }
+
+  const navMyTravelsHandler = () => {
+    stateMyFriendsSet(false)
+    stateAboutSet(false)
+    stateMyTravelsSet(true)
+  }
+
+  const navMyFriendsHandler = () => {
+    stateMyTravelsSet(false)
+    stateAboutSet(false)
+    stateMyFriendsSet(true)
+  }
+
   return (
     <>
-      <Header />
+      <Header navAboutHandler={navAboutHandler}/>
       <div id="main">
         <section className="post">
           <div className="row">
@@ -25,10 +48,14 @@ dispatch(fetchInitUser())
               <UserCard />
             </div>
             <div className="col-9 col-12-small">
-              <Navbar />
-              <UserAbout />
-              {/* <UserTravels /> */}
-              {/* <UserFriends /> */}
+              <Navbar
+                navAboutHandler={navAboutHandler}
+                navMyTravelsHandler={navMyTravelsHandler}
+                navMyFriendsHandler={navMyFriendsHandler}
+              />
+              {stateAbout ? <UserAbout /> : null}
+              {stateMyTravels ? <UserTravels /> : null}
+              {stateMyFriends ? <UserFriends /> : null}
             </div>
           </div>
         </section>
