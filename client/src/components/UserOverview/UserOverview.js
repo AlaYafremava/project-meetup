@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 
 function UserOverview(props) {
 
-  const user = useSelector(store => store.profile.user)
+  const user = useSelector(store => store.user.user)
   // console.log(user);
-  let userAge = 2021 - user.bday.substr(0,4)
+  let userAge = 2021 - user?.bday?.substr(0,4)
   // console.log(userAge);
 
   return (
@@ -29,7 +29,7 @@ function UserOverview(props) {
             <span>
               <i className="element-icon fa-user"></i>
             </span>
-            &nbsp; Member since {user.regDate.substr(0,4)}
+            &nbsp; Member since {user?.regDate?.substr(0,4)}
           </li>
         </ul>
       </div>

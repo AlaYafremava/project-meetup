@@ -1,5 +1,18 @@
-import { initTravelsAC, addTravelsAC, delTravelsAC, editTravelsAC } from "../../redux/actionCreators/actionCreators"
+import { initUserAC, initTravelsAC, addTravelsAC, delTravelsAC, editTravelsAC } from "../../redux/actionCreators/actionCreators"
 
+export const fetchInitUser = () => {
+  const token = window.localStorage.getItem('token')
+  return (dispatch) => {
+      fetch('http://localhost:4000/profile', {
+          method: "GET",
+          headers: {  "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
+      })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data)})
+            // dispatch(initUserAC(data.auth))})
+  }
+}
 
 export const fetchInitTravels = () => {
     const token = window.localStorage.getItem('token')

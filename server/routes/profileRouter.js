@@ -5,14 +5,12 @@ import Social from '../models/socials.js'
 import verToken from '../middlware/auth.js'
 
 router.get('/profile', verToken, async (req, res) => {
-  // console.log(req.headers.authorization);
-
-
-  // const user = await User.findOne({ _id: req.user.id })
-  // if (user) {
-  //   res.status(201).json(user)
-  // }
-  // res.status(400).json({ success: false })
+try {
+  const user = await User.findOne({ _id: req.user.id })
+  return res.status(200).json(user)
+} catch (error) {
+  res.status(400).json({success: false})
+}
 })
 
 router.patch('/profile/edit', async (req, res) => {

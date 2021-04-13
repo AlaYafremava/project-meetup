@@ -1,8 +1,8 @@
-import { SIGNUP, LOGIN, LOGOUT } from '../actionTypes/actionTypes'
+import { SIGNUP, LOGIN, LOGOUT, INIT_USER } from '../actionTypes/actionTypes'
 
 const initialState = { user: {}, isAuth: false }
 
-const authReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SIGNUP:
       // console.log(action.payload);
@@ -17,10 +17,12 @@ const authReducer = (state = initialState, action) => {
       window.localStorage.removeItem('app_state')
       return { ...state, user: {}, isAuth: false }
       
+      case INIT_USER:
+        return { ...state, user: action.payload }
 
     default:
       return state
   }
 }
 
-export default authReducer
+export default userReducer

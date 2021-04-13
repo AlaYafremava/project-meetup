@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
-import authReducer from './authReducer'
+import userReducer from './userReducer'
 import profileReducer from './profileReducer'
 import mapReducer from './mapReducer';
 import travelReducer from "./travelReducer"
 
 const rootReducer = combineReducers({
-  auth: authReducer,
-  profile: profileReducer,
+  user: userReducer,
+  // profile: profileReducer,
   map: mapReducer,
   travels: travelReducer
 })
