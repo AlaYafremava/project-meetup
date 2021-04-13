@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
   education: { type: String },
   profession: { type: String },
   about: { type: String },
-  avatar: {type: String},
+  avatar: { type: String },
   regDate: { type: Date, default: Date.now() },
   tags: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -45,6 +45,11 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }],
+  visibility: { type: Boolean, default: false },
+  map: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Map'
+  }
 })
 
 export default mongoose.model('User', userSchema)
