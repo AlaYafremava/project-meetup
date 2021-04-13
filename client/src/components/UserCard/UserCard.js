@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux'
 
 function UserCard(props) {
   
-  const user = useSelector(store => store.profile.user)
-  // console.log(user)
+  const user = useSelector(store => store.user.user)
+  console.log(user)
 
   return (
     <div className="card">
