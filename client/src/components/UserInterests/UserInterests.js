@@ -10,7 +10,7 @@ function UserInterests(props) {
 
   return (
     <div>
-      <ul className='actions'>
+      <ul className='actions actions-interests'>
         <li>
           {/* {user.tags ? user?.tags.map((el, i) => <input className='tags' type='submit' value={el} />): 'Здесь будут теги'} */}
           <input className='userTags' type='submit' value='Running'/>

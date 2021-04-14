@@ -2062,6 +2062,7 @@ input, select, textarea {
 /* Button */
 
 	input[type="submit"],
+  input[type="file"],
 	input[type="reset"],
 	input[type="button"],
 	button,
@@ -2092,6 +2093,7 @@ input, select, textarea {
 	}
 
 		input[type="submit"].icon:before,
+    input[type="file"].icon:before,
 		input[type="reset"].icon:before,
 		input[type="button"].icon:before,
 		button.icon:before,
@@ -2100,7 +2102,8 @@ input, select, textarea {
 		}
 
 		input[type="submit"].icon.solo,
-		input[type="reset"].icon.solo,
+		input[type="file"].icon.solo,
+    input[type="reset"].icon.solo,
 		input[type="button"].icon.solo,
 		button.icon.solo,
 		.button.icon.solo {
