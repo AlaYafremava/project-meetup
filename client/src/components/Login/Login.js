@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import './Login.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { LOGIN } from '../../redux/actionTypes/actionTypes'
 
@@ -9,7 +9,7 @@ function Login({ authHandler }) {
 
   const dispatch = useDispatch()
   const history = useHistory()
-  const store = useSelector(store => store)
+  // const store = useSelector(store => store)
 
   const loginHandler = (e) => {
     e.preventDefault()
@@ -26,7 +26,7 @@ function Login({ authHandler }) {
           dispatch({ type: LOGIN, payload: data.user });
           history.push('/profile')
         } else {
-          alert('Не удалось войти в аккаунт')
+          alert('Failed access to this account')
         };
       })
     // console.log(store);

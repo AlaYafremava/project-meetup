@@ -5,12 +5,30 @@ import Social from '../models/socials.js'
 import verToken from '../middlware/auth.js'
 
 router.get('/profile', verToken, async (req, res) => {
-try {
-  const user = await User.findOne({ _id: req.user.id })
-  return res.status(200).json(user)
-} catch (error) {
-  res.status(400).json({success: false})
-}
+  try {
+    const user = await User.findOne({ _id: req.user.id })
+    return res.status(200).json(user)
+  } catch (error) {
+    res.status(400).json({ success: false })
+  }
+})
+
+router.patch('/profile', async (req, res) => {
+  // console.log(req.body);
+  // let user
+  const { id, visibility } = req.body;
+  if (visibility != undefined ) {
+    const user = await User.findById(id);
+    // user = await User.findByIdAndUpdate({ _id: req.body.id }, { name: req.body.name, surname: req.body.surname })
+    // console.log(sex);
+    user.visibility = !visibility;
+    await user.save();
+    return res.status(201).json({ success: true, user });
+  } else {
+    return res.status(400).json({ success: false, message: 'Не удалось обновить пользователя' });
+  }
+  // } catch (error) {
+  // }
 })
 
 router.patch('/profile/edit', async (req, res) => {
@@ -38,7 +56,7 @@ router.patch('/profile/edit', async (req, res) => {
     // if (user.telegram.includes('https://t.me/')) {
     //   user.telegram = user.telegram.substring(13) + telegram.substring(1)
     // } else {
-      user.telegram = 'https://t.me/' + telegram.substring(1)
+    user.telegram = 'https://t.me/' + telegram.substring(1)
     // }
     user.instagram = 'https://instagram.com/' + instagram.substring(1)
     user.facebook = 'https://www.facebook.com/' + facebook
@@ -49,7 +67,7 @@ router.patch('/profile/edit', async (req, res) => {
     user = await User.findById(req.body.id)
     return res.status(201).json({ success: true, user })
   } else {
-    return res.status(400).json({ success: false, message: 'Не удалось обновить пользователя' })
+    return res.status(400).json({ success: false, message: 'Failed to update user information' })
   }
   // } catch (error) {
   // }

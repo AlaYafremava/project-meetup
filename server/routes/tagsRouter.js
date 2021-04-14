@@ -16,7 +16,7 @@ router.get('/tags', async (req, res) => {
       }
       return res.status(200).json({ tags, success: true })
   } catch (error) {
-      res.status(400).json({ message: 'tags load error' })
+      res.status(400).json({ message: 'Tags load error' })
   }
 })
 

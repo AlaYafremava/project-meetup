@@ -39,7 +39,7 @@ router.route("/signup")
       return res.status(200).json({ user: newUser, token, success: true })
     } catch (e) {
       console.log(e.message);
-      res.status(400).json({ message: "signup error" })
+      res.status(400).json({ message: "Signup error" })
     }
   })
 

@@ -17,7 +17,7 @@ function UserOverview(props) {
             <span>
               <i className="element-icon fa-venus-mars"></i>
             </span>
-            &nbsp; {userAge !== NaN ? userAge : ''}{userAge ?  ',' : ''} {user.sex}
+            &nbsp; {!userAge.isNaN ? userAge + ', ' : ''}{user.sex}
           </li>
           <li className="li-overview">
             <span>
