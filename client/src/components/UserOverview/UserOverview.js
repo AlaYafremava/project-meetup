@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 function UserOverview(props) {
 
   const user = useSelector(store => store.user.user)
-  // console.log(user);
-  let userAge = 2021 - user?.bday?.substr(0,4)
+  const langs = useSelector(store => store.user.user.languages.filter(lang => lang.check))
+  // console.log(langs);
+
+  let userAge = 2021 - user?.bday?.substr(0, 4)
   // console.log(userAge);
 
   return (
@@ -17,19 +19,20 @@ function UserOverview(props) {
             <span>
               <i className="element-icon fa-venus-mars"></i>
             </span>
-            &nbsp; {!userAge.isNaN ? userAge + ', ' : ''}{user.sex}
+            &nbsp; {(!userAge.isNaN && !userAge === 0) ? userAge + ', ' : ''}{user.sex ? user.sex : 'No gender listed'}
           </li>
           <li className="li-overview">
             <span>
               <i className="element-icon fa-comments-o"></i>
             </span>
-            &nbsp; English, Russian
+            &nbsp; {langs ? langs.map(lang => lang.title + ', ') : 'No languages listed'}
+            {/* English, Russian */}
           </li>
           <li className="li-overview">
             <span>
               <i className="element-icon fa-user"></i>
             </span>
-            &nbsp; Member since {user?.regDate?.substr(0,4)}
+            &nbsp; Member since {user.regDate ? user?.regDate?.substr(0, 4) : 2021}
           </li>
         </ul>
       </div>
@@ -39,19 +42,19 @@ function UserOverview(props) {
             <span>
               <i className="element-icon fa-home"></i>
             </span>
-            &nbsp; {user.homeTown}
+            &nbsp; {user.homeTown ? user.homeTown : 'No home town listed'}
           </li>
           <li className="li-overview">
             <span>
               <i className="element-icon fa-graduation-cap"></i>
             </span>
-            &nbsp;{user.education}
+            &nbsp; {user.education ? user.education : 'No education listed'}
           </li>
           <li className="li-overview">
             <span>
               <i className="element-icon fa-suitcase"></i>
             </span>
-            &nbsp; {user.profession}
+            &nbsp; {user.profession ? user.profession : 'No profession listed'}
           </li>
         </ul>
       </div>

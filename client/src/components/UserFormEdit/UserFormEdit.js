@@ -4,35 +4,42 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { fetchInitTags } from '../../redux/reduxThunk/asyncFuncs'
 import { UPDATE_USER } from '../../redux/actionTypes/actionTypes'
+import { v4 as uuidv4 } from 'uuid';
 import './UserFormEdit.css'
 import UserTag from '../../components/UserTag/UserTag'
+import UserLang from '../../components/UserLang/UserLang'
 
 function UserFormEdit() {
   const user = useSelector(store => store.user.user)
-  const tags = useSelector(store => store.tags.tags)
-  console.log(tags);
-  const [tagState, setTagState] = useState(user.tags)
+  const [tagList, setTagList] = useState(user.tags);
+  const [langList, setLangList] = useState(user.languages);
 
-  
- 
-  const dispatch = useDispatch()
-  const history = useHistory()
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  // console.log(user.sex);
-
-  useEffect(() => {
-    dispatch(fetchInitTags())
-  }, [dispatch])
-
-  const changeStatusHandler = (id) => {
-    // console.log(tagState[id].check);
-    setTagState(tagState[id].check = !tagState[id].check)
+  const changeStatusHandler = (tagTitle) => {
+    setTagList((prevState) => prevState.map(el => {
+      if (el.title === tagTitle) {
+        el.check = !el.check;
+        return el
+      }
+      return el
+    }))
     // dispatch(fetchChangeTagStatus(id))
   }
 
-  const formHandler = (e) => {
-    e.preventDefault()
+  const selectLangHandler = (langTitle) => {
+    setLangList((prev) => prev.map(el => {
+      if (el.title === langTitle) {
+        el.check = !el.check
+        return el
+      }
+      return el
+    }))
+  }
 
+  const formHandler = (e) => {
+    e.preventDefault();
     let { name, surname, sex, bday, phone, country, city, homeCountry, homeTown, occupation, education, description, telegram, instagram, facebook } = e.target
     // console.log(name.value, surname.value, sex.value, bday.value, phone.value, country.value, city.value, homeCountry.value, homeTown.value, profession.value, education.value, about.value, socials.value)
     console.log(user);
@@ -41,7 +48,26 @@ function UserFormEdit() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ id: user._id, name: name.value, surname: surname.value, sex: sex.value, bday: bday.value, phone: phone.value, country: country.value, city: city.value, homeCountry: homeCountry.value, homeTown: homeTown.value, occupation: occupation.value, education: education.value, description: description.value, telegram: telegram.value, instagram: instagram.value, facebook: facebook.value })
+      body: JSON.stringify({
+        id: user._id,
+        name: name.value,
+        surname: surname.value,
+        sex: sex.value,
+        bday: bday.value,
+        phone: phone.value,
+        country: country.value,
+        city: city.value,
+        homeCountry: homeCountry.value,
+        homeTown: homeTown.value,
+        occupation: occupation.value,
+        education: education.value,
+        description: description.value,
+        telegram: telegram.value,
+        instagram: instagram.value,
+        facebook: facebook.value,
+        tags: tagList,
+        languages: langList,
+      })
     })
       .then(res => res.json())
       .then(data => {
@@ -354,7 +380,7 @@ function UserFormEdit() {
                   name="city"
                   autoComplete="off"
                   defaultValue={user.city}
-                  
+
                 />
               </div>
 
@@ -595,7 +621,7 @@ function UserFormEdit() {
                   name="homeTown"
                   autoComplete="off"
                   defaultValue={user.homeTown}
-                  
+
                 />
               </div>
 
@@ -632,26 +658,17 @@ function UserFormEdit() {
                 <label>Your interests or hobbies</label>
               </div>
               <ul>
-              {tags && tags?.map(el => <UserTag el={el} changeStatusHandler={changeStatusHandler} /> )}
+                {user.tags && user?.tags?.map(el => <UserTag key={uuidv4()} el={el} changeStatusHandler={changeStatusHandler} />)}
               </ul>
-              {/* <input className='tags' type='submit' value='Vegan' style={{ paddingTop: 0, marginTop: 20, marginLeft: 30 }} /> */}
-              {/* <div className="col-4 col-12-small">
-                <input type="checkbox" id="demo-copy" name="interests-running" value='running'/>
-                <label htmlFor="demo-copy">running</label>
-              </div>
-              <div className="col-4 col-12-small">
-                <input type="checkbox" id="demo-copy" name="interests-reading" value='reading'/>
-                <label htmlFor="demo-copy">reading</label>
-              </div>
-              <div className="col-4 col-12-small">
-                <input type="checkbox" id="demo-copy" name="interests-travelling" value='travelling'/>
-                <label htmlFor="demo-copy">travelling</label>
-              </div> */}
 
               <div className="col-12">
                 <label>Languages you speak</label>
               </div>
-              <div className="col-4 col-12-small">
+              <ul>
+                {user.languages && user?.languages?.map(el => <UserLang el={el} selectLangHandler={selectLangHandler} />)}
+
+              </ul>
+              {/* <div className="col-4 col-12-small">
                 <input type="checkbox" id="lang1" name="demo-languages" />
                 <label htmlFor="demo-copy">russian</label>
               </div>
@@ -662,7 +679,7 @@ function UserFormEdit() {
               <div className="col-4 col-12-small">
                 <input type="checkbox" id="lang3" name="demo-languages" />
                 <label htmlFor="demo-copy">spain</label>
-              </div>
+              </div> */}
 
               <div className="col-12">
                 <label>Your socials</label>
