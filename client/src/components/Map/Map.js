@@ -46,7 +46,7 @@ function Map({ visibility }) {
 
 
   const { coords, markers } = useSelector((store) => store.map)
-  const store = useSelector((store) => store)
+  // const store = useSelector((store) => store)
 
   const center = coords.lat ?
     coords :
@@ -54,6 +54,8 @@ function Map({ visibility }) {
       lat: 59.93848,
       lng: 30.312481,
     }
+
+    console.log(coords);
 
   // установка координат по клику и запись в store
   const createMarker = useCallback((event) => {
