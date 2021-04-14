@@ -50,14 +50,14 @@ router.patch('/profile/edit', async (req, res) => {
     user.about = description
     user.tags = tags
     user.languages = languages
-    if (user.telegram.includes('https://t.me/')) {
-      user.telegram = telegram
+    // if (user.telegram.includes('https://t.me/') || user.telegram.includes('@')) {
+    user.telegram = telegram
       //user.telegram.substring(13) + telegram.substring(1)
-    } else {
-    user.telegram = 'https://t.me/' + telegram.substring(1)
-    }
-    user.instagram = 'https://instagram.com/' + instagram.substring(1)
-    user.facebook = 'https://www.facebook.com/' + facebook
+    // } else {
+    // user.telegram = 'https://t.me/' + telegram.substring(1)
+    // }
+    user.instagram = instagram
+    user.facebook = facebook
     await user.save()
     // console.log(user);
     return res.status(201).json({ success: true, user })
