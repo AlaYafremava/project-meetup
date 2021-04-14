@@ -1,6 +1,7 @@
 import Router from "express"
 const router = new Router()
 import User from "../models/users.js"
+import Tag from "../models/tags.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import verToken from "../middlware/auth.js"
@@ -25,14 +26,14 @@ router.route("/signup")
       const { name, sex, email, password } = req.body
       // console.log(name, sex, email, password);
       const account = await User.findOne({ email })
+      const tags = await Tag.find()
       if (account) {
         return res.status(400).json({ message: "Email already exist" })
       }
       const hashPassword = await bcrypt.hash(password, 10)
       const newUser = await User.create({
-        name, sex, email, password: hashPassword
+        name, sex, email, password: hashPassword, tags
       })
-     
       // await newUser.save()
       const token = generateToken(newUser._id)
       return res.status(200).json({ user: newUser, token, success: true })

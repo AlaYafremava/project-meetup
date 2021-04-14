@@ -23,6 +23,7 @@ function Navbar({ navAboutHandler, navMyTravelsHandler, navMyFriendsHandler,stat
         </li>
       </ul>
       <div>
+
         {stateAbout ? (
           <a href="/profile/edit" className="button primary">
             Edit profile

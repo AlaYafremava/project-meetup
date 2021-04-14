@@ -8,23 +8,11 @@ function UserInterests(props) {
   const user = useSelector(store => store.user.user)
   console.log(user);
 
-  // useEffect(() => {
-  //   fetch('/profile', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type':'application/json',
-  //       'Authorization':`Bearer ${token}`,
-  //     }
-  //   })
-  //   .then(res => res.json())
-  //   .then(user => console.log(user))
-  // }, [])
-
   return (
     <div>
       <ul className='actions'>
         <li>
-          {user.tags ? user.tags.map((el, i) => <input className='tags' type='submit' value={el} />): 'Здесь будут теги'}
+          {user.tags ? user?.tags.map((el, i) => <input className='tags' type='submit' value={el} />): 'Здесь будут теги'}
           
         </li>
       </ul>
