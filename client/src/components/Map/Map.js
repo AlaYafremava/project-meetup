@@ -9,7 +9,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 
 const containerStyle = {
-  width: '70vw',
+  width: '47vw',
   height: '70vh',
   borderRadius: '4px',
 }
@@ -47,23 +47,13 @@ function Map({ visibility }) {
 
   const { coords, markers } = useSelector((store) => store.map)
   const store = useSelector((store) => store)
-// 
 
-  console.log(store);
-  // const center = (if (coords.lat) { coords } else {
-  //     lat: 59.93848,
-  //     lng: 30.312481,
-  //   })
-    
-    
-    const center = coords.lat ? coords : {
+  const center = coords.lat ?
+    coords :
+    {
       lat: 59.93848,
       lng: 30.312481,
     }
-    // console.log(coords);
-
-  // console.log(coords, 'coords');
-  // console.log(center, 'center');
 
   // установка координат по клику и запись в store
   const createMarker = useCallback((event) => {
@@ -90,7 +80,7 @@ function Map({ visibility }) {
         <span role="img" aria-label="tent">Our logo</span>
       </h1> */}
       <GoogleMap
-        zoom={14}
+        zoom={13}
         mapContainerStyle={containerStyle}
         center={center}
         options={options}

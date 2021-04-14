@@ -3,21 +3,14 @@ import { initUserAC, initTagsAC, initTravelsAC, addTravelsAC, delTravelsAC, edit
 export const fetchInitUser = () => {
   const token = window.localStorage.getItem('token')
   return (dispatch) => {
-    fetch('http://localhost:4000/profile', {
+    fetch('/profile', {
       method: "GET",
       headers: { "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
     })
       .then(res => res.json())
       .then(data => {
-        // console.log(data)})
         dispatch(initUserAC(data))
       })
-
-          .then(res => res.json())
-          .then(data => {
-            // console.log(data)})
-            dispatch(initUserAC(data))})
-
   }
 }
 
@@ -51,7 +44,7 @@ export const fetchChangeTagStatus = (id) => {
 export const fetchInitTravels = () => {
   const token = window.localStorage.getItem('token')
   return (dispatch) => {
-    fetch('http://localhost:4000/travels', {
+    fetch('/travels', {
       method: "GET",
       headers: { "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
     })
@@ -63,7 +56,7 @@ export const fetchInitTravels = () => {
 export const fetchDelTravels = (id) => {
   const token = window.localStorage.getItem('token')
   return (dispatch) => {
-    fetch('http://localhost:4000/travels', {
+    fetch('/travels', {
       method: "delete",
       headers: { "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({ id })
@@ -84,7 +77,7 @@ export const fetchEditTravels = (
 ) => {
   const token = window.localStorage.getItem('token')
   return (dispatch) => {
-    fetch(`http://localhost:4000/travels/${id}`, {
+    fetch(`/travels/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({
