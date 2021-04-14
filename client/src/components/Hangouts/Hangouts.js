@@ -12,20 +12,23 @@ import MapSwitch from '../MapSwitch/MapSwitch'
 
 
 function Hangouts() {
-  // const { visibility } = useSelector(store => store.profile)
-  // const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(fetchInitUser())
-  }, []);
-
+  
   const { user } = useSelector(store => store.user);
   const dispatch = useDispatch();
-
+  
+    useEffect(() => {
+      dispatch(fetchInitUser())
+    }, [dispatch]);
+  
   let visCheck = useRef();
-  console.log(user);
+  console.log(user.visibility);
+
+  const verChecked = () => {
+    return user.visibility && 'default';
+  }
 
   const changeVisibility = (event) => {
+    fetch()
     navigator.geolocation.getCurrentPosition(res =>
       dispatch({
         type: 'MY_COORDS', payload: {
@@ -58,7 +61,9 @@ function Hangouts() {
                 </div> */}
                 <input type="checkbox" id="demo-copy" name="demo-copy"
                   ref={visCheck}
-                  onChange={changeVisibility} />
+                  defaultChecked={verChecked()}
+                  onChange={changeVisibility}
+                  />
                 <label htmlFor="demo-copy">Become available for others</label>
               </div>
                <h2>Become available</h2>
