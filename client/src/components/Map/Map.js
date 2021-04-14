@@ -35,10 +35,10 @@ function Map({ visibility }) {
   useEffect(() => {
     fetch('/users')
       .then(res => res.json())
-      .then(users => dispatch({ type: 'INIT_VISIBLES_MARKS', payload: { users, id: user._id } }))
+      .then(users => dispatch({ type: 'INIT_VISIBLES_MARKS', payload: { users, id: user?._id } }))
     // (el) => (el.userId.visibility && !user._id) el.coords 
   }, [])
-console.log(coords.id);
+// console.log(coords.id);
 
   //удалить метку, если user невидим
   useEffect(() => {
@@ -47,7 +47,7 @@ console.log(coords.id);
       method: 'POST',
       headers: { 'Content-Type': 'Application/json' },
       body: JSON.stringify({
-        id: coords.id
+        id: coords?.id
       }),
     });
 

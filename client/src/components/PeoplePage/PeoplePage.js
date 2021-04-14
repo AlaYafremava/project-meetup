@@ -17,9 +17,9 @@ function PeoplePage(props) {
   const [user] = people.filter(el => (el._id === id ? el : undefined))
   console.log(user)
 
-  const langs = user.languages
+  const langs = user.languages.filter(lang => lang.check)
   // console.log(langs);
-  const tags = user.tags
+  const tags = user.tags.filter(tags => tags.check)
   // console.log(tags);
 
   const dispatch = useDispatch()
