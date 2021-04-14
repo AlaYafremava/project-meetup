@@ -11,33 +11,8 @@ import './Hangouts.css'
 
 function Hangouts() {
 
-  const { user } = useSelector(store => store.user);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchInitUser())
-  }, [dispatch]);
-
-  // let visCheck = useRef();
-  // console.log(user.visibility);
-
-  const verChecked = (event) => {
-    return user?.visibility && 'default'
-  }
-
-  const changeVisibility = (event) => {
-    // запись в базу изменений
-    fetch('/profile', {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ id: user._id, visibility: event.target.checked })
-    })
-      .then(res => res.json())
-      .then(data => dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: data.visibility }))
-
-    // текущее положение в координаты
+  // текущее положение в координаты
+  const autoCoord = () => {
     navigator.geolocation.getCurrentPosition(res =>
       fetch('/map/new-coords', {
         method: 'POST',
@@ -57,11 +32,65 @@ function Hangouts() {
             lng: res.coords.longitude,
             id: data._id
           }
-        })
-        )
+        }))
     )
+  }
 
-    // dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: event.target.checked })
+  const { user } = useSelector(store => store.user);
+  const { coords } = useSelector(store => store.map);
+  console.log(coords);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchInitUser())
+  }, [dispatch]);
+
+  useEffect(() => (user?.visibility && !coords.lat) && autoCoord(), []);
+
+  // let visCheck = useRef();
+  console.log(user?.visibility);
+
+
+  const verChecked = (event) => {
+    return user?.visibility && 'default'
+  }
+
+  const changeVisibility = (event) => {
+    // запись в базу изменений
+    fetch('/profile', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id: user._id, visibility: event.target.checked })
+    })
+      .then(res => res.json())
+      .then(data => dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: data.visibility }))
+
+    // текущее положение в координаты
+    autoCoord()
+    // navigator.geolocation.getCurrentPosition(res =>
+    //   fetch('/map/new-coords', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'Application/json' },
+    //     body: JSON.stringify({
+    //       coords: {
+    //         lat: res.coords.latitude,
+    //         lng: res.coords.longitude,
+    //       },
+    //       userId: user._id,
+    //     }),
+    //   })
+    //     .then(res => res.json())
+    //     .then(data => dispatch({
+    //       type: 'MY_COORDS', payload: {
+    //         lat: res.coords.latitude,
+    //         lng: res.coords.longitude,
+    //         id: data._id
+    //       }
+    //     }))
+    // )
   }
 
   return (
@@ -71,7 +100,7 @@ function Hangouts() {
         <section className="post">
           <div className="row">
             <div className="col-3 col-12-small">
-              <UserCardSmall user={user}/>
+              <UserCardSmall user={user} />
             </div>
             <div className="col-9 col-12-small">
 
