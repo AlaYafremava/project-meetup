@@ -8,7 +8,7 @@ function UserAboutMe(props) {
   return (
     <div className="box">
       <p>
-        {user.about}
+        {user.about ? user.about : 'No description listed'}
       </p>
     </div>
   )

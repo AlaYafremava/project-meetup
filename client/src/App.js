@@ -23,7 +23,7 @@ function App() {
         Authorization: `Bearer ${token}`,
       },
     })
-  }, [token])
+  }, [])
 
   const isAuth = useSelector(store => store.user.isAuth)
 

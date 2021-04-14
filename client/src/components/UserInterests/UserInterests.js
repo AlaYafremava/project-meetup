@@ -1,36 +1,20 @@
 import React from 'react';
 import './UserInterests.css'
 import { useSelector } from 'react-redux'
+import { v4 as uuidv4 } from 'uuid';
 
 function UserInterests(props) {
   // const dispatch = useDispatch()
 
-  const user = useSelector(store => store.user.user)
-  console.log(user);
+  const tags = useSelector(store => store.user.user.tags.filter(tag => tag.check))
+  // console.log(tags);
 
   return (
     <div>
       <ul className='actions'>
-        <li>
-          {/* {user.tags ? user?.tags.map((el, i) => <input className='tags' type='submit' value={el} />): 'Здесь будут теги'} */}
-          <input className='userTags' type='submit' value='Running'/>
-        </li>
-        <li>
-          {/* {user.tags ? user?.tags.map((el, i) => <input className='tags' type='submit' value={el} />): 'Здесь будут теги'} */}
-          <input className='userTags' type='submit' value='Movies'/>
-        </li>
-        <li>
-          {/* {user.tags ? user?.tags.map((el, i) => <input className='tags' type='submit' value={el} />): 'Здесь будут теги'} */}
-          <input className='userTags' type='submit' value='Street food'/>
-        </li>
-        <li>
-          {/* {user.tags ? user?.tags.map((el, i) => <input className='tags' type='submit' value={el} />): 'Здесь будут теги'} */}
-          <input className='userTags' type='submit' value='IT'/>
-        </li>
-        <li>
-          {/* {user.tags ? user?.tags.map((el, i) => <input className='tags' type='submit' value={el} />): 'Здесь будут теги'} */}
-          <input className='userTags' type='submit' value='Travels'/>
-        </li>
+        {tags ? tags.map(tag =>  <li key={uuidv4()}>
+          <input className='userTags' type='submit' value={tag.title} onClick={(e) => e.preventDefault()}/>
+        </li>) : 'No interests listed'}
       </ul>
 
     </div>
