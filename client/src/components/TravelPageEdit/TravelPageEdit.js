@@ -49,14 +49,6 @@ function TravelPageEdit(props) {
     })
   }
 
-  // const uploadImageHandler = () => {
-  //   const data = new FormData();
-  //   data.append('file', imageSelected);
-  //   data.append('upload_preset', 'im0obtej');
-  //    Axios.post("https://api.cloudinary.com/v1_1/dde0fkiet/image/upload", data)
-  //    .then((res) => {console.log(res)})
-  // }
-
   return (
     <>
       <Header />
@@ -374,6 +366,7 @@ function TravelPageEdit(props) {
                 />
               </div>
               <div className="col-6 col-12-xsmall">
+
                 <label>Upload a picture</label>
                 <div className="field__wrapper">
                   <input
