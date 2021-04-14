@@ -1,13 +1,8 @@
 import React from 'react';
 import './UserInterests.css'
-import { useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid';
 
-function UserInterests(props) {
-  // const dispatch = useDispatch()
-
-  const tags = useSelector(store => store.user.user.tags.filter(tag => tag.check))
-  // console.log(tags);
+function UserInterests({tags}) {
 
   return (
     <div>

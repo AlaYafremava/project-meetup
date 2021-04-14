@@ -14,7 +14,7 @@ const [state, setState] = useState({})
 
 
   useEffect( async() => {
-    const response = await fetch(`http://localhost:4000/travels/${id}`, {
+    const response = await fetch(`/travels/${id}`, {
       method: "GET",
       // headers: {  "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` }
     })

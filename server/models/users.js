@@ -22,27 +22,35 @@ const userSchema = new mongoose.Schema({
   telegram: { type: String, default: '' },
   instagram: { type: String, default: '' },
   facebook: { type: String, default: '' },
-  userTravels: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Travel'
-  }],
-  pastTravels: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Travel'
-  }],
-  futureTravels: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Travel'
-  }],
-  friends: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
+  userTravels: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Travel',
+    },
+  ],
+  pastTravels: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Travel',
+    },
+  ],
+  futureTravels: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Travel',
+    },
+  ],
+  friends: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
   visibility: { type: Boolean, default: false },
   map: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Map'
-  }
+    ref: 'Map',
+  },
 })
 
 export default mongoose.model('User', userSchema)

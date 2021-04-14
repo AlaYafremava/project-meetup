@@ -2,8 +2,6 @@ import React from 'react'
 import './PeopleCard.css'
 import { Link } from 'react-router-dom'
 
-const user = {}
-
 function PeopleCard({ person }) {
   return (
     <div className="card-people" >
