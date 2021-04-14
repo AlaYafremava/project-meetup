@@ -1,21 +1,10 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './TravelPageEdit.css'
 import Header from '../Header/Header'
 import { useHistory, useParams } from 'react-router'
 import { fetchEditTravels } from "../../redux/reduxThunk/asyncFuncs.js"
 import { useDispatch, useSelector } from 'react-redux'
-
-// const trip = {
-//   id: 1,
-//   title: 'Some trip',
-//   description:
-//     'Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.',
-//   country: 'AFGHANISTAN',
-//   city: 'Brest',
-//   startDate: { type: Date, required: true },
-//   finishDate: { type: Date, required: true },
-//   number: 5,
-// }
+import Axios from "axios"
 
 function TravelPageEdit(props) {
   const { id } = useParams()
@@ -30,10 +19,16 @@ function TravelPageEdit(props) {
   const history = useHistory()
   const store = useSelector(store => store)
   const [travels] = store.travels.travels.filter(travel => travel._id === id)
+  const [imageSelected, setImageSelected] = useState('')
 
 
   const editTravelHandler = (e) => {
     e.preventDefault()
+    const data = new FormData();
+    data.append('file', imageSelected);
+    data.append('upload_preset', 'im0obtej');
+     Axios.post("https://api.cloudinary.com/v1_1/dde0fkiet/image/upload", data)
+     .then((res) => {console.log(res)})
     if (inputStartDate.current.value <= inputEndDate.current.value) {
       dispatch(fetchEditTravels(id,
         inputTitle.current.value,
@@ -50,23 +45,13 @@ function TravelPageEdit(props) {
     }
   }
 
-  const loadImageHandler = (event) => {
-    event.preventDefault();
-    const data = new FormData();
-    console.log(event.target.files[0]);
-    data.append('photo', event.target.files[0]);
-    // data.append('name', 'Test Name');
-    // data.append('desc', 'Test description');
-    fetch("http://localhost:4000/upload", {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-      },
-      body: data
-    }).then((response) => {
-      return response.text();
-    })
-  }
+  // const uploadImageHandler = () => {
+  //   const data = new FormData();
+  //   data.append('file', imageSelected);
+  //   data.append('upload_preset', 'im0obtej');
+  //    Axios.post("https://api.cloudinary.com/v1_1/dde0fkiet/image/upload", data)
+  //    .then((res) => {console.log(res)})
+  // }
 
   return (
     <>
@@ -372,9 +357,9 @@ function TravelPageEdit(props) {
               </div>
               <div className="col-6 col-12-xsmall">
                 <label>Upload photo</label>
-                <form enctype="multipart/form-data" method="post">
-            <p><input type="file" name="photo" accept="image/*,image/jpeg" onChange={loadImageHandler} /></p>
-          </form>
+                {/* <form enctype="multipart/form-data" method="post"> */}
+            <p><input type="file" name="photo" accept="image/*,image/jpeg" onChange={(event) => {setImageSelected(event.target.files[0])}}/></p>
+          {/* </form> */}
               </div>
             </div>
             <div className="col-12 travel-btn">
