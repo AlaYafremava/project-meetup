@@ -12,7 +12,7 @@ function TravelCardBig({el}) {
           </h2>
         </header>
         <a href={`/travels/${el._id}`} className="image main">
-          <img src="pic01.jpg" alt="picture" />
+          <img src={el.src} alt="picture" />
         </a>
       </article>
  

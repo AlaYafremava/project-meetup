@@ -30,7 +30,7 @@ function Travels(props) {
               <div>
                 <ul className="actions">
                   <li className="li-travels">
-                    <a href="/" className="button icon solid solo fa-arrow-down scrolly">
+                    <a href="/#" className="button icon solid solo fa-arrow-down scrolly">
                       Continue
                     </a>
                   </li>

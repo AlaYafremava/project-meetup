@@ -36,56 +36,56 @@ function Hangouts() {
     })
       .then(res => res.json())
       .then(data => console.log(data))
-  // }
-  navigator.geolocation.getCurrentPosition(res =>
-    dispatch({
-      type: 'MY_COORDS', payload: {
-        lat: res.coords.latitude,
-        lng: res.coords.longitude,
-        time: new Date(),
-      }
-    }))
-  // console.log(res.coords.latitude))
-  dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: event.target.checked })
-}
 
+    navigator.geolocation.getCurrentPosition(res =>
+      // фетч на обновление координат
+      dispatch({
+        type: 'MY_COORDS', payload: {
+          lat: res.coords.latitude,
+          lng: res.coords.longitude,
+          time: new Date(),
+        }
+      }))
 
-return (
-  <>
-    <Header />
-    <div id="main">
-      <section className="post">
-        <div className="row">
-          <div className="col-3 col-12-small">
-            <UserCardSmall />
-          </div>
-          <div className="col-9 col-12-small">
+    dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: event.target.checked })
+  }
 
-            <div>
-              {/* слайдер */}
-              {/* <div class="slideThree">
+  return (
+    <>
+      <Header />
+      <div id="main">
+        <section className="post">
+          <div className="row">
+            <div className="col-3 col-12-small">
+              <UserCardSmall />
+            </div>
+            <div className="col-9 col-12-small">
+
+              <div>
+                {/* слайдер */}
+                {/* <div class="slideThree">
                   <input type="checkbox" value="None" id="slideThree" name="check" checked />
                   <label htmlFor="slideThree"></label>
                 </div> */}
-              <input type="checkbox" id="demo-copy" name="demo-copy"
-                // ref={visCheck}
-                defaultChecked={verChecked()}
-                onChange={changeVisibility}
-              />
-              <label htmlFor="demo-copy">Become available for others</label>
+                <input type="checkbox" id="demo-copy" name="demo-copy"
+                  // ref={visCheck}
+                  defaultChecked={verChecked()}
+                  onChange={changeVisibility}
+                />
+                <label htmlFor="demo-copy">Become available for others</label>
+              </div>
+              <h2>Become available</h2>
+              <MapSwitch />
+              <div>
+                <Map visibility={user.visibility} />
+              </div>
+
             </div>
-            <h2>Become available</h2>
-            <MapSwitch />
-
-            <Map visibility={user.visibility} />
-
-
           </div>
-        </div>
-      </section>
-    </div>
-  </>
-)
+        </section>
+      </div>
+    </>
+  )
 }
 
 export default Hangouts

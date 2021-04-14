@@ -1,0 +1,44 @@
+.card-people {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 0 auto 1rem;
+  min-height: 8rem;
+}
+
+.avatar-people {
+  border-radius: 50%;
+  max-height: 70%;
+  max-width: 70%;
+  vertical-align: middle;
+  padding: 0.5rem 0.5rem 0.5rem 1rem
+}
+
+.card-people.last-icons{
+  padding-right: 1rem; 
+  max-width: 5rem;
+ } 
+
+.title-people {
+  padding: 0;
+}
+
+.title-people>p {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  line-height: 1.4rem
+}
+
+.card-people>ul.icons {
+  padding-bottom: 0rem;
+  display: flex;
+  flex-direction: column;
+  padding-right: 1rem;
+}
+
+.card-people>a {
+  border-bottom: none
+}

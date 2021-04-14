@@ -11,10 +11,12 @@ function UserInterests(props) {
 
   return (
     <div>
+
       <ul className='actions'>
         {tags ? tags.map(tag =>  <li key={uuidv4()}>
           <input className='userTags' type='submit' value={tag.title} onClick={(e) => e.preventDefault()}/>
         </li>) : 'No interests listed'}
+
       </ul>
 
     </div>
