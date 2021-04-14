@@ -21,7 +21,7 @@ function Hangouts() {
   // let visCheck = useRef();
   console.log(user.visibility);
 
-  const verChecked = () => {
+  const verChecked = (event) => {
     return user.visibility && 'default'
   }
 
@@ -32,22 +32,44 @@ function Hangouts() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ id: user._id, visibility: user.visibility })
+      body: JSON.stringify({ id: user._id, visibility: event.target.checked })
     })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: data.visibility }))
 
+    // текущее положение в координаты
     navigator.geolocation.getCurrentPosition(res =>
-      // фетч на обновление координат
-      dispatch({
-        type: 'MY_COORDS', payload: {
-          lat: res.coords.latitude,
-          lng: res.coords.longitude,
-          time: new Date(),
-        }
-      }))
+      fetch('/map/new-coords', {
+        method: 'POST',
+        headers: { 'Content-Type': 'Application/json' },
+        body: JSON.stringify({
+          coords: {
+            lat: res.coords.latitude,
+            lng: res.coords.longitude,
+          },
+          userId: user._id,
+        }),
+      })
+        .then(res => res.json())
+        .then(data => dispatch({
+          type: 'MY_COORDS', payload: {
+            lat: res.coords.latitude,
+            lng: res.coords.longitude,
+            id: data._id
+          }
+        })
+        )
+    )
+    // dispatch({
+    //   type: 'MY_COORDS', payload: {
+    //     lat: res.coords.latitude,
+    //     lng: res.coords.longitude,
+    //     time: new Date(),
+    // //   }
+    // })
+    // )
 
-    dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: event.target.checked })
+    // dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: event.target.checked })
   }
 
   return (

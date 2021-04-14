@@ -18,9 +18,9 @@ router.patch('/profile', async (req, res) => {
   const { id, visibility } = req.body;
   if (visibility != undefined) {
     const user = await User.findById(id);
-    user.visibility = !visibility;
+    user.visibility = visibility;
     await user.save();
-    return res.status(201).json({ success: true, user });
+    return res.status(201).json({ success: true, visibility: user.visibility });
   } else {
     return res.status(400).json({ success: false, message: 'Не удалось обновить пользователя' });
   }

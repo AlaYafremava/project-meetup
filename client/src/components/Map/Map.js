@@ -41,7 +41,7 @@ function Map({ visibility }) {
     !visibility && dispatch({ type: 'DEL_COORDS' })
   }, [visibility]);
 
-  const { coords, markers } = useSelector((store) => store.map)
+  const { coords, markers, id } = useSelector((store) => store.map)
   const store = useSelector((store) => store)
 
   const center = coords.lat ? coords : {
@@ -52,11 +52,13 @@ function Map({ visibility }) {
   // установка координат по клику и запись в store
   const createMarker = useCallback((event) => {
     // fetch в Map на обновление координат
+    // editCoords
     dispatch({
       type: 'MY_COORDS', payload: {
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
         time: new Date(),
+        id
       }
     })
   }, [])
