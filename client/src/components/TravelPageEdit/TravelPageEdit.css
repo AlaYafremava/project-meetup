@@ -2,3 +2,68 @@
   text-align: center;
   margin-top: 4rem;
 }
+
+.field__wrapper {
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+.field__file {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+}
+
+.field__file-wrapper {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.field__file-fake {
+  height: 3rem;
+  width: calc(100% - 130px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0 16px;
+  border: 2px solid #eeeeee;
+  border-right: none;
+}
+
+.field__file-button {
+  width: 130px;
+  height: 3rem;
+  color: black;
+  border: 2px solid black;
+  font-size: 0.8rem;
+  font-weight: 900;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.field__file-button:hover {
+  color: #18bfef !important;
+  border: 2px solid #18bfef;
+}
