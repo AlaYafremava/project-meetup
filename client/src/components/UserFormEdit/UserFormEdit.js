@@ -42,7 +42,7 @@ function UserFormEdit() {
     e.preventDefault();
     let { name, surname, sex, bday, phone, country, city, homeCountry, homeTown, occupation, education, description, telegram, instagram, facebook } = e.target
     // console.log(name.value, surname.value, sex.value, bday.value, phone.value, country.value, city.value, homeCountry.value, homeTown.value, profession.value, education.value, about.value, socials.value)
-    console.log(user);
+    // console.log(user);
     fetch('/profile/edit', {
       method: 'PATCH',
       headers: {
@@ -692,7 +692,7 @@ function UserFormEdit() {
                   type="text"
                   name="telegram"
                   autoComplete="off"
-                  defaultValue={user.telegram ? '@' + user.telegram : '@'}
+                  defaultValue={user.telegram && user.telegram}
                 />
               </div>
               <div className="col-4 col-12-small">
@@ -703,7 +703,7 @@ function UserFormEdit() {
                   type="text"
                   name="instagram"
                   autoComplete="off"
-                  defaultValue={user.instagram ? '@' + user.instagram : '@'}
+                  defaultValue={user.instagram && user.instagram}
                 />
               </div>
               <div className="col-4 col-12-small">
@@ -714,7 +714,7 @@ function UserFormEdit() {
                   type="text"
                   name="facebook"
                   autoComplete="off"
-                  defaultValue={user.facebook ? user.facebook : ''}
+                  defaultValue={user.facebook && user.facebook}
                 />
               </div>
             </div>
