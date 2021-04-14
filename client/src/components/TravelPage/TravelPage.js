@@ -56,7 +56,7 @@ const [state, setState] = useState({})
               </a>
             </li>
             <li>
-              <a onClick={deleteHandler} className="button fit small">
+               <a onClick={deleteHandler} className="button fit small">
                 Delete travel
               </a>
             </li>
