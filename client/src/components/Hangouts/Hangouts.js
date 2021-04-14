@@ -28,7 +28,8 @@ function Hangouts() {
   }
 
   const changeVisibility = (event) => {
-    fetch()
+    // fetch()
+ 
     navigator.geolocation.getCurrentPosition(res =>
       dispatch({
         type: 'MY_COORDS', payload: {
