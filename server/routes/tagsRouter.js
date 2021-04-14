@@ -16,21 +16,21 @@ router.get('/tags', async (req, res) => {
       }
       return res.status(200).json({ tags, success: true })
   } catch (error) {
-      res.status(400).json({ message: 'tags load error' })
+      res.status(400).json({ message: 'Tags load error' })
   }
 })
 
 router.patch('/tag', async (req, res) => {
-  console.log(req.user);
-  const tag1 = (await User.findOne(req.user.id)).populate('tags').tag._id
-  console.log(tag1);
-  const tag = await Tag.findById(req.body.id)
+  // console.log(req.user);
+  const tag = (await User.findOne(req.user.id)).populate('tags').tag._id
+  // const tag = await Tag.findById(req.body.id)
   console.log(tag);
-  tag1.check = !tag1.check
-  await tag1.save()
-  await User.findByIdAndUpdate(req.user.id, { $push: { tags: tag1 } })
+  tag.check = !tag.check
+  await tag.save()
+  await user.save()
+  // await User.findByIdAndUpdate(req.user.id, { $push: { tags: tag } })
 
-  res.status(200).json(tag, us)
+  res.status(200).json(tag)
 })
 
 export default router

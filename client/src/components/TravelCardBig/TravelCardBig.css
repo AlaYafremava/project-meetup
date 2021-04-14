@@ -18,3 +18,7 @@ header.major {
 #main > .post.featured {
   padding: 2rem 5rem
 }
+
+header.major > .date:before, header.major > .date:after {
+  width: calc(45% - 6rem);
+}

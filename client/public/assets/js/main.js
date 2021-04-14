@@ -52,7 +52,7 @@
 		$this.each(function() {
 
 			var $t = $(this),
-				$bg = $('<div class="bg"></div>').appendTo($t),
+				$bg = $('<div className="bg"></div>').appendTo($t),
 				on, off;
 
 			on = function() {
@@ -147,7 +147,7 @@
 				'<div id="navPanel">' +
 					'<nav>' +
 					'</nav>' +
-					'<a href="#navPanel" class="close"></a>' +
+					'<a href="#navPanel" className="close"></a>' +
 				'</div>'
 			)
 				.appendTo($body)

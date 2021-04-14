@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../Header/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -8,10 +8,13 @@ import './UserFormEdit.css'
 import UserTag from '../../components/UserTag/UserTag'
 
 function UserFormEdit() {
+  const user = useSelector(store => store.user.user)
   const tags = useSelector(store => store.tags.tags)
   console.log(tags);
+  const [tagState, setTagState] = useState(user.tags)
 
-  const user = useSelector(store => store.user.user)
+  
+ 
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -20,6 +23,12 @@ function UserFormEdit() {
   useEffect(() => {
     dispatch(fetchInitTags())
   }, [dispatch])
+
+  const changeStatusHandler = (id) => {
+    // console.log(tagState[id].check);
+    setTagState(tagState[id].check = !tagState[id].check)
+    // dispatch(fetchChangeTagStatus(id))
+  }
 
   const formHandler = (e) => {
     e.preventDefault()
@@ -110,7 +119,7 @@ function UserFormEdit() {
 
               <div className="col-6 col-12-xsmall">
                 <label>Country</label>
-                <select className="form-control" name="country" required>
+                <select className="form-control" name="country" >
                   <option>{user.country}</option>
                   <option>AALAND ISLANDS</option>
                   <option>AFGHANISTAN</option>
@@ -345,13 +354,13 @@ function UserFormEdit() {
                   name="city"
                   autoComplete="off"
                   defaultValue={user.city}
-                  required
+                  
                 />
               </div>
 
               <div className="col-6 col-12-xsmall">
                 <label>Country you are from</label>
-                <select className="form-control" name="homeCountry" required>
+                <select className="form-control" name="homeCountry">
                   <option>{user.homeCountry}</option>
                   <option>AALAND ISLANDS</option>
                   <option>AFGHANISTAN</option>
@@ -586,7 +595,7 @@ function UserFormEdit() {
                   name="homeTown"
                   autoComplete="off"
                   defaultValue={user.homeTown}
-                  required
+                  
                 />
               </div>
 
@@ -623,7 +632,7 @@ function UserFormEdit() {
                 <label>Your interests or hobbies</label>
               </div>
               <ul>
-              {tags && tags?.map(el => <UserTag el={el} style={{ paddingTop: 0, marginTop: 20, marginLeft: 30 }} /> )}
+              {tags && tags?.map(el => <UserTag el={el} changeStatusHandler={changeStatusHandler} /> )}
               </ul>
               {/* <input className='tags' type='submit' value='Vegan' style={{ paddingTop: 0, marginTop: 20, marginLeft: 30 }} /> */}
               {/* <div className="col-4 col-12-small">

@@ -19,7 +19,8 @@ const travelSchema = new mongoose.Schema({
   images: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Image'
-  }]
+  }],
+  scr: []
 })
 
 export default mongoose.model('Travel', travelSchema)
