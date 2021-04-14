@@ -51,6 +51,7 @@ function Hangouts() {
   // let visCheck = useRef();
   console.log(user?.visibility);
 
+
   const verChecked = (event) => {
     return user?.visibility && 'default'
   }
@@ -119,7 +120,7 @@ function Hangouts() {
               </div>
               {/* <MapSwitch /> */}
               <div>
-                <Map visibility={user.visibility} />
+                <Map visibility={user?.visibility} />
               </div>
 
             </div>

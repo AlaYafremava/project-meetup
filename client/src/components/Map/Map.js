@@ -35,11 +35,12 @@ function Map({ visibility }) {
   useEffect(() => {
     fetch('/users')
       .then(res => res.json())
-      .then(users => dispatch({ type: 'INIT_VISIBLES_MARKS', payload: { users, id: user._id } }))
+      .then(users => dispatch({ type: 'INIT_VISIBLES_MARKS', payload: { users, id: user?._id } }))
     // (el) => (el.userId.visibility && !user._id) el.coords 
   }, [])
 
 console.log(coords);
+
 
   //удалить метку, если user невидим
   useEffect(() => {

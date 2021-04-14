@@ -4,8 +4,14 @@ import './UserFriends.css'
 function UserFriends({ user }) {
   return (
     <section>
+      <h2 className="title-h2-travels">Your friends in MEETUP</h2>
+      {user.friends.length < 1 && (
+        <h4>
+          You dont have here any friends for travelling yet:( <br /> Find them!
+        </h4>
+      )}
       {user.friends ? (
-        user.friends.map(friend => {
+        user?.friends.map(friend => {
           return (
             <div className="card-friend">
               <div>
