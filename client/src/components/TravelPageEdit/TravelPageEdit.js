@@ -44,7 +44,7 @@ function TravelPageEdit(props) {
         )
         history.push('/travels')
       } else {
-        alert('Введите дату окончания позже даты старта!')
+        alert('Enter the end date later than the start date!')
       }
     })
   }
