@@ -1,15 +1,11 @@
 import React from 'react'
 import './UserOverview.css'
-import { useDispatch, useSelector } from 'react-redux'
+// import { useDispatch, useSelector } from 'react-redux'
 
-function UserOverview(props) {
-
-  const user = useSelector(store => store.user.user)
-  const langs = useSelector(store => store.user.user.languages.filter(lang => lang.check))
-  // console.log(langs);
+function UserOverview({ user, langs }) {
 
   let userAge = 2021 - user?.bday?.substr(0, 4)
-  // console.log(userAge);
+  // // console.log(userAge);
 
   return (
     <div className="row">
@@ -19,7 +15,7 @@ function UserOverview(props) {
             <span>
               <i className="element-icon fa-venus-mars"></i>
             </span>
-            &nbsp; {(!userAge.isNaN && !userAge === 0) ? userAge + ', ' : ''}{user.sex ? user.sex : 'No gender listed'}
+            &nbsp; {(!userAge.isNaN && userAge !== 0) ? userAge + ', ' : ''}{user.sex ? user.sex : 'No gender listed'}
           </li>
           <li className="li-overview">
             <span>

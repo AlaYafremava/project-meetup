@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 // import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import Header from '../Header/Header'
 import Navbar from '../Navbar/Navbar'
 import UserAbout from '../UserAbout/UserAbout'
@@ -10,6 +10,12 @@ import UserTravels from '../UserTravels/UserTravels'
 import { fetchInitUser } from '../../redux/reduxThunk/asyncFuncs'
 
 function Profile(props) {
+  const user = useSelector(store => store.user.user)
+  const langs = useSelector(store => store.user.user.languages.filter(lang => lang.check))
+  // console.log(langs);
+  const tags = useSelector(store => store.user.user.tags.filter(tag => tag.check))
+  // console.log(tags);
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -40,12 +46,12 @@ function Profile(props) {
 
   return (
     <>
-      <Header navAboutHandler={navAboutHandler}/>
+      <Header navAboutHandler={navAboutHandler} />
       <div id="main">
         <section className="post">
           <div className="row">
             <div className="col-3 col-12-small">
-              <UserCard />
+              <UserCard user={user}/>
             </div>
             <div className="col-9 col-12-small">
               <Navbar
@@ -56,9 +62,9 @@ function Profile(props) {
                 navMyFriendsHandler={navMyFriendsHandler}
                 stateMyFriends={stateMyFriends}
               />
-              {stateAbout ? <UserAbout /> : null}
-              {stateMyTravels ? <UserTravels /> : null}
-              {stateMyFriends ? <UserFriends /> : null}
+              {stateAbout ? <UserAbout user={user} langs={langs} tags={tags}/> : null}
+              {stateMyTravels ? <UserTravels user={user} /> : null}
+              {stateMyFriends ? <UserFriends user={user}/> : null}
             </div>
           </div>
         </section>

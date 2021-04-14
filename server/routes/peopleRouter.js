@@ -7,6 +7,7 @@ router.get('/', async (req, res) => {
   try {
     const people = await User.find()
     const peopleSort = people.map(el => ({
+      _id: el._id,
       name: el.name,
       surname: el.surname,
       country: el.country,
@@ -14,7 +15,23 @@ router.get('/', async (req, res) => {
       telegram: el.telegram,
       instagram: el.instagram,
       facebook: el.facebook,
-      avatar: el.avatar
+      avatar: el.avatar,
+      bday: el.bday,
+      sex: el.sex,
+      homeCountry: el.homeCountry,
+      homeTown: el.homeTown,
+      education: el.education,
+      profession: el.profession,
+      about: el.about,
+      regDate: el.regDate,
+      tags: el.tags,
+      languages: el.languages,
+      userTravels: el.userTravels,
+      pastTravels: el.pastTravels,
+      futureTravels: el.futureTravels,
+      friends: el.friends,
+      visibility: el.visibility,
+      map: el.map,
     }))
     return res.status(200).json(peopleSort)
   } catch (error) {
