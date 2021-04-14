@@ -49,7 +49,7 @@ router.patch('/profile/edit', async (req, res) => {
     user = await User.findById(req.body.id)
     return res.status(201).json({ success: true, user })
   } else {
-    return res.status(400).json({ success: false, message: 'Не удалось обновить пользователя' })
+    return res.status(400).json({ success: false, message: 'Failed to update user information' })
   }
   // } catch (error) {
   // }
