@@ -11,7 +11,7 @@ import TravelPage from './components/TravelPage/TravelPage'
 import TravelPageCreate from './components/TravelPageCreate/TravelPageCreate'
 import TravelPageEdit from './components/TravelPageEdit/TravelPageEdit'
 import Map from './components/Map/Map'
-import PeopleCard from './components/PeoplePage/PeoplePage'
+import PeoplePage from './components/PeoplePage/PeoplePage'
 import People from './components/People/People'
 
 function App() {
@@ -69,7 +69,7 @@ function App() {
             {isAuth === true ? <People /> : <Redirect to="/" />}
           </Route>
 
-          {/* <Route path="/people/:id">{isAuth === true ? <PeoplePage /> : <Redirect to="/" />}</Route> */}
+          <Route path="/people/:id">{isAuth === true ? <PeoplePage /> : <Redirect to="/" />}</Route>
         </Switch>
         {isAuth === true && (
           <div id="copyright">

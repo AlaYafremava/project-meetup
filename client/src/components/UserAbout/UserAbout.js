@@ -3,17 +3,17 @@ import UserAboutMe from '../UserAboutMe/UserAboutMe'
 import UserInterests from '../UserInterests/UserInterests'
 import UserOverview from '../UserOverview/UserOverview'
 
-function UserAbout(props) {
+function UserAbout({ user, langs, tags }) {
   return (
     <section>
       <h3>Overview</h3>
-      <UserOverview />
+      <UserOverview user={user} langs={langs} />
 
       <h3>Interests</h3>
-      <UserInterests />
+      <UserInterests tags={tags}/>
 
       <h3>About me</h3>
-      <UserAboutMe />
+      <UserAboutMe user={user}/>
     </section>
   )
 }
