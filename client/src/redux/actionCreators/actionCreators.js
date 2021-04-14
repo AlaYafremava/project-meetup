@@ -60,9 +60,3 @@ export const initPeopleAC = (payload) => {
   payload
   }
 }
-
-export const initPeopleAC = (payload) => {
-  return {type: INIT_PERSON,
-  payload
-  }
-}

@@ -25,8 +25,11 @@ function Map({ visibility }) {
 
   const dispatch = useDispatch();
   const { user } = useSelector(store => store.user);
-  const [selected, setSelected] = useState(null);
 
+  const [selected, setSelected] = useState(null);
+  
+  const { coords, markers, id } = useSelector((store) => store.map)
+  const store = useSelector((store) => store)
 
   // формирорвание markers
   useEffect(() => {
@@ -35,33 +38,49 @@ function Map({ visibility }) {
       .then(users => dispatch({ type: 'INIT_VISIBLES_MARKS', payload: { users, id: user._id } }))
     // (el) => (el.userId.visibility && !user._id) el.coords 
   }, [])
+console.log(coords.id);
 
   //удалить метку, если user невидим
   useEffect(() => {
-    !visibility && dispatch({ type: 'DEL_COORDS' })
+    !visibility && 
+    fetch('/map/del-coords', {
+      method: 'POST',
+      headers: { 'Content-Type': 'Application/json' },
+      body: JSON.stringify({
+        id: coords.id
+      }),
+    });
+
+    dispatch({ type: 'DEL_COORDS' })
   }, [visibility]);
 
-  const { coords, markers, id } = useSelector((store) => store.map)
-  const store = useSelector((store) => store)
-
-  const center = coords.lat ? coords : {
-    lat: 59.96,
-    lng: 30.312481,
-  }
 
   // установка координат по клику и запись в store
-  const createMarker = useCallback((event) => {
-    // fetch в Map на обновление координат
-    // editCoords
-    dispatch({
-      type: 'MY_COORDS', payload: {
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
+  // Callback
+  const changeMarker = (event) => {
+    fetch('/map/edit-coords', {
+      method: 'POST',
+      headers: { 'Content-Type': 'Application/json' },
+      body: JSON.stringify({
+        coords: {
+          lat: event.latLng.lat(),
+          lng: event.latLng.lng(),
+        },
+        id: coords.id,
         time: new Date(),
-        id
-      }
+      }),
     })
-  }, [])
+      .then(res => res.json())
+      .then(data =>
+        // console.log(data.editCoords))
+        dispatch({
+          type: 'MY_COORDS', payload: {
+            lat: data.editCoords.coords.lat,
+            lng: data.editCoords.coords.lng,
+            id: data._id
+          }
+        }))
+  }
 
   // установка ключа google
   const { isLoaded, loadError } = useLoadScript({
@@ -76,9 +95,9 @@ function Map({ visibility }) {
       <GoogleMap
         zoom={13}
         mapContainerStyle={containerStyle}
-        center={center}
+        center={coords.lat ? coords : { lat: 59.96, lng: 30.312481 }}
         options={options}
-        onClick={visibility && createMarker}
+        onClick={visibility && changeMarker}
       >
         {visibility && <Marker
           position={coords}
@@ -93,9 +112,9 @@ function Map({ visibility }) {
         {visibility && markers.length != 0 ? markers.map((marker) =>
           <Marker
             key={performance.now()}
-            position={
-              { lat: marker.lat, lng: marker.lng } //coords
-            }
+            // position={
+            //   { lat: marker.lat, lng: marker.lng } //coords
+            // }
             onClick={(event) => {
               console.log(coords);
               setSelected(marker);

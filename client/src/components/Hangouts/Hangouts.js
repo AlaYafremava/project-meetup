@@ -60,14 +60,6 @@ function Hangouts() {
         })
         )
     )
-    // dispatch({
-    //   type: 'MY_COORDS', payload: {
-    //     lat: res.coords.latitude,
-    //     lng: res.coords.longitude,
-    //     time: new Date(),
-    // //   }
-    // })
-    // )
 
     // dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: event.target.checked })
   }
