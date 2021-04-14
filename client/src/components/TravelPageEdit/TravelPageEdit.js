@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import './TravelPageEdit.css'
 import Header from '../Header/Header'
 import { useHistory, useParams } from 'react-router'
-import { fetchEditTravels } from "../../redux/reduxThunk/asyncFuncs.js"
+import { fetchEditTravels } from '../../redux/reduxThunk/asyncFuncs.js'
 import { useDispatch, useSelector } from 'react-redux'
-import Axios from "axios"
+import Axios from 'axios'
 
 function TravelPageEdit(props) {
   const { id } = useParams()
@@ -21,17 +21,17 @@ function TravelPageEdit(props) {
   const [travels] = store.travels.travels.filter(travel => travel._id === id)
   const [imageSelected, setImageSelected] = useState('')
 
-
-  const editTravelHandler = (e) => {
+  const editTravelHandler = e => {
     e.preventDefault()
-    const data = new FormData();
-    data.append('file', imageSelected);
-    data.append('upload_preset', 'im0obtej');
-    Axios.post("https://api.cloudinary.com/v1_1/dde0fkiet/image/upload", data)
-      .then(res => {
-        let imageUrl = res.data.secure_url
-        if (inputStartDate.current.value <= inputEndDate.current.value) {
-          dispatch(fetchEditTravels(id,
+    const data = new FormData()
+    data.append('file', imageSelected)
+    data.append('upload_preset', 'im0obtej')
+    Axios.post('https://api.cloudinary.com/v1_1/dde0fkiet/image/upload', data).then(res => {
+      let imageUrl = res.data.secure_url
+      if (inputStartDate.current.value <= inputEndDate.current.value) {
+        dispatch(
+          fetchEditTravels(
+            id,
             inputTitle.current.value,
             inputDescription.current.value,
             inputCountry.current.value,
@@ -40,22 +40,14 @@ function TravelPageEdit(props) {
             inputEndDate.current.value,
             inputNumber.current.value,
             imageUrl
-          ))
-          history.push("/travels")
-        } else {
-          alert("Введите дату окончания позже даты старта!")
-        }
+          )
+        )
+        history.push('/travels')
+      } else {
+        alert('Enter the end date later than the start date!')
       }
-      )
+    })
   }
-
-  // const uploadImageHandler = () => {
-  //   const data = new FormData();
-  //   data.append('file', imageSelected);
-  //   data.append('upload_preset', 'im0obtej');
-  //    Axios.post("https://api.cloudinary.com/v1_1/dde0fkiet/image/upload", data)
-  //    .then((res) => {console.log(res)})
-  // }
 
   return (
     <>
@@ -67,7 +59,8 @@ function TravelPageEdit(props) {
             <div className="row gtr-uniform">
               <div className="col-12">
                 <label>Title</label>
-                <input ref={inputTitle}
+                <input
+                  ref={inputTitle}
                   type="text"
                   name="title"
                   autoComplete="off"
@@ -79,7 +72,8 @@ function TravelPageEdit(props) {
 
               <div className="col-12">
                 <label>Description</label>
-                <textarea ref={inputDescription}
+                <textarea
+                  ref={inputDescription}
                   defaultValue={travels?.description}
                   name="description"
                   placeholder="Put interesting and important information about this trip..."
@@ -88,7 +82,11 @@ function TravelPageEdit(props) {
 
               <div className="col-6 col-12-xsmall">
                 <label>Country</label>
-                <select ref={inputCountry} className="form-control" defaultValue={travels?.country} required>
+                <select
+                  ref={inputCountry}
+                  className="form-control"
+                  defaultValue={travels?.country}
+                  required>
                   <option>AALAND ISLANDS</option>
                   <option>AFGHANISTAN</option>
                   <option>ALBANIA</option>
@@ -317,7 +315,8 @@ function TravelPageEdit(props) {
               </div>
               <div className="col-6 col-12-xsmall">
                 <label>City</label>
-                <input ref={inputCity}
+                <input
+                  ref={inputCity}
                   defaultValue={travels?.city}
                   type="text"
                   name="city"
@@ -327,11 +326,14 @@ function TravelPageEdit(props) {
               </div>
               <div className="col-6 col-12-xsmall">
                 <label>Start date</label>
-                <input ref={inputStartDate}
+                <input
+                  ref={inputStartDate}
                   defaultValue={travels?.startDate.slice(0, 10)}
                   type="date"
                   name="startDate"
-                  min={`${new Date().getFullYear()}-0${new Date().getMonth() + 1}-${new Date().getDate()}`}
+                  min={`${new Date().getFullYear()}-0${
+                    new Date().getMonth() + 1
+                  }-${new Date().getDate()}`}
                   max="2030-12-31"
                   required
                 />
@@ -339,18 +341,22 @@ function TravelPageEdit(props) {
 
               <div className="col-6 col-12-xsmall">
                 <label>End date</label>
-                <input ref={inputEndDate}
+                <input
+                  ref={inputEndDate}
                   defaultValue={travels?.finishDate.slice(0, 10)}
                   type="date"
                   name="finishDate"
-                  min={`${new Date().getFullYear()}-0${new Date().getMonth() + 1}-${new Date().getDate()}`}
+                  min={`${new Date().getFullYear()}-0${
+                    new Date().getMonth() + 1
+                  }-${new Date().getDate()}`}
                   max="2030-12-31"
                   required
                 />
               </div>
               <div className="col-6 col-12-xsmall">
                 <label>Number of persons for this trip</label>
-                <input ref={inputNumber}
+                <input
+                  ref={inputNumber}
                   defaultValue={travels?.number}
                   type="number"
                   name="number"
@@ -360,14 +366,31 @@ function TravelPageEdit(props) {
                 />
               </div>
               <div className="col-6 col-12-xsmall">
-                <label>Upload photo</label>
-                {/* <form enctype="multipart/form-data" method="post"> */}
-                <p><input type="file" name="photo" accept="image/*,image/jpeg" onChange={(event) => { setImageSelected(event.target.files[0]) }} /></p>
-                {/* </form> */}
+
+                <label>Upload a picture</label>
+                <div className="field__wrapper">
+                  <input
+                    type="file"
+                    name="photo"
+                    accept="image/*,image/jpeg"
+                    id="field__file-2"
+                    className="field field__file"
+                    multiple
+                    onChange={event => {
+                      setImageSelected(event.target.files[0])
+                    }}
+                  />
+                  <label className="field__file-wrapper" for="field__file-2">
+                    <div className="field__file-fake">Choose a file</div>
+                    <div className="field__file-button">Choose</div>
+                  </label>
+                </div>
               </div>
             </div>
             <div className="col-12 travel-btn">
-              <button type="submit" className="button large">Save changes</button>
+              <button type="submit" className="button large">
+                Save changes
+              </button>
             </div>
           </form>
         </section>

@@ -46,8 +46,9 @@ router.get('/travels', verToken, async (req, res) => {
 
 router.post('/travels/new', verToken, async (req, res) => {
     try {
-        const { title, description, country, city, startDate, finishDate, number } = req.body
+        const { title, description, country, city, startDate, finishDate, number, src } = req.body
         const userAddNewTravel = await User.findOne({ _id: req.user.id })
+       
         const newTravel = await Travel.create({
             title,
             description,
@@ -57,7 +58,13 @@ router.post('/travels/new', verToken, async (req, res) => {
             finishDate,
             number,
             owner: userAddNewTravel,
+            src: [src]
         })
+        const newImage = await Image.create({
+            src: src,
+            imgTravel: newTravel
+        })
+
         await User.findByIdAndUpdate(req.user.id, { $push: { userTravels: newTravel } })
         if (newTravel) {
             return res.status(200).json({ newTravel, success: true })
@@ -95,15 +102,7 @@ router.put("/travels/:id", verToken, upload.single('photo'), async function (req
         number,
         src
     } = req.body
-    console.log(id,
-        title,
-        description,
-        country,
-        city,
-        startDate,
-        finishDate,
-        number,
-        )
+   
     try {
         const travelAddNewImage = await Travel.findById(id)
         const newImage = await Image.create({
@@ -119,7 +118,7 @@ router.put("/travels/:id", verToken, upload.single('photo'), async function (req
             finishDate,
             number,
             images: [newImage],
-            $push: { src: src } 
+            src: [src]
         })
         console.log(travel);
         res.status(200).json({ travel, newImage })

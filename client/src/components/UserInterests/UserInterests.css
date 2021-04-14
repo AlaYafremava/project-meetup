@@ -1,4 +1,3 @@
-
 input[type="submit"].userTags {
   border-radius: 10px;
   background-color: transparent;
@@ -8,6 +7,11 @@ input[type="submit"].userTags {
 
 }
 
-/* input[type="submit"].userTags:active {
-  outline: none ;
-} */
+.actions-interests {
+  display: fle;
+  flex-wrap: wrap
+}
+
+ul.actions-interests > li {
+  padding-bottom: 1rem;
+}
