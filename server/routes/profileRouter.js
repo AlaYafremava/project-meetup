@@ -29,9 +29,9 @@ router.patch('/profile', async (req, res) => {
 router.patch('/profile/edit', async (req, res) => {
   // console.log(req.body);
   let user
-  let { name, surname, sex, bday, phone, country, city, homeCountry, homeTown, occupation, education, description, telegram, instagram, facebook, tags, languages } = req.body
+  let { name, surname, sex, bday, phone, country, city, homeCountry, homeTown, occupation, education, description, telegram, instagram, facebook, tags, languages, avatar } = req.body
   // console.log(bday);
-  if (name || surname || sex || bday || phone || country || city || homeCountry || homeTown || occupation || education || description || telegram || instagram || facebook || tags || languages) {
+  if (name || surname || sex || bday || phone || country || city || homeCountry || homeTown || occupation || education || description || telegram || instagram || facebook || tags || languages || avatar) {
     // try {
     user = await User.findById(req.body.id)
     // user = await User.findByIdAndUpdate({ _id: req.body.id }, { name: req.body.name, surname: req.body.surname })
@@ -50,8 +50,10 @@ router.patch('/profile/edit', async (req, res) => {
     user.about = description
     user.tags = tags
     user.languages = languages
+
     // if (user.telegram.includes('https://t.me/') || user.telegram.includes('@')) {
     user.telegram = telegram
+
       //user.telegram.substring(13) + telegram.substring(1)
     // } else {
     // user.telegram = 'https://t.me/' + telegram.substring(1)

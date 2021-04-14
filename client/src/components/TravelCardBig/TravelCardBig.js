@@ -1,7 +1,11 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import './TravelCardBig.css'
 
 function TravelCardBig({el}) {
+  const store = useSelector(store => store)
+  const userId = store.user.user._id
+
   return (
     <>
       <article className="post featured">
