@@ -9,7 +9,7 @@ function UserCard(props) {
 
   return (
     <div className="card">
-      <img src="avatar.jpeg" alt="avatar" className="avatar" />
+      <img src={user.avatar} alt="avatar" className="avatar" />
       <p className="userName">
         <i>{user.name} {user.surname}</i>
       </p>
