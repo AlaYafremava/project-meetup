@@ -39,7 +39,7 @@ router.get('/travels', verToken, async (req, res) => {
         }
         return res.status(200).json({ travels, success: true })
     } catch (e) {
-        res.status(400).json({ message: 'travels load error' })
+        res.status(400).json({ message: 'Travels load error' })
     }
 })
 
@@ -63,7 +63,7 @@ router.post('/travels/new', verToken, async (req, res) => {
         }
     } catch (e) {
         console.error(e.message)
-        res.status(400).json({ message: 'travel create error' })
+        res.status(400).json({ message: 'Travel create error' })
     }
 })
 
@@ -78,7 +78,7 @@ router.get("/travels/:id", (async (req, res) => {
         }
         return res.status(200).json({ travel, success: true })
     } catch (e) {
-        res.status(400).json({ message: "travels load error" })
+        res.status(400).json({ message: "Travels load error" })
     }
 }))
 
@@ -108,7 +108,7 @@ router.put("/travels/:id", verToken, upload.single('photo'), async function (req
         res.status(200).json({ success: true, travel })
     }
     catch {
-        res.status(404).json({ success: false, message: "travel edit error" })
+        res.status(404).json({ success: false, message: "Travel edit error" })
     }
 })
 
@@ -119,7 +119,7 @@ router.delete('/travels', verToken, async function (req, res, next) {
         await Travel.findByIdAndDelete(id)
         res.status(200).json({ success: true, id })
     } catch {
-        res.status(404).json({ message: 'travel delete error' })
+        res.status(404).json({ message: 'Travel delete error' })
     }
 })
 
