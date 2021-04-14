@@ -1,13 +1,16 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import TravelCard from '../TravelCard/TravelCard'
 import './UserTravels.css'
 
 function UserTravels(props) {
+  const store = useSelector(store => store)
+
   return (
     <div id="main">
       <h2 className="title-h2-travels">Travels planned by me</h2>
       <section className="posts">
-        <TravelCard />
+      {store.user.user.userTravels.map(el => <TravelCard key={performance.now()} el={el} />)}
       </section>
       <div>
         <ul className="actions">

@@ -54,7 +54,7 @@ function App() {
             {isAuth === true ? <TravelPage /> : <Redirect to="/" />}
           </Route>
 
-          {/* <Route path="/map">{isAuth === true ? <Map /> : <Redirect to="/" />}</Route> */}
+          <Route path="/map">{isAuth === true ? <Map /> : <Redirect to="/" />}</Route>
 
           <Route exact path="/profile">
             {isAuth === true ? <Profile /> : <Redirect to="/" />}
