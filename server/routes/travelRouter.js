@@ -32,7 +32,7 @@ router.post('/upload', upload.single('photo'), async (req,res) => {
 
 router.get('/travels', verToken, async (req, res) => {
     try {
-        const travels = await Travel.find()
+        const travels = await Travel.find().populate("images")
         if (!travels) {
             return res.status(400).json({
                 message: 'Travels not found',

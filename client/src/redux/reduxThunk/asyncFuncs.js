@@ -5,6 +5,7 @@ import {
   addTravelsAC,
   delTravelsAC,
   editTravelsAC,
+  initPeopleAC,
 } from '../../redux/actionCreators/actionCreators'
 
 export const fetchInitUser = () => {
@@ -109,5 +110,15 @@ export const fetchEditTravels = (
     })
       .then(res => res.json())
       .then(data => dispatch(editTravelsAC(data.travel)))
+  }
+}
+
+
+//PEOPLE
+export const fetchInitPeople = () => {
+  return dispatch => {
+    fetch('/people')
+      .then(response => response.json())
+      .then(( people ) => dispatch(initPeopleAC(people)))
   }
 }

@@ -26,13 +26,112 @@ router.route("/signup")
       const { name, sex, email, password } = req.body
       // console.log(name, sex, email, password);
       const account = await User.findOne({ email })
-      const tags = await Tag.find()
+      const tags = [
+        {
+          id: 1,
+          title: 'vegan',
+          check: false
+        },
+        {
+          id: 2,
+          title: 'travel',
+          check: false
+        },
+        {
+          id: 3,
+          title: 'sport',
+          check: false
+        },
+        {
+          id: 4,
+          title: 'architecture',
+          check: false
+        },
+        {
+          id: 5,
+          title: 'video games',
+          check: false
+        },
+        {
+          id: 6,
+          title: 'rock music',
+          check: false
+        },
+        {
+          id: 7,
+          title: 'classic music',
+          check: false
+        },
+        {
+          id: 8,
+          title: 'IT',
+          check: false
+        },
+        {
+          id: 9,
+          title: 'running',
+          check: false
+        },
+        {
+          id: 10,
+          title: 'science',
+          check: false
+        },
+        {
+          id: 11,
+          title: 'street food',
+          check: false
+        },
+        {
+          id: 12,
+          title: 'movies',
+          check: false
+        },
+      ]
+      const languages = [
+        {
+          title: 'English',
+          check: false
+        },
+        {
+          title: 'Russian',
+          check: false
+        },
+        {
+          title: 'Spanish',
+          check: false
+        },
+        {
+          title: 'Chinese',
+          check: false
+        },
+        {
+          title: 'French',
+          check: false
+        },
+        {
+          title: 'Italian',
+          check: false
+        },
+        {
+          title: 'German',
+          check: false
+        },
+        {
+          title: 'Japanese',
+          check: false
+        },
+        {
+          title: 'Korean',
+          check: false
+        },
+      ]
       if (account) {
         return res.status(400).json({ message: "Email already exist" })
       }
       const hashPassword = await bcrypt.hash(password, 10)
       const newUser = await User.create({
-        name, sex, email, password: hashPassword, tags
+        name, sex, email, password: hashPassword, tags, languages
       })
       // await newUser.save()
       const token = generateToken(newUser._id)

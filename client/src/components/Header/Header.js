@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { logoutAC } from '../../redux/actionCreators/actionCreators'
 import { Link } from 'react-router-dom'
 import './Header.css'
 
-function Header({navAboutHandler}) {
+function Header({ navAboutHandler }) {
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -24,19 +24,28 @@ function Header({navAboutHandler}) {
             </a>
           </div>
           <ul className="links headersLinks">
-            <li>
-              <Link to="/hangouts" className="links">
+            <li className={history.location.pathname === "/hangouts" && 'active'}>
+              <Link to="/hangouts">
                 Hangouts
               </Link>
             </li>
-            <li>
-              <Link to="/travels">Travels</Link>
+            <li className={history.location.pathname === "/travels" && 'active'}>
+              <Link to="/travels">
+                Travels
+              </Link>
             </li>
-            <li>
-              <Link to="/profile" onClick={navAboutHandler}>My Profile</Link>
+            <li className={history.location.pathname === "/people" && 'active'}>
+              <Link to="/people">
+                People
+              </Link>
+            </li>
+            <li className={history.location.pathname === "/profile" && 'active'}>
+              <Link to="/profile">
+                My Profile
+              </Link>
             </li>
 
-            <li className="active">
+            <li>
               <Link to="/" onClick={logOutHandler}>
                 LogOut
               </Link>
