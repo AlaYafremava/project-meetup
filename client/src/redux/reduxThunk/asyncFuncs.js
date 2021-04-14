@@ -85,7 +85,8 @@ export const fetchEditTravels = (
   city,
   startDate,
   finishDate,
-  number
+  number,
+  imageUrl
 ) => {
   const token = window.localStorage.getItem('token')
 
@@ -103,6 +104,7 @@ export const fetchEditTravels = (
         startDate,
         finishDate,
         number,
+        src : imageUrl
       }),
     })
       .then(res => res.json())

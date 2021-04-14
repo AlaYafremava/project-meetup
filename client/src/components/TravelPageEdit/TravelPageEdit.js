@@ -27,22 +27,26 @@ function TravelPageEdit(props) {
     const data = new FormData();
     data.append('file', imageSelected);
     data.append('upload_preset', 'im0obtej');
-     Axios.post("https://api.cloudinary.com/v1_1/dde0fkiet/image/upload", data)
-     .then((res) => {console.log(res)})
-    if (inputStartDate.current.value <= inputEndDate.current.value) {
-      dispatch(fetchEditTravels(id,
-        inputTitle.current.value,
-        inputDescription.current.value,
-        inputCountry.current.value,
-        inputCity.current.value,
-        inputStartDate.current.value,
-        inputEndDate.current.value,
-        inputNumber.current.value,
-      ))
-      history.push("/travels")
-    } else {
-      alert("Введите дату окончания позже даты старта!")
-    }
+    Axios.post("https://api.cloudinary.com/v1_1/dde0fkiet/image/upload", data)
+      .then(res => {
+        let imageUrl = res.data.secure_url
+        if (inputStartDate.current.value <= inputEndDate.current.value) {
+          dispatch(fetchEditTravels(id,
+            inputTitle.current.value,
+            inputDescription.current.value,
+            inputCountry.current.value,
+            inputCity.current.value,
+            inputStartDate.current.value,
+            inputEndDate.current.value,
+            inputNumber.current.value,
+            imageUrl
+          ))
+          history.push("/travels")
+        } else {
+          alert("Введите дату окончания позже даты старта!")
+        }
+      }
+      )
   }
 
   // const uploadImageHandler = () => {
@@ -358,8 +362,8 @@ function TravelPageEdit(props) {
               <div className="col-6 col-12-xsmall">
                 <label>Upload photo</label>
                 {/* <form enctype="multipart/form-data" method="post"> */}
-            <p><input type="file" name="photo" accept="image/*,image/jpeg" onChange={(event) => {setImageSelected(event.target.files[0])}}/></p>
-          {/* </form> */}
+                <p><input type="file" name="photo" accept="image/*,image/jpeg" onChange={(event) => { setImageSelected(event.target.files[0]) }} /></p>
+                {/* </form> */}
               </div>
             </div>
             <div className="col-12 travel-btn">

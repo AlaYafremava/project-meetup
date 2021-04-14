@@ -2,6 +2,7 @@ import Router from 'express'
 const router = new Router()
 import User from "../models/users.js"
 import Travel from "../models/travels.js"
+import Image from "../models/images.js"
 import verToken from "../middlware/auth.js"
 import path from "path"
 import multer from 'multer'
@@ -83,7 +84,6 @@ router.get("/travels/:id", (async (req, res) => {
 }))
 
 router.put("/travels/:id", verToken, upload.single('photo'), async function (req, res, next) {
-    // const { id } = req.params
     const {
         id,
         title,
@@ -92,9 +92,24 @@ router.put("/travels/:id", verToken, upload.single('photo'), async function (req
         city,
         startDate,
         finishDate,
-        number
+        number,
+        src
     } = req.body
+    console.log(id,
+        title,
+        description,
+        country,
+        city,
+        startDate,
+        finishDate,
+        number,
+        )
     try {
+        const travelAddNewImage = await Travel.findById(id)
+        const newImage = await Image.create({
+            src,
+            imgTravel: travelAddNewImage
+        })
         const travel = await Travel.findByIdAndUpdate(id, {
             title,
             description,
@@ -102,10 +117,12 @@ router.put("/travels/:id", verToken, upload.single('photo'), async function (req
             city,
             startDate,
             finishDate,
-            number
+            number,
+            images: [newImage],
+            $push: { src: src } 
         })
         console.log(travel);
-        res.status(200).json({ success: true, travel })
+        res.status(200).json({ travel, newImage })
     }
     catch {
         res.status(404).json({ success: false, message: "travel edit error" })

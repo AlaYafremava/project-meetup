@@ -44,7 +44,7 @@ const [state, setState] = useState({})
             </p>
           </header>
           <div className="image main">
-            <img src="pic01.jpg" alt="pic" />
+            {/* <img src={state?.travel?.src[0]} alt="pic" /> */}
           </div>
           <p>
           {state?.travel?.description}
