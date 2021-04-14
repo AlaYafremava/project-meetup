@@ -6,7 +6,7 @@ function TravelCardBig({el}) {
     <>
       <article className="post featured">
         <header className="major">
-          <span className="date">From {el.startDate?.slice(0,10)} to {el.finishDate?.slice(0,10)}</span>
+          <span className="date"> {el.startDate?.slice(0,10)} 	&#160; ~ 	&#160; {el.finishDate?.slice(0,10)}</span>
           <h2>
             <a href={`/travels/${el._id}`}>{el.title}</a>
           </h2>

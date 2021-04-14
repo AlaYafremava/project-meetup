@@ -36,7 +36,7 @@ const [state, setState] = useState({})
       <div id="main">
         <section className="post">
           <header className="major">
-            <span className="date">{state?.travel?.startDate.slice(0,10)}</span>
+            <span className="date">{state?.travel?.startDate.slice(0,10)} 	&#160; ~ 	&#160; {state?.travel?.finishDate.slice(0,10)}</span>
             <h1>{state?.travel?.title}</h1>
             <p>
               The world is a book
