@@ -12,12 +12,6 @@ export const fetchInitUser = () => {
         // console.log(data)})
         dispatch(initUserAC(data))
       })
-
-          .then(res => res.json())
-          .then(data => {
-            // console.log(data)})
-            dispatch(initUserAC(data))})
-
   }
 }
 

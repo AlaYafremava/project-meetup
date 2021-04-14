@@ -1,7 +1,7 @@
 import { SIGNUP, LOGIN, LOGOUT, INIT_USER, CHANGE_VISIBILITY_USER,UPDATE_USER  } from '../actionTypes/actionTypes'
 
 
-const initialState = { user: {}, isAuth: false, tags: [] }
+const initialState = { user: {}, isAuth: false}
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
