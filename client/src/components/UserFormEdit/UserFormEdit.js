@@ -8,12 +8,13 @@ import { v4 as uuidv4 } from 'uuid';
 import './UserFormEdit.css'
 import UserTag from '../../components/UserTag/UserTag'
 import UserLang from '../../components/UserLang/UserLang'
+import Axios from 'axios'
 
 function UserFormEdit() {
   const user = useSelector(store => store.user.user)
   const [tagList, setTagList] = useState(user.tags);
   const [langList, setLangList] = useState(user.languages);
-
+  const [imageSelected, setImageSelected] = useState('')
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -42,7 +43,15 @@ function UserFormEdit() {
     e.preventDefault();
     let { name, surname, sex, bday, phone, country, city, homeCountry, homeTown, occupation, education, description, telegram, instagram, facebook } = e.target
     // console.log(name.value, surname.value, sex.value, bday.value, phone.value, country.value, city.value, homeCountry.value, homeTown.value, profession.value, education.value, about.value, socials.value)
+
     console.log(user);
+
+    const data = new FormData()
+    data.append('file', imageSelected)
+    data.append('upload_preset', 'im0obtej')
+    Axios.post('https://api.cloudinary.com/v1_1/dde0fkiet/image/upload', data).then(res => {
+      let imageUrl = res.data.secure_url
+
     fetch('/profile/edit', {
       method: 'PATCH',
       headers: {
@@ -67,6 +76,7 @@ function UserFormEdit() {
         facebook: facebook.value,
         tags: tagList,
         languages: langList,
+        avatar: imageUrl
       })
     })
       .then(res => res.json())
@@ -76,7 +86,7 @@ function UserFormEdit() {
           dispatch({ type: UPDATE_USER, payload: data })
           history.push('/profile')
         }
-      })
+      })})
   }
 
   return (
@@ -646,6 +656,28 @@ function UserFormEdit() {
               </div>
 
               <div className="col-12">
+
+                <label>Download your picture</label>
+                <div className="field__wrapper">
+                  <input
+                    type="file"
+                    name="photo"
+                    accept="image/*,image/jpeg"
+                    id="field__file-2"
+                    className="field field__file"
+                    multiple
+                    onChange={event => {
+                      setImageSelected(event.target.files[0])
+                    }}
+                  />
+                  <label className="field__file-wrapper" for="field__file-2">
+                    <div className="field__file-fake">Choose a picture</div>
+                    <div className="field__file-button">Choose</div>
+                  </label>
+                </div>
+              </div>
+
+              <div className="col-12">
                 <label>Tell something about yourself</label>
                 <textarea
                   name="description"
@@ -692,7 +724,7 @@ function UserFormEdit() {
                   type="text"
                   name="telegram"
                   autoComplete="off"
-                  defaultValue={user.telegram ? '@' + user.telegram : '@'}
+                  defaultValue={user.telegram && user.telegram}
                 />
               </div>
               <div className="col-4 col-12-small">
@@ -703,7 +735,7 @@ function UserFormEdit() {
                   type="text"
                   name="instagram"
                   autoComplete="off"
-                  defaultValue={user.instagram ? '@' + user.instagram : '@'}
+                  defaultValue={user.instagram && user.instagram}
                 />
               </div>
               <div className="col-4 col-12-small">
@@ -714,7 +746,7 @@ function UserFormEdit() {
                   type="text"
                   name="facebook"
                   autoComplete="off"
-                  defaultValue={user.facebook ? user.facebook : ''}
+                  defaultValue={user.facebook && user.facebook}
                 />
               </div>
             </div>

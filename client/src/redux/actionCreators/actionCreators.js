@@ -60,3 +60,4 @@ export const initPeopleAC = (payload) => {
   payload
   }
 }
+

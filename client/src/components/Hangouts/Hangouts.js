@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchInitUser } from '../../redux/reduxThunk/asyncFuncs'
 
 import './Hangouts.css'
-import MapSwitch from '../MapSwitch/MapSwitch'
+// import MapSwitch from '../MapSwitch/MapSwitch'
 
 function Hangouts() {
 
@@ -71,11 +71,12 @@ function Hangouts() {
         <section className="post">
           <div className="row">
             <div className="col-3 col-12-small">
-              <UserCardSmall />
+              <UserCardSmall user={user}/>
             </div>
             <div className="col-9 col-12-small">
 
               <div>
+                <h2>Let's hangout with someone</h2>
                 {/* слайдер */}
                 {/* <div class="slideThree">
                   <input type="checkbox" value="None" id="slideThree" name="check" checked />
@@ -88,8 +89,7 @@ function Hangouts() {
                 />
                 <label htmlFor="demo-copy">Become available for others</label>
               </div>
-              <h2>Become available</h2>
-              <MapSwitch />
+              {/* <MapSwitch /> */}
               <div>
                 <Map visibility={user.visibility} />
               </div>

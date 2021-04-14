@@ -3,23 +3,19 @@ import '../UserCard/UserCard.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-function UserCardSmall(props) {
-  const dispatch = useDispatch()
-
-  const user = useSelector(store => store.user.user)
-
-  // console.log(user)
+function UserCardSmall({ user }) {
   return (
     <div className="card">
       <img src="avatar.jpeg" alt="avatar" className="avatar" />
       <a href="/profile">
         <p className="userName">
-          <i>Alla Yefremova</i>
+          <i>{user?.name + ' ' + user?.surname}</i>
         </p>
         <p className="title">
           <i>
-            Saint-Petersburg, <br />
-            Russian Federation
+            {user?.city}
+            {user?.city && ','} <br />
+            {user?.country}
           </i>
         </p>
       </a>

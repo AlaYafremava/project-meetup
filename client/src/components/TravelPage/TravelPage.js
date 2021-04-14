@@ -4,17 +4,19 @@ import Header from '../Header/Header'
 import {useEffect, useState} from 'react'
 import {useHistory, useParams} from "react-router-dom"
 import { fetchDelTravels} from "../../redux/reduxThunk/asyncFuncs"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 function TravelPage(props) {
   const token = window.localStorage.getItem('token')
   const {id} = useParams()
   const history = useHistory()
+  const store = useSelector(store => store)
+  const userId = store.user.user._id
 const [state, setState] = useState({})
 
 
   useEffect( async() => {
-    const response = await fetch(`http://localhost:4000/travels/${id}`, {
+    const response = await fetch(`/travels/${id}`, {
       method: "GET",
       // headers: {  "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` }
     })
@@ -50,16 +52,18 @@ const [state, setState] = useState({})
           {state?.travel?.description}
           </p>
           <ul className="actions fit small">
+          {(state?.travel?.owner === userId) ?
             <li>
               <a href={`/travels/${id}/edit`} className="button fit small">
                 Edit travel
               </a>
-            </li>
+            </li> : <a></a>}
+            {(state?.travel?.owner === userId) ?
             <li>
                <a onClick={deleteHandler} className="button fit small">
                 Delete travel
               </a>
-            </li>
+            </li> : <a></a>}
           </ul>
         </section>
       </div>
