@@ -13,22 +13,17 @@ router.get('/profile', verToken, async (req, res) => {
   }
 })
 
+// изменение свойства visibility у user'a
 router.patch('/profile', async (req, res) => {
-  // console.log(req.body);
-  // let user
   const { id, visibility } = req.body;
-  if (visibility != undefined ) {
+  if (visibility != undefined) {
     const user = await User.findById(id);
-    // user = await User.findByIdAndUpdate({ _id: req.body.id }, { name: req.body.name, surname: req.body.surname })
-    // console.log(sex);
     user.visibility = !visibility;
     await user.save();
     return res.status(201).json({ success: true, user });
   } else {
     return res.status(400).json({ success: false, message: 'Не удалось обновить пользователя' });
   }
-  // } catch (error) {
-  // }
 })
 
 router.patch('/profile/edit', async (req, res) => {

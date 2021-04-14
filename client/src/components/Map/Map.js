@@ -23,43 +23,35 @@ const options = {
 
 function Map({ visibility }) {
 
-  const [selected, setSelected] = useState(null);
   const dispatch = useDispatch();
+  const { user } = useSelector(store => store.user);
+  const [selected, setSelected] = useState(null);
 
+
+  // формирорвание markers
   useEffect(() => {
-    // dispatch({ type: 'INIT_MAP', payload: { visibility: true } });
-    dispatch({
-      type: 'INIT_MARKS', payload: [
-        { lat: 59.9381841762223, lng: 30.31536517097182, user: 'Ann' },
-        { lat: 59.938017673154, lng: 30.312043967568645, user: 'Mike' },
-        { lat: 59.938915343840016, lng: 30.30861916384227, user: 'Jeck' },
-        { lat: 59.94098222939891, lng: 30.314060360105106, user: 'Monika' },
-      ]
-    });
+    fetch('/users')
+      .then(res => res.json())
+      .then(users => dispatch({ type: 'INIT_VISIBLES_MARKS', payload: { users, id: user._id } }))
+    // (el) => (el.userId.visibility && !user._id) el.coords 
   }, [])
 
-  //удалить метку, если невидим
+  //удалить метку, если user невидим
   useEffect(() => {
     !visibility && dispatch({ type: 'DEL_COORDS' })
   }, [visibility]);
 
-
-
   const { coords, markers } = useSelector((store) => store.map)
-
   const store = useSelector((store) => store)
-  console.log(coords);
-
 
   const center = coords.lat ? coords : {
-      lat: 59.96,
-      lng: 30.312481,
-    }
-
-    console.log(coords);
+    lat: 59.96,
+    lng: 30.312481,
+  }
 
   // установка координат по клику и запись в store
   const createMarker = useCallback((event) => {
+    // fetch в Map на обновление координат
     dispatch({
       type: 'MY_COORDS', payload: {
         lat: event.latLng.lat(),
@@ -79,21 +71,14 @@ function Map({ visibility }) {
 
   return isLoaded ? (
     <>
-      {/* <h1>
-        <span role="img" aria-label="tent">Our logo</span>
-      </h1> */}
       <GoogleMap
         zoom={13}
         mapContainerStyle={containerStyle}
         center={center}
         options={options}
         onClick={visibility && createMarker}
-
-      // onLoad={} //возможно здесь будет логика при загрузке карты
-      // {visibility && 1 : 2}
       >
         {visibility && <Marker
-          // key=
           position={coords}
           icon={{
             url: '/me.png',
@@ -101,21 +86,13 @@ function Map({ visibility }) {
             anchor: new window.google.maps.Point(15, 15) // поставить в центр иконки
           }}
         />}
-        {/* {visibility && <Marker
-          // key=
-          position={coords}
-          icon={{
-            url: '/me.png',
-            scaledSize: new window.google.maps.Size(30, 30), // масштабировать иконку
-            anchor: new window.google.maps.Point(15, 15) // поставить в центр иконки
-          }}
-        />} */}
+
+        {/* прорисовка всех юзеров, которые хотять meetUp */}
         {visibility && markers.length != 0 ? markers.map((marker) =>
           <Marker
             key={performance.now()}
             position={
-              // coords
-              { lat: marker.lat, lng: marker.lng }
+              { lat: marker.lat, lng: marker.lng } //coords
             }
             onClick={(event) => {
               console.log(coords);
@@ -123,6 +100,7 @@ function Map({ visibility }) {
             }}
           />) : null}
 
+        {/* создаем информационное окно на каждый маркер */}
         {selected ? (
           <InfoWindow
             position={{ lat: selected.lat, lng: selected.lng }}
@@ -138,15 +116,6 @@ function Map({ visibility }) {
           </InfoWindow>
         ) : null}
       </GoogleMap>
-
-      {/* определение авто-координат. Пока в разработке */}
-      {/* <span className={styles.mapstyle} onClick={() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-          dispatch({ type: 'MY_COORDS', payload: { lat: position.coords.latitude, lng: position.coords.longitude } })
-        }, () => null)
-      }}>
-        <img src="" alt="locate me" style={{ width: "48px", height: '48px' }}></img>
-      </span> */}
     </>
   ) : (
       <div></div>
