@@ -46,7 +46,6 @@ function Map({ visibility }) {
 
 
   const { coords, markers } = useSelector((store) => store.map)
-
   const store = useSelector((store) => store)
   console.log(coords);
 
