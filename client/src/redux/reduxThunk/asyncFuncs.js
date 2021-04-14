@@ -1,11 +1,18 @@
-import { initUserAC, initTagsAC, initTravelsAC, addTravelsAC, delTravelsAC, editTravelsAC } from "../../redux/actionCreators/actionCreators"
+import {
+  initUserAC,
+  initTagsAC,
+  initTravelsAC,
+  addTravelsAC,
+  delTravelsAC,
+  editTravelsAC,
+} from '../../redux/actionCreators/actionCreators'
 
 export const fetchInitUser = () => {
   const token = window.localStorage.getItem('token')
-  return (dispatch) => {
+  return dispatch => {
     fetch('http://localhost:4000/profile', {
-      method: "GET",
-      headers: { "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
+      method: 'GET',
+      headers: { 'Content-Type': 'Application/json', Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())
       .then(data => {
@@ -16,18 +23,18 @@ export const fetchInitUser = () => {
 }
 
 export const fetchInitTags = () => {
-  return (dispatch) => {
+  return dispatch => {
     fetch('/tags')
       .then(res => res.json())
       .then(data => {
-        console.log(data.tags);
+        console.log(data.tags)
         dispatch(initTagsAC(data.tags))
       })
   }
 }
 
-export const fetchChangeTagStatus = (id) => {
-  return (dispatch) => {
+export const fetchChangeTagStatus = id => {
+  return dispatch => {
     fetch('/tag', {
       method: 'PATCH',
       headers: { 'Content-Type': 'Application/json' },
@@ -38,30 +45,30 @@ export const fetchChangeTagStatus = (id) => {
         console.log(data)
       })
     // dispatch(checkTagAC())})
-
   }
 }
 
 export const fetchInitTravels = () => {
   const token = window.localStorage.getItem('token')
-  return (dispatch) => {
+  return dispatch => {
     fetch('http://localhost:4000/travels', {
-      method: "GET",
-      headers: { "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
+      method: 'GET',
+      headers: { 'Content-Type': 'Application/json', Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())
       .then(data => dispatch(initTravelsAC(data.travels)))
   }
 }
 
-export const fetchDelTravels = (id) => {
+export const fetchDelTravels = id => {
   const token = window.localStorage.getItem('token')
-  return (dispatch) => {
+  return dispatch => {
     fetch('http://localhost:4000/travels', {
-      method: "delete",
-      headers: { "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
-      body: JSON.stringify({ id })
-    }).then(res => res.json())
+      method: 'delete',
+      headers: { 'Content-Type': 'Application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ id }),
+    })
+      .then(res => res.json())
       .then(data => dispatch(delTravelsAC(data.id)))
   }
 }
@@ -77,10 +84,10 @@ export const fetchEditTravels = (
   number
 ) => {
   const token = window.localStorage.getItem('token')
-  return (dispatch) => {
+  return dispatch => {
     fetch(`http://localhost:4000/travels/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
+      method: 'PUT',
+      headers: { 'Content-Type': 'Application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({
         id,
         title,
@@ -89,9 +96,10 @@ export const fetchEditTravels = (
         city,
         startDate,
         finishDate,
-        number
-      })
-    }).then(res => res.json())
+        number,
+      }),
+    })
+      .then(res => res.json())
       .then(data => dispatch(editTravelsAC(data.travel)))
   }
 }
