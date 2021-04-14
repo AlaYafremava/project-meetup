@@ -11,6 +11,8 @@ import TravelPage from './components/TravelPage/TravelPage'
 import TravelPageCreate from './components/TravelPageCreate/TravelPageCreate'
 import TravelPageEdit from './components/TravelPageEdit/TravelPageEdit'
 import Map from './components/Map/Map'
+import PeopleCard from './components/PeoplePage/PeoplePage'
+import People from './components/People/People'
 
 function App() {
   const token = window.localStorage.getItem('token')
@@ -30,7 +32,6 @@ function App() {
   return (
     <>
       <Router>
-
         <Switch>
           <Route exact path="/">
             {isAuth === false ? <Auth /> : <Redirect to="/hangouts" />}
@@ -63,6 +64,12 @@ function App() {
           <Route path="/profile/edit">
             {isAuth === true ? <UserFormEdit /> : <Redirect to="/" />}
           </Route>
+
+          <Route exact path="/people">
+            {isAuth === true ? <People /> : <Redirect to="/" />}
+          </Route>
+
+          {/* <Route path="/people/:id">{isAuth === true ? <PeoplePage /> : <Redirect to="/" />}</Route> */}
         </Switch>
         {isAuth === true && (
           <div id="copyright">
