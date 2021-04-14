@@ -47,15 +47,15 @@ function Signup({ authHandler }) {
           </div>
           <div id='sexDiv' className="field">
             <div className="col-4 col-12-small">
-              <input type="radio" id="demo-priority-low" name="sex" value="woman" defaultChecked />
-              <label htmlFor="demo-priority-low">Woman</label>
+              <input type="radio" id="demo-priority-low" name="sex" value="Female" defaultChecked />
+              <label htmlFor="demo-priority-low">Female</label>
             </div>
             <div className="col-4 col-12-small">
-              <input type="radio" id="demo-priority-normal" name="sex" value="man" />
-              <label htmlFor="demo-priority-normal">Man</label>
+              <input type="radio" id="demo-priority-normal" name="sex" value="Male" />
+              <label htmlFor="demo-priority-normal">Male</label>
             </div>
             <div className="col-4 col-12-small">
-              <input type="radio" id="demo-priority-high" name="sex" value="other" />
+              <input type="radio" id="demo-priority-high" name="sex" value="Other" />
               <label htmlFor="demo-priority-high">Other</label>
             </div>
           </div>

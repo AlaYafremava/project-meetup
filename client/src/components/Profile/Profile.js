@@ -50,8 +50,11 @@ function Profile(props) {
             <div className="col-9 col-12-small">
               <Navbar
                 navAboutHandler={navAboutHandler}
+                stateAbout={stateAbout}
                 navMyTravelsHandler={navMyTravelsHandler}
+                stateMyTravels={stateMyTravels}
                 navMyFriendsHandler={navMyFriendsHandler}
+                stateMyFriends={stateMyFriends}
               />
               {stateAbout ? <UserAbout /> : null}
               {stateMyTravels ? <UserTravels /> : null}

@@ -2,7 +2,7 @@ import React from 'react'
 // import { Link } from 'react-router-dom'
 import './Navbar.css'
 
-function Navbar({ navAboutHandler, navMyTravelsHandler, navMyFriendsHandler }) {
+function Navbar({ navAboutHandler, navMyTravelsHandler, navMyFriendsHandler,stateAbout,stateMyTravels,stateMyFriends }) {
   return (
     <div className="nav_div nav-actions">
       <ul className="actions">
@@ -23,17 +23,25 @@ function Navbar({ navAboutHandler, navMyTravelsHandler, navMyFriendsHandler }) {
         </li>
       </ul>
       <div>
-        {/* <a href="/profile/edit" className="button primary">
-          Edit profile
-        </a> */}
 
-        <a href="/travels/new" className="button primary">
+        {stateAbout ? (
+          <a href="/profile/edit" className="button primary">
+            Edit profile
+          </a>
+        ) : null}
+
+        {stateMyTravels ? (
+          <a href="/travels/new" className="button primary">
           Create new travel
         </a>
+        ) : null}
 
-        {/* <a href="/travels/new" className="button primary">
+        {stateMyFriends ? (
+          <a href="/hangouts" className="button primary">
           Find new friends
-        </a> */}
+        </a>
+        ) : null}
+
       </div>
     </div>
   )
