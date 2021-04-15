@@ -4421,7 +4421,7 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
   -webkit-align-items: center;
   -ms-align-items: center;
   align-items: center;
-  padding: 3.15rem 4rem;
+  padding: 2rem 2rem;
 }
 
 #footer>section.split.contact>section>* {
@@ -4452,11 +4452,11 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 }
 
 #footer>section.split.contact>section:first-child {
-  padding: 4rem 4rem 3rem 4rem;
+  padding: 2rem 2rem 0rem 2rem;
 }
 
 #footer>section.split.contact>section:last-child {
-  padding: 3rem 4rem 4rem 4rem;
+  padding: 1rem 2rem 1rem 2rem;
 }
 
 #footer>section.split.contact>section.alt {

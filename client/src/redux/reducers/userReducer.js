@@ -1,7 +1,15 @@
-import { SIGNUP, LOGIN, LOGOUT, INIT_USER, CHANGE_VISIBILITY_USER,UPDATE_USER  } from '../actionTypes/actionTypes'
+import {
+  SIGNUP,
+  LOGIN,
+  LOGOUT,
+  INIT_USER,
+  CHANGE_VISIBILITY_USER,
+  UPDATE_USER,
+  ADD_FRIEND,
+  REMOVE_FRIEND,
+} from '../actionTypes/actionTypes'
 
-
-const initialState = { user: {}, isAuth: false}
+const initialState = { user: {}, isAuth: false }
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -17,9 +25,8 @@ const userReducer = (state = initialState, action) => {
       window.localStorage.clear()
       return { ...state, user: {}, isAuth: false }
 
-
     case CHANGE_VISIBILITY_USER:
-      return { ...state, user: {...state.user, visibility: action.payload} }
+      return { ...state, user: { ...state.user, visibility: action.payload } }
 
     case INIT_USER:
       return { ...state, user: action.payload }
@@ -30,6 +37,13 @@ const userReducer = (state = initialState, action) => {
 
     // case INIT_USER_TAGS:
     //   return { ...state, tags: action.payload }
+
+    case ADD_FRIEND:
+      return { ...state, user: { ...state.user, friends: [...state.user.friends, action.payload] } }
+
+    case REMOVE_FRIEND:
+      console.log(state.user.friends.filter(el => el._id !== action.payload));
+      return { ...state, user: { ...state.user, friends: state.user.friends.filter(el => el._id !== action.payload) } }
 
     default:
       return state
