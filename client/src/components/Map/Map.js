@@ -100,7 +100,7 @@ function Map({ visibility }) {
       <GoogleMap
         zoom={13}
         mapContainerStyle={containerStyle}
-        center={coords?.coords.lat ? coords?.coords : { lat: 59.96, lng: 30.312481 }}
+        center={coords?.coords?.lat ? coords?.coords : { lat: 59.96, lng: 30.312481 }}
         options={options}
         onClick={visibility && changeMarker}
       >

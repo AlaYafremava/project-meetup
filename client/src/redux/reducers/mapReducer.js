@@ -6,7 +6,7 @@ const mapReducer = (mapCoords, action) => {
     case 'INIT_VISIBLES_MARKS':
       console.log(action.payload);
       const {markers, currentUserId } = action.payload;
-      const arrCoords = markers.filter((coords) =>  coords.user.visibility && currentUserId != coords.user._id );
+      const arrCoords = markers.filter((coords) =>  coords?.user?.visibility && currentUserId != coords.user._id );
       const arrMarkers = arrCoords.map(marker => marker.coords)
       // console.log(typeof arrCoords[0].lat);
       // console.log(arrCoords);

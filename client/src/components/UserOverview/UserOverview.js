@@ -15,7 +15,7 @@ function UserOverview({ user, langs }) {
             <span>
               <i className="element-icon fa-venus-mars"></i>
             </span>
-            &nbsp; {(user?.bday !== null || userAge < 0) ? userAge + ', ' : ' '}{user.sex ? user.sex : 'No gender listed'}
+            &nbsp; {(user?.bday !== null || userAge < 0 || !isNaN(userAge)) ? userAge + ', ' : ''}{user?.sex ? user?.sex : 'No gender listed'}
           </li>
           <li className="li-overview">
             <span>
