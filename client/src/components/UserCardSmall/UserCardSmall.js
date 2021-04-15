@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 function UserCardSmall({ user }) {
   return (
     <div className="card">
-      <img src="avatar.jpeg" alt="avatar" className="avatar" />
+      <img src={user?.avatar ? user?.avatar : "avatar.jpeg"} alt="avatar" className="avatar" />
       <a href="/profile">
         <p className="userName">
           <i>{user?.name + ' ' + user?.surname}</i>
