@@ -5,13 +5,6 @@ import { fetchInitTravels } from '../../redux/reduxThunk/asyncFuncs'
 import './TravelCard.css'
 
 function TravelCard({ idTravel }) {
-  // const store = useSelector(store => store)
-  // const dispatch = useDispatch()
-  // useEffect(() => {
-  //   dispatch(fetchInitTravels())
-  // })
-  // const store = useSelector(store => store)
-
   const  {travels}  = useSelector(store => store.travels)
 
   const [travel] = travels.filter(el => el._id === idTravel)

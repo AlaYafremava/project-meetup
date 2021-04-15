@@ -2,11 +2,11 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import './TravelCardBig.css'
-
+import {Link} from 'react-router-dom'
 function TravelCardBig({el}) {
   const store = useSelector(store => store)
   const userId = store.user.user._id
-
+ 
   return (
     <>
       <article className="post featured">

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 function UserCardSmall({ user }) {
   return (
     <div className="card">
+
       <img src={user?.avatar ? user.avatar : 'avatar.jpeg'} alt="avatar" className="avatar" />
       <Link to="/profile">
         <p className="userName">
