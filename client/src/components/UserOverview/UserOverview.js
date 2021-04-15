@@ -16,6 +16,7 @@ function UserOverview({ user, langs }) {
               <i className="element-icon fa-venus-mars"></i>
             </span>
             &nbsp; {(user?.bday !== null || userAge < 0 || !isNaN(userAge)) ? userAge + ', ' : ''}{user?.sex ? user?.sex : 'No gender listed'}
+
           </li>
           <li className="li-overview">
             <span>
@@ -38,7 +39,7 @@ function UserOverview({ user, langs }) {
             <span>
               <i className="element-icon fa-home"></i>
             </span>
-            &nbsp; {user.homeTown ? user.homeTown : 'No home town listed'}
+            &nbsp; {user.homeTown ? user.homeTown : 'No hometown listed'}
           </li>
           <li className="li-overview">
             <span>

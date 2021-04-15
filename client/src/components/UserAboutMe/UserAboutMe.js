@@ -1,13 +1,19 @@
 import React from 'react'
 
-function UserAboutMe({user}) {
-
+function UserAboutMe({ user }) {
   return (
-    <div className="box">
-      <p>
-        {user.about ? user.about : 'No description listed'}
-      </p>
-    </div>
+    <>
+      {user.about ? (
+        <div className="box">
+          <p>{user.about && user.about}</p>
+        </div>
+      ) : (
+        <p>Put some information about yourself...</p>
+      )}
+      <div>
+        <p>{user.about && user.about}</p>
+      </div>
+    </>
   )
 }
 
