@@ -11,11 +11,8 @@ import thunk from 'redux-thunk'
 // });
 
 const saveState = (state) => {
-    try {
         const serialisedState = JSON.stringify(state);
         window.localStorage.setItem('app_state', serialisedState);
-    } catch (err) {
-    }
 };
 
 const loadstate = () => {
@@ -32,6 +29,7 @@ const oldState = loadstate()
 const store = createStore(rootReducer, oldState, composeWithDevTools(applyMiddleware(thunk)))
 
 store.subscribe(() => {
+  console.log('local storage updated');
     saveState(store.getState());
 });
 
