@@ -78,10 +78,6 @@ function Hangouts() {
     return user?.visibility && 'default'
   }
 
-  const verChecked = (event) => {
-    return user?.visibility && 'default'
-  }
-
   // запись в базу изменения свойства visibility
   const changeVisibility = (event) => {
     fetch('/profile', {

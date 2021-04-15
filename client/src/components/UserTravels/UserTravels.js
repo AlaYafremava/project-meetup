@@ -27,7 +27,7 @@ function UserTravels({ user }) {
         </ul>
       </div> */}
 
-      <h2 className="title-h2-travels">Future travels</h2>
+      <h2 className="title-h2-travels">Joined travels</h2>
       {user?.futureTravels?.length < 1 && (
         <h4>
           You dont have any plans for travelling :( <br /> Join to someone!
