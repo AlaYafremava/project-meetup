@@ -7,6 +7,8 @@ import {
   UPDATE_USER,
   ADD_FRIEND,
   REMOVE_FRIEND,
+  JOIN,
+  UNJOIN,
 } from '../actionTypes/actionTypes'
 
 const initialState = { user: {}, isAuth: false }
@@ -42,8 +44,26 @@ const userReducer = (state = initialState, action) => {
       return { ...state, user: { ...state.user, friends: [...state.user.friends, action.payload] } }
 
     case REMOVE_FRIEND:
-      console.log(state.user.friends.filter(el => el._id !== action.payload));
-      return { ...state, user: { ...state.user, friends: state.user.friends.filter(el => el._id !== action.payload) } }
+      // console.log(state.user.friends.filter(el => el._id !== action.payload))
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          friends: state.user.friends.filter(el => el._id !== action.payload),
+        },
+      }
+
+    case JOIN:
+      return { ...state, user: { ...state.user, futureTravels: [...state.user.futureTravels, action.payload] } }
+
+    case UNJOIN:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          futureTravels: state.user.futureTravels.filter(el => el._id !== action.payload),
+        },
+      }
 
     default:
       return state

@@ -10,7 +10,6 @@ import './Hangouts.css'
 // import MapSwitch from '../MapSwitch/MapSwitch'
 
 function Hangouts() {
-
   // текущее положение в координаты
   const autoCoord = () => {
     navigator.geolocation.getCurrentPosition(res =>
@@ -26,106 +25,110 @@ function Hangouts() {
         }),
       })
         .then(res => res.json())
-        .then(data => dispatch({
-          type: 'MY_COORDS', payload:
-            data
-          // {
-          //   lat: res.coords.latitude,
-          //   lng: res.coords.longitude,
-          //   id: data._id
-          // }
-        }))
+        .then(data =>
+          dispatch({
+            type: 'MY_COORDS',
+            payload: data,
+            // {
+            //   lat: res.coords.latitude,
+            //   lng: res.coords.longitude,
+            //   id: data._id
+            // }
+          })
+        )
     )
   }
 
-  const { user } = useSelector(store => store.user);
-  const { coords, markers } = useSelector(store => store.map);
-  console.log(coords?.user); // ???
-  console.log(user);
-  console.log(markers, 'markers');
+  const { user } = useSelector(store => store.user)
+  const { coords, markers } = useSelector(store => store.map)
+  console.log(coords?.user) // ???
+  console.log(user)
+  console.log(markers, 'markers')
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchInitUser())
-  }, [dispatch]);
+  }, [dispatch])
 
   // формирорвание markers
   useEffect(() => {
     fetch('/map')
       .then(res => res.json())
-      .then(markers => dispatch({
-        type: 'INIT_VISIBLES_MARKS', payload: { markers, currentUserId:  user._id}
-      }))
+      .then(markers =>
+        dispatch({
+          type: 'INIT_VISIBLES_MARKS',
+          payload: { markers, currentUserId: user._id },
+        })
+      )
 
     // (el) => (el.userId.visibility && !user._id) el.coords
-}, [])
+  }, [])
 
-// console.log(coords._id);
-// console.log(!coords._id);
-// добавление маркера на текущее местоположение
-useEffect(() => user?.visibility && !coords?._id && autoCoord(), []); //???
+  // console.log(coords._id);
+  // console.log(!coords._id);
+  // добавление маркера на текущее местоположение
+  useEffect(() => user?.visibility && !coords?._id && autoCoord(), []) //???
 
+  // console.log(user?.visibility);
 
-// console.log(user?.visibility);
+  const verChecked = event => {
+    return user?.visibility && 'default'
+  }
 
+  // запись в базу изменения свойства visibility
+  const changeVisibility = event => {
+    fetch('/profile', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: user._id, visibility: event.target.checked }),
+    })
+      .then(res => res.json())
+      .then(data => dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: data.visibility }))
 
-const verChecked = (event) => {
-  return user?.visibility && 'default'
-}
+    // задать текущее положение в координаты
+    // autoCoord()
+  }
 
-// запись в базу изменения свойства visibility
-const changeVisibility = (event) => {
-  fetch('/profile', {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ id: user._id, visibility: event.target.checked })
-  })
-    .then(res => res.json())
-    .then(data => dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: data.visibility }))
-
-  // задать текущее положение в координаты
-  // autoCoord()
-}
-
-return (
-  <>
-    <Header />
-    <div id="main">
-      <section className="post">
-        <div className="row">
-          <div className="col-3 col-12-small">
-            <UserCardSmall user={user} />
-          </div>
-          <div className="col-9 col-12-small">
-
-            <div>
-              <h2>Let's hangout with someone</h2>
-              {/* слайдер */}
-              {/* <div class="slideThree">
+  return (
+    <>
+      <Header />
+      <div id="main">
+        <section className="post">
+          <div className="row">
+            <div className="col-3 col-12-small">
+              <UserCardSmall user={user} />
+            </div>
+            <div className="col-9 col-12-small">
+              <div>
+                <h2>Let's hangout with someone</h2>
+                {/* слайдер */}
+                {/* <div className="slideThree">
                   <input type="checkbox" value="None" id="slideThree" name="check" checked />
                   <label htmlFor="slideThree"></label>
                 </div> */}
-              <input type="checkbox" id="demo-map" name="demo-map"
-                // ref={visCheck}
-                defaultChecked={verChecked()}
-                onChange={changeVisibility}
-              />
-              <label htmlFor="demo-map">Become available for others</label>
+                <input
+                  type="checkbox"
+                  id="demo-map"
+                  name="demo-map"
+                  // ref={visCheck}
+                  defaultChecked={verChecked()}
+                  onChange={changeVisibility}
+                />
+                <label htmlFor="demo-map">Become available for others</label>
+              </div>
+              {/* <MapSwitch /> */}
+              <div>
+                <Map visibility={user?.visibility} />
+              </div>
             </div>
-            {/* <MapSwitch /> */}
-            <div>
-              <Map visibility={user?.visibility} />
-            </div>
-
           </div>
-        </div>
-      </section>
-    </div>
-  </>
-)
+        </section>
+      </div>
+    </>
+  )
 }
 
 export default Hangouts
