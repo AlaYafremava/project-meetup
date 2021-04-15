@@ -34,42 +34,42 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            {isAuth === false ? <Auth /> : <Redirect to="/mtravels" />}
+            {isAuth === false ? <Auth /> : <Redirect to="/travels" />}
           </Route>
 
-          <Route path="/mhangouts">{isAuth === true ? <Hangouts /> : <Redirect to="/" />}</Route>
+          <Route path="/hangouts">{isAuth === true ? <Hangouts /> : <Redirect to="/" />}</Route>
 
           <Route exact path="/mtravels">
             {isAuth === true ? <Travels /> : <Redirect to="/" />}
           </Route>
 
-          <Route path="/mtravels/new">
+          <Route path="/travels/new">
             {isAuth === true ? <TravelPageCreate /> : <Redirect to="/" />}
           </Route>
 
-          <Route path="/mtravels/:id/edit">
+          <Route path="/travels/:id/edit">
             {isAuth === true ? <TravelPageEdit /> : <Redirect to="/" />}
           </Route>
 
-          <Route path="/mtravels/:id">
+          <Route path="/travels/:id">
             {isAuth === true ? <TravelPage /> : <Redirect to="/" />}
           </Route>
 
-          <Route path="/mmap">{isAuth === true ? <Map /> : <Redirect to="/" />}</Route>
+          <Route path="/map">{isAuth === true ? <Map /> : <Redirect to="/" />}</Route>
 
           <Route exact path="/profile">
             {isAuth === true ? <Profile /> : <Redirect to="/" />}
           </Route>
 
-          <Route path="/mprofile/edit">
+          <Route path="/profile/edit">
             {isAuth === true ? <UserFormEdit /> : <Redirect to="/" />}
           </Route>
 
-          <Route exact path="/mpeople">
+          <Route exact path="/people">
             {isAuth === true ? <People /> : <Redirect to="/" />}
           </Route>
 
-          <Route path="/mpeople/:id">{isAuth === true ? <PeoplePage /> : <Redirect to="/" />}</Route>
+          <Route path="/people/:id">{isAuth === true ? <PeoplePage /> : <Redirect to="/" />}</Route>
         </Switch>
         {isAuth === true && (
           <div id="copyright">
