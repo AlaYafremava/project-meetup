@@ -9,7 +9,6 @@ const server = http.createServer(app)
 
 server.listen(port, () => {
   try {
-    console.log('>>>>>>>>>>', process.env.DB_ATLAS);
     mongoose.connect(process.env.DB_ATLAS, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
