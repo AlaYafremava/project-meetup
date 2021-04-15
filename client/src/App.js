@@ -34,42 +34,42 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            {isAuth === false ? <Auth /> : <Redirect to="/hangouts" />}
+            {isAuth === false ? <Auth /> : <Redirect to="/mtravels" />}
           </Route>
 
-          <Route path="/hangouts">{isAuth === true ? <Hangouts /> : <Redirect to="/" />}</Route>
+          <Route path="/mhangouts">{isAuth === true ? <Hangouts /> : <Redirect to="/" />}</Route>
 
-          <Route exact path="/travels">
+          <Route exact path="/mtravels">
             {isAuth === true ? <Travels /> : <Redirect to="/" />}
           </Route>
 
-          <Route path="/travels/new">
+          <Route path="/mtravels/new">
             {isAuth === true ? <TravelPageCreate /> : <Redirect to="/" />}
           </Route>
 
-          <Route path="/travels/:id/edit">
+          <Route path="/mtravels/:id/edit">
             {isAuth === true ? <TravelPageEdit /> : <Redirect to="/" />}
           </Route>
 
-          <Route path="/travels/:id">
+          <Route path="/mtravels/:id">
             {isAuth === true ? <TravelPage /> : <Redirect to="/" />}
           </Route>
 
-          <Route path="/map">{isAuth === true ? <Map /> : <Redirect to="/" />}</Route>
+          <Route path="/mmap">{isAuth === true ? <Map /> : <Redirect to="/" />}</Route>
 
           <Route exact path="/profile">
             {isAuth === true ? <Profile /> : <Redirect to="/" />}
           </Route>
 
-          <Route path="/profile/edit">
+          <Route path="/mprofile/edit">
             {isAuth === true ? <UserFormEdit /> : <Redirect to="/" />}
           </Route>
 
-          <Route exact path="/people">
+          <Route exact path="/mpeople">
             {isAuth === true ? <People /> : <Redirect to="/" />}
           </Route>
 
-          <Route path="/people/:id">{isAuth === true ? <PeoplePage /> : <Redirect to="/" />}</Route>
+          <Route path="/mpeople/:id">{isAuth === true ? <PeoplePage /> : <Redirect to="/" />}</Route>
         </Switch>
         {isAuth === true && (
           <div id="copyright">
