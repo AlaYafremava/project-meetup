@@ -12,6 +12,7 @@ import './Hangouts.css'
 function Hangouts() {
 
   // функция текущее определения координат
+
   const autoCoord = () => {
     navigator.geolocation.getCurrentPosition(res =>
       fetch('/map/new-coords', {
@@ -26,6 +27,7 @@ function Hangouts() {
         }),
       })
         .then(res => res.json())
+
         .then(data => dispatch({
           type: 'MY_COORDS', payload:
             data
@@ -39,16 +41,17 @@ function Hangouts() {
   // console.log(user, user);
   // console.log(markers, 'markers');
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchInitUser())
-  }, [dispatch]);
+  }, [dispatch])
 
   // формирорвание markers
   useEffect(() => {
     fetch('/map')
       .then(res => res.json())
+
       .then(markers => dispatch({
         type: 'INIT_VISIBLES_MARKS', payload: { markers, currentUserId: user._id }
       }))
@@ -64,8 +67,16 @@ function Hangouts() {
   useEffect(() => user?.visibility && coords?.user?._id != user._id && autoCoord(), [user?.visibility]); //???
 
 
+  // console.log(coords._id);
+  // console.log(!coords._id);
+  // добавление маркера на текущее местоположение
+  useEffect(() => user?.visibility && !coords?._id && autoCoord(), []) //???
+
   // console.log(user?.visibility);
 
+  const verChecked = event => {
+    return user?.visibility && 'default'
+  }
 
   const verChecked = (event) => {
     return user?.visibility && 'default'
@@ -84,8 +95,10 @@ function Hangouts() {
       .then(data => dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: data.visibility }))
 
     // задать текущее положение в координаты
+
     // console.log(user?.visibility);
     // user?.visibility && autoCoord()
+
   }
 
   return (
@@ -99,6 +112,7 @@ function Hangouts() {
             </div>
             <div className="col-9 col-12-small">
 
+
               <div>
                 <h2>Let's hangout with someone</h2>
                 {/* слайдер */}
@@ -107,6 +121,7 @@ function Hangouts() {
                   <label htmlFor="slideThree"></label>
                 </div> */}
                 <input type="checkbox" id="demo-map" name="demo-map"
+
                   // ref={visCheck}
                   defaultChecked={verChecked()}
                   onChange={changeVisibility}

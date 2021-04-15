@@ -34,7 +34,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            {isAuth === false ? <Auth /> : <Redirect to="/hangouts" />}
+            {isAuth === false ? <Auth /> : <Redirect to="/travels" />}
           </Route>
 
           <Route path="/hangouts">{isAuth === true ? <Hangouts /> : <Redirect to="/" />}</Route>
