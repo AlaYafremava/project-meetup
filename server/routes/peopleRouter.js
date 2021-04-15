@@ -1,7 +1,7 @@
 import Router from 'express'
 const router = new Router()
 import User from '../models/users.js'
-import verToken from '../middlware/auth.js'
+// import verToken from '../middlware/auth.js'
 
 router.get('/', async (req, res) => {
   try {
@@ -39,39 +39,27 @@ router.get('/', async (req, res) => {
   }
 })
 
-// router.route('/:id')
-//   .get(verToken, async (req, res) => {
-//     let user
-//     try {
-//       const { id } = req.params
-//       user = await User.findById(id)
-//     } catch (err) {
-//       res.status(400).json({ success: false })
-//     }
-//     res.status(201).json(user)
-//   })
-// .post(verToken, async (req, res) => {
-//   const { name, surname, email, password, bday, phone, sex, city, profession, regDate, tags, languages, socials, userTravels, pastTravels, futureTravels } = req.body
+router.post('/:id/friends/new', async (req, res) => {
+  try {
+    const newFriend = await User.findOne({ _id: req.body.idFriend })
 
-//   if (name && surname && email && password && bday && sex) {
-//     const newUser = await User.create({ name, surname, email, password, bday, phone, sex, city, profession, regDate, tags, languages, socials, userTravels, pastTravels, futureTravels })
+    await User.findByIdAndUpdate(req.params.id, { $push: { friends: newFriend } })
+    if (newFriend) {
+      return res.status(200).json(newFriend)
+    }
+  } catch (e) {
+    console.error(e.message)
+    res.status(400).json({ message: 'Friend add error' })
+  }
+})
 
-//     res.status(201).json(newUser)
-//   } else {
-//     res.status(400).json({ create: false })
-//   }
-// })
-// .put(verToken, async (req, res) => {
-//   let user;
-//   const { id } = req.params
-//   const { name, surname, email, password, bday, phone, sex, city, profession, regDate, tags, languages, socials, userTravels, pastTravels, futureTravels } = req.body
-//   // console.log('>>>>>>>', req.params.id);
-//   try {
-//     user = await User.findByIdAndUpdate({ _id: id }, { name, surname, email, password, bday, phone, sex, city, profession, regDate, tags, languages, socials, userTravels, pastTravels, futureTravels });
-//   } catch (error) {
-//     return res.json({ success: false, errorMessage: 'Не удалось обновить запись в базе данных.' });
-//   }
-//   return res.json({ success: true, user });
-// })
-
+router.delete('/:id/friends/new', async (req, res) => {
+  try {
+    await User.findByIdAndUpdate(req.params.id, { $pull: { friends: req.body.id } })
+    return res.status(200).json({ success: true })
+  } catch (e) {
+    console.error(e.message)
+    res.status(404).json({ message: 'Friend remove error' })
+  }
+})
 export default router

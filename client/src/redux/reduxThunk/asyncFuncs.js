@@ -6,16 +6,17 @@ import {
   delTravelsAC,
   editTravelsAC,
   initPeopleAC,
+  addFriendAC,
+  removeFriendAC,
 } from '../../redux/actionCreators/actionCreators'
 
 export const fetchInitUser = () => {
   const token = window.localStorage.getItem('token')
 
-  return (dispatch) => {
+  return dispatch => {
     fetch('/profile', {
-      method: "GET",
-      headers: { "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
-
+      method: 'GET',
+      headers: { 'Content-Type': 'Application/json', Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())
       .then(data => {
@@ -53,11 +54,10 @@ export const fetchChangeTagStatus = id => {
 export const fetchInitTravels = () => {
   const token = window.localStorage.getItem('token')
 
-  return (dispatch) => {
+  return dispatch => {
     fetch('/travels', {
-      method: "GET",
-      headers: { "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
-
+      method: 'GET',
+      headers: { 'Content-Type': 'Application/json', Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())
       .then(data => dispatch(initTravelsAC(data.travels)))
@@ -67,12 +67,13 @@ export const fetchInitTravels = () => {
 export const fetchDelTravels = id => {
   const token = window.localStorage.getItem('token')
 
-  return (dispatch) => {
+  return dispatch => {
     fetch('/travels', {
-      method: "delete",
-      headers: { "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
-      body: JSON.stringify({ id })
-    }).then(res => res.json())
+      method: 'delete',
+      headers: { 'Content-Type': 'Application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ id }),
+    })
+      .then(res => res.json())
 
       .then(data => dispatch(delTravelsAC(data.id)))
   }
@@ -91,10 +92,10 @@ export const fetchEditTravels = (
 ) => {
   const token = window.localStorage.getItem('token')
 
-  return (dispatch) => {
+  return dispatch => {
     fetch(`/travels/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "Application/json", 'Authorization': `Bearer ${token}` },
+      method: 'PUT',
+      headers: { 'Content-Type': 'Application/json', Authorization: `Bearer ${token}` },
 
       body: JSON.stringify({
         id,
@@ -105,7 +106,7 @@ export const fetchEditTravels = (
         startDate,
         finishDate,
         number,
-        src : imageUrl
+        src: imageUrl,
       }),
     })
       .then(res => res.json())
@@ -113,12 +114,39 @@ export const fetchEditTravels = (
   }
 }
 
-
 //PEOPLE
 export const fetchInitPeople = () => {
   return dispatch => {
     fetch('/people')
       .then(response => response.json())
-      .then(( people ) => dispatch(initPeopleAC(people)))
+      .then(people => dispatch(initPeopleAC(people)))
+  }
+}
+
+export const fetchAddFriend = (idMy, idFriend) => {
+  return dispatch => {
+    fetch(`/people/${idMy}/friends/new`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/json',
+      },
+      body: JSON.stringify({ idFriend }),
+    })
+      .then(response => response.json())
+      .then(friend => dispatch(addFriendAC(friend)))
+  }
+}
+
+export const fetchRemoveFriend = (idMy, idFriend) => {
+  return dispatch => {
+    fetch(`/people/${idMy}/friends/new`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'Application/json',
+      },
+      body: JSON.stringify({ idFriend }),
+    })
+      .then(response => response.json())
+      .then(msg => dispatch(removeFriendAC(idFriend)))
   }
 }
