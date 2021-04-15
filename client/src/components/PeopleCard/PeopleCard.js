@@ -67,7 +67,7 @@ function PeopleCard({ person, user }) {
         </li>
       </ul>
       <div>
-        {user.friends.find(friend => friend._id === person._id) ? (
+        {user?.friends?.find(friend => friend._id === person._id) ? (
           <button onClick={removeFriendHandler} className="button">
             Remove
           </button>

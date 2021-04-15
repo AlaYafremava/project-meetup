@@ -41,7 +41,10 @@ const userReducer = (state = initialState, action) => {
     //   return { ...state, tags: action.payload }
 
     case ADD_FRIEND:
-      return { ...state, user: { ...state.user, friends: [...state.user.friends, action.payload] } }
+      return {
+        ...state,
+        user: { ...state.user, friends: [...new Set([...state.user.friends, action.payload])] },
+      }
 
     case REMOVE_FRIEND:
       // console.log(state.user.friends.filter(el => el._id !== action.payload))
@@ -54,7 +57,13 @@ const userReducer = (state = initialState, action) => {
       }
 
     case JOIN:
-      return { ...state, user: { ...state.user, futureTravels: [...state.user.futureTravels, action.payload] } }
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          futureTravels: [...new Set([...state.user.futureTravels, action.payload])],
+        },
+      }
 
     case UNJOIN:
       return {

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 // import { useDispatch } from 'react-redux'
 // import { fetchAddFriend, fetchRemoveFriend } from '../../redux/reduxThunk/asyncFuncs'
 
@@ -19,16 +18,10 @@ function UserFriends({ user }) {
     }
     return result
   }
-
-  // const dispatch = useDispatch()
-
-  // const removeFriendHandler = friendId => {
-  //   dispatch(fetchRemoveFriend(user._id, friendId))
-  // }
   return (
     <section>
       <h2 className="title-h2-travels">Your friends in MEETUP</h2>
-      {user.friends.length < 1 && (
+      {user?.friends?.length < 1 && (
         <h4>
           You dont have here any friends for travelling yet:( <br /> Find them!
         </h4>
@@ -38,7 +31,7 @@ function UserFriends({ user }) {
           const [friend] = people.filter(el => el._id === id)
           return (
             <div className="card-people">
-              <Link to={friend._id === user._id ? `/profile` : `/people/${friend._id}`}>
+              <a href={friend._id === user._id ? `/profile` : `/people/${friend._id}`}>
                 <div>
                   <img
                     src={friend.avatar ? friend.avatar : 'avatar.jpeg '}
@@ -46,8 +39,8 @@ function UserFriends({ user }) {
                     className="avatar-people"
                   />
                 </div>
-              </Link>
-              <Link to={friend._id === user._id ? `/profile` : `/people/${friend._id}`}>
+              </a>
+              <a href={friend._id === user._id ? `/profile` : `/people/${friend._id}`}>
                 <div className="title-people">
                   <p>
                     <i>
@@ -55,14 +48,14 @@ function UserFriends({ user }) {
                     </i>
                   </p>
                 </div>
-              </Link>
-              <Link to={friend._id === user._id ? `/profile` : `/people/${friend._id}`}>
+              </a>
+              <a href={friend._id === user._id ? `/profile` : `/people/${friend._id}`}>
                 <div className="title-people">
                   <p>
                     <i>{friend.country ? friend.country : 'Country not specified'}</i>
                   </p>
                 </div>
-              </Link>
+              </a>
 
               <ul className="icons alt last-icons">
                 <li>
@@ -87,11 +80,6 @@ function UserFriends({ user }) {
                   )}
                 </li>
               </ul>
-              {/* <div>
-                <button onClick={removeFriendHandler} className="button">
-                  Remove
-                </button>
-              </div> */}
             </div>
           )
         })

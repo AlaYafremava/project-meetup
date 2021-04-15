@@ -8,12 +8,14 @@ import authRouter from './routes/authRouter.js'
 import tagsRouter from './routes/tagsRouter.js'
 import userRouter from './routes/userRouter.js'
 import mapRouter from './routes/mapRouter.js'
+import morgan from 'morgan'
 
 const app = express()
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
+app.use(morgan('dev'))
 
 app.use('/people', peopleRouter)
 app.use(profileRouter)
