@@ -51,6 +51,7 @@ function UserFormEdit() {
     data.append('upload_preset', 'im0obtej')
     Axios.post('https://api.cloudinary.com/v1_1/dde0fkiet/image/upload', data).then(res => {
       let imageUrl = res.data.secure_url
+      console.log(imageUrl);
 
     fetch('/profile/edit', {
       method: 'PATCH',

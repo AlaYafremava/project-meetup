@@ -41,11 +41,15 @@ const [state, setState] = useState({})
      "Content-Type": "Application/json", 'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(
-        {message: e.target.messageEmail.value, ownerId: state?.travel?.owner, from: `${store.user.user.name} ${store.user.user.surname}` }
+        {message: e.target.messageEmail.value, ownerId: state?.travel?.owner, from: `${store.user.user.name} ${store.user.user.surname}`, userEmail: store.user.user.email }
       )
     }).then(res => res.json())
     .then(data => {
+      if (data.status === true){
       alert("Сообщение отправлено!")
+      } else {
+        alert("Сообщение не отправлено!")
+      }
     })
   }
 
@@ -86,6 +90,7 @@ const [state, setState] = useState({})
       </div>
       <footer id="footer" className="footer-post">
         <section className="footer-post-sect">
+        {(state?.travel?.owner !== userId) ?
           <form onSubmit={sendMailHandler} method="post">
             <div className="fields">
               <div className="field">
@@ -98,7 +103,7 @@ const [state, setState] = useState({})
                 <input type="submit" value="Send Message" />
               </li>
             </ul>
-          </form>
+          </form> : <a></a>}
         </section>
         <section className="split contact footer-post-sect">
           <section className="alt">
