@@ -27,8 +27,8 @@ function Hangouts() {
       })
         .then(res => res.json())
         .then(data => dispatch({
-          type: 'MY_COORDS', payload: 
-          data
+          type: 'MY_COORDS', payload:
+            data
           // {
           //   lat: res.coords.latitude,
           //   lng: res.coords.longitude,
@@ -39,8 +39,10 @@ function Hangouts() {
   }
 
   const { user } = useSelector(store => store.user);
-  const { coords } = useSelector(store => store.map);
-  console.log(coords.user);
+  const { coords, markers } = useSelector(store => store.map);
+  console.log(coords?.user); // ???
+  console.log(user);
+  console.log(markers, 'markers');
 
   const dispatch = useDispatch();
 
@@ -48,103 +50,82 @@ function Hangouts() {
     dispatch(fetchInitUser())
   }, [dispatch]);
 
-  // console.log(coords._id);
-  // console.log(!coords._id);
-  // добавление маркера на текущее местоположение
-  useEffect(() => user?.visibility && !coords._id && autoCoord(), []);
-
   // формирорвание markers
   useEffect(() => {
     fetch('/map')
       .then(res => res.json())
-      .then(markers => console.log(markers))
-        // dispatch({
-        //   type: 'INIT_VISIBLES_MARKS', payload: { users, id: user._id }
-        // }))
-    // (el) => (el.userId.visibility && !user._id) el.coords 
-  }, [])
+      .then(markers => dispatch({
+        type: 'INIT_VISIBLES_MARKS', payload: { markers, currentUserId:  user._id}
+      }))
 
-  // let visCheck = useRef();
-  // console.log(user?.visibility);
+    // (el) => (el.userId.visibility && !user._id) el.coords
+}, [])
+
+// console.log(coords._id);
+// console.log(!coords._id);
+// добавление маркера на текущее местоположение
+useEffect(() => user?.visibility && !coords?._id && autoCoord(), []); //???
 
 
-  const verChecked = (event) => {
-    return user?.visibility && 'default'
-  }
+// console.log(user?.visibility);
 
-  const changeVisibility = (event) => {
-    // запись в базу изменений
-    fetch('/profile', {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ id: user._id, visibility: event.target.checked })
-    })
-      .then(res => res.json())
-      .then(data => dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: data.visibility }))
 
-    // текущее положение в координаты
-    autoCoord()
-    // navigator.geolocation.getCurrentPosition(res =>
-    //   fetch('/map/new-coords', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'Application/json' },
-    //     body: JSON.stringify({
-    //       coords: {
-    //         lat: res.coords.latitude,
-    //         lng: res.coords.longitude,
-    //       },
-    //       userId: user._id,
-    //     }),
-    //   })
-    //     .then(res => res.json())
-    //     .then(data => dispatch({
-    //       type: 'MY_COORDS', payload: {
-    //         lat: res.coords.latitude,
-    //         lng: res.coords.longitude,
-    //         id: data._id
-    //       }
-    //     }))
-    // )
-  }
+const verChecked = (event) => {
+  return user?.visibility && 'default'
+}
 
-  return (
-    <>
-      <Header />
-      <div id="main">
-        <section className="post">
-          <div className="row">
-            <div className="col-3 col-12-small">
-              <UserCardSmall user={user} />
-            </div>
-            <div className="col-9 col-12-small">
+// запись в базу изменения свойства visibility
+const changeVisibility = (event) => {
+  fetch('/profile', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ id: user._id, visibility: event.target.checked })
+  })
+    .then(res => res.json())
+    .then(data => dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: data.visibility }))
 
-              <div>
-                <h2>Let's hangout with someone</h2>
-                {/* слайдер */}
-                {/* <div class="slideThree">
+  // задать текущее положение в координаты
+  // autoCoord()
+}
+
+return (
+  <>
+    <Header />
+    <div id="main">
+      <section className="post">
+        <div className="row">
+          <div className="col-3 col-12-small">
+            <UserCardSmall user={user} />
+          </div>
+          <div className="col-9 col-12-small">
+
+            <div>
+              <h2>Let's hangout with someone</h2>
+              {/* слайдер */}
+              {/* <div class="slideThree">
                   <input type="checkbox" value="None" id="slideThree" name="check" checked />
                   <label htmlFor="slideThree"></label>
                 </div> */}
-                <input type="checkbox" id="demo-copy" name="demo-copy"
-                  // ref={visCheck}
-                  defaultChecked={verChecked()}
-                  onChange={changeVisibility}
-                />
-                <label htmlFor="demo-copy">Become available for others</label>
-              </div>
-              {/* <MapSwitch /> */}
-              <div>
-                <Map visibility={user?.visibility} />
-              </div>
-
+              <input type="checkbox" id="demo-map" name="demo-map"
+                // ref={visCheck}
+                defaultChecked={verChecked()}
+                onChange={changeVisibility}
+              />
+              <label htmlFor="demo-map">Become available for others</label>
             </div>
+            {/* <MapSwitch /> */}
+            <div>
+              <Map visibility={user?.visibility} />
+            </div>
+
           </div>
-        </section>
-      </div>
-    </>
-  )
+        </div>
+      </section>
+    </div>
+  </>
+)
 }
 
 export default Hangouts

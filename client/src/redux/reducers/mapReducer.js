@@ -4,10 +4,14 @@ const mapReducer = (mapCoords, action) => {
   switch (action.type) {
 
     case 'INIT_VISIBLES_MARKS':
-      const arrCoords = action.payload.users.map((user) => ( user._id.visibility && !action.payload.id ) ? user.coords : user);
-      console.log(typeof arrCoords[0].lat);
-      console.log(arrCoords);
-      return { ...mapCoords, markers: arrCoords };
+      console.log(action.payload);
+      const {markers, currentUserId } = action.payload;
+      const arrCoords = markers.filter((coords) =>  coords.user.visibility && currentUserId != coords.user._id );
+      const arrMarkers = arrCoords.map(marker => marker.coords)
+      // console.log(typeof arrCoords[0].lat);
+      // console.log(arrCoords);
+      return { ...mapCoords, markers: arrMarkers };
+    // arrCoords };
 
     case 'MY_COORDS':
       console.log('reduser map');

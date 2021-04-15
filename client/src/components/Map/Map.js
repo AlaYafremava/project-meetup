@@ -44,7 +44,7 @@ function Map({ visibility }) {
 
   //удалить метку, если user невидим
   useEffect(() => {
-    console.log('удаление', coords._id);
+    console.log('удаление', coords?._id); //???
     !visibility &&
       fetch('/map/del-coords', {
         method: 'DELETE',
@@ -100,12 +100,12 @@ function Map({ visibility }) {
       <GoogleMap
         zoom={13}
         mapContainerStyle={containerStyle}
-        center={coords.coords?.lat ? coords.coords : { lat: 59.96, lng: 30.312481 }}
+        center={coords?.coords.lat ? coords?.coords : { lat: 59.96, lng: 30.312481 }}
         options={options}
         onClick={visibility && changeMarker}
       >
         {visibility && <Marker
-          position={coords.coords}
+          position={coords?.coords}
           icon={{
             url: '/me.png',
             scaledSize: new window.google.maps.Size(30, 30), // масштабировать иконку
@@ -114,11 +114,13 @@ function Map({ visibility }) {
         />}
 
         {/* прорисовка всех юзеров, которые хотять meetUp */}
+        {console.log(markers)}
         {visibility && markers.length != 0 ? markers.map((marker) =>
           <Marker
             key={performance.now()}
             // position={
-            //   { lat: marker.lat, lng: marker.lng } //coords
+            //   marker.coords
+            // //   { lat: marker.lat, lng: marker.lng } //coords
             // }
             onClick={(event) => {
               console.log(coords.coords);
