@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './UserCard.css'
 
 function UserCard({ user }) {
@@ -21,21 +22,21 @@ function UserCard({ user }) {
       <hr />
       <ul className="icons alt">
         {user.telegram && <li>
-          <a href={user?.telegram} className="icon brands alt fa-telegram">
+          <Link to={user?.telegram} className="icon brands alt fa-telegram">
             <span className="label">Telegram</span>
-          </a>
+          </Link>
         </li>}
 
         {user.facebook && <li>
-          <a href={user?.facebook} className="icon brands alt fa-facebook-f">
+          <Link to={user?.facebook} className="icon brands alt fa-facebook-f">
             <span className="label">Facebook</span>
-          </a>
+          </Link>
         </li>}
         
         {user.instagram && <li>
-          <a href={user?.instagram} className="icon brands alt fa-instagram">
+          <Link to={user?.instagram} className="icon brands alt fa-instagram">
             <span className="label">Instagram</span>
-          </a>
+          </Link>
         </li>}
         
       </ul>

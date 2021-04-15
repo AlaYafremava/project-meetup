@@ -1,13 +1,12 @@
 import React from 'react'
 import '../UserCard/UserCard.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function UserCardSmall({ user }) {
   return (
     <div className="card">
-      <img src="avatar.jpeg" alt="avatar" className="avatar" />
-      <a href="/profile">
+      <img src={user?.avatar ? user.avatar : 'avatar.jpeg'} alt="avatar" className="avatar" />
+      <Link to="/profile">
         <p className="userName">
           <i>{user?.name + ' ' + user?.surname}</i>
         </p>
@@ -18,7 +17,7 @@ function UserCardSmall({ user }) {
             {user?.country}
           </i>
         </p>
-      </a>
+      </Link>
     </div>
   )
 }

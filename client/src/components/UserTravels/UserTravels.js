@@ -6,15 +6,11 @@ import './UserTravels.css'
 function UserTravels({ user }) {
   return (
     <div id="main">
-      <h2 className="title-h2-travels">Travels planned by me</h2>
-      {user?.userTravels?.length < 1 && (
-        <h4>
-          You dont have any plans for travelling :( <br /> Let's do it!
-        </h4>
-      )}
+      <h2 className="title-h2-travels">Planned travels</h2>
+      {user?.userTravels?.length < 1 && <h4>There are not any plans for travelling :(</h4>}
       <section className="posts">
-        {user?.userTravels.map(el => (
-          <TravelCard key={performance.now()} idTravel={el._id} />
+        {user?.userTravels?.map(el => (
+          <TravelCard key={performance.now()} idTravel={el._id ? el._id : el} />
         ))}
       </section>
       {/* <div>
@@ -29,9 +25,7 @@ function UserTravels({ user }) {
 
       <h2 className="title-h2-travels">Joined travels</h2>
       {user?.futureTravels?.length < 1 && (
-        <h4>
-          You dont have any plans for travelling :( <br /> Join to someone!
-        </h4>
+        <h4>There are not any travels :(</h4>
       )}
       <section className="posts">
         {user?.futureTravels?.map(el => {

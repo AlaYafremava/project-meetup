@@ -12,7 +12,7 @@ function UserAbout({ user, langs, tags }) {
       <h3>Interests</h3>
       <UserInterests tags={tags}/>
 
-      <h3>About me</h3>
+      <h3>About</h3>
       <UserAboutMe user={user}/>
     </section>
   )

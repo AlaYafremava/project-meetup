@@ -30,39 +30,39 @@ function PeopleCard({ person, user }) {
         <div className="title-people">
           <p>
             <i>
-              <b>{person.name + ' ' + person.surname}</b>
+              <b>{person.name}</b>
             </i>
           </p>
         </div>
       </Link>
-      <Link to={person._id === user._id ? `/profile` : `/people/${person._id}`}>
+      {/* <Link to={person._id === user._id ? `/profile` : `/people/${person._id}`}>
         <div className="title-people">
           <p>
             <i>{person.country ? person.country : 'Country not specified'}</i>
           </p>
         </div>
-      </Link>
+      </Link> */}
 
       <ul className="icons alt last-icons">
         <li>
           {person.telegram && (
-            <a href={person.telegram} className="icon brands alt fa-telegram">
+            <Link to={person.telegram} className="icon brands alt fa-telegram">
               <span className="label">Telegram</span>
-            </a>
+            </Link>
           )}
         </li>
         <li>
           {person.facebook && (
-            <a href={person.facebook} className="icon brands alt fa-facebook-f">
+            <Link to={person.facebook} className="icon brands alt fa-facebook-f">
               <span className="label">Facebook</span>
-            </a>
+            </Link>
           )}
         </li>
         <li>
           {person.instagram && (
-            <a href={person.instagram} className="icon brands alt fa-instagram">
+            <Link to={person.instagram} className="icon brands alt fa-instagram">
               <span className="label">Instagram</span>
-            </a>
+            </Link>
           )}
         </li>
       </ul>
