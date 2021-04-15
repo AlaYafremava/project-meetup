@@ -83,7 +83,6 @@ function Map({ visibility }) {
     })
       .then(res => res.json())
       .then(data =>
-        // console.log(data.editCoords, 'data.editCoords'))
         dispatch({
           type: 'MY_COORDS', payload:
             // {
