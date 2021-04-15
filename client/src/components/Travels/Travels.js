@@ -4,6 +4,7 @@ import UserCardSmall from '../UserCardSmall/UserCardSmall'
 import TravelCardBig from '../TravelCardBig/TravelCardBig'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchInitTravels } from '../../redux/reduxThunk/asyncFuncs'
+import { Link } from 'react-router-dom'
 
 function Travels(props) {
   const dispatch = useDispatch()
@@ -31,9 +32,9 @@ function Travels(props) {
                   There are not any plans yet... <br /> Be first! Add some adventure!
                 </h4>
               )}
-              <a href="/travels/new" className="button primary">
+              <Link to="/travels/new" className="button primary">
                 Create new travel
-              </a>
+              </Link>
               <div id="main">
                 {store.travels?.travels ? (
                   store.travels?.travels?.map(el => (
@@ -46,9 +47,9 @@ function Travels(props) {
               {/* <div>
                 <ul className="actions">
                   <li className="li-travels">
-                    <a href="/#" className="button icon solid solo fa-arrow-down scrolly">
+                    <Link to="/#" className="button icon solid solo fa-arrow-down scrolly">
                       Continue
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div> */}

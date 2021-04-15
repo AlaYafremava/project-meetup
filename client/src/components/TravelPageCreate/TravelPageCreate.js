@@ -39,11 +39,11 @@ function TravelPageCreate(props) {
               if (data.success === true) {
                 return history.push(`/travels`)
               } else {
-                alert('Не удалось cоздать travel')
+                alert('Failed to create the travel')
               }
             })
         } else {
-          alert("Введите дату окончания позже даты старта!")
+          alert("Enter the end date later than the start date!")
         }
       })}
 

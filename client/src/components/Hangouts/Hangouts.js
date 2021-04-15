@@ -96,7 +96,6 @@ function Hangouts() {
     // user?.visibility && autoCoord()
 
   }
-
   return (
     <>
       <Header />
