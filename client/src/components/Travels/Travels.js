@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import UserCardSmall from '../UserCardSmall/UserCardSmall'
 import TravelCardBig from '../TravelCardBig/TravelCardBig'
@@ -10,9 +10,10 @@ function Travels(props) {
   const store = useSelector(store => store)
   const user = useSelector(store => store.user.user)
 
+
   useEffect(() => {
     dispatch(fetchInitTravels())
-  }, [dispatch])
+  }, [])
 
   return (
     <>

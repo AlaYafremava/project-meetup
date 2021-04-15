@@ -36,7 +36,6 @@ function TravelPage(props) {
   }
 
   const sendMailHandler = e => {
-    console.log(e.target.messageEmail.value)
     e.preventDefault()
     fetch('/api/contact', {
       method: 'POST',
@@ -46,7 +45,7 @@ function TravelPage(props) {
       },
 
       body: JSON.stringify(
-        {message: e.target.messageEmail.value, ownerId: state?.travel?.owner, from: `${store.user.user.name} ${store.user.user.surname}`, userEmail: store.user.user.email }
+        {message: e.target.messageEmail.value, ownerId: state?.travel?.owner._id, from: `${store.user.user.name} ${store.user.user.surname}`, userEmail: store.user.user.email }
       )
     }).then(res => res.json())
     .then(data => {
@@ -56,10 +55,6 @@ function TravelPage(props) {
         alert("Сообщение не отправлено!")
       }
     })
-      .then(res => res.json())
-      .then(data => {
-        alert('Сообщение отправлено!')
-      })
   }
 
   const joinHandler = () => {
@@ -134,7 +129,7 @@ function TravelPage(props) {
       </div>
       <footer id="footer" className="footer-post">
         <section className="footer-post-sect">
-        {(state?.travel?.owner !== userId) ?
+        {state?.travel?.owner._id !== userId ?
           <form onSubmit={sendMailHandler} method="post">
             <div className="fields">
               <div className="field">
