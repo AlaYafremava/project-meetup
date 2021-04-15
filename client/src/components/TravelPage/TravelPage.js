@@ -3,7 +3,11 @@ import './TravelPage.css'
 import Header from '../Header/Header'
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import { fetchDelTravels } from '../../redux/reduxThunk/asyncFuncs'
+import {
+  fetchDelTravels,
+  fetchJoinToTravel,
+  fetchUnjoinToTravel,
+} from '../../redux/reduxThunk/asyncFuncs'
 import { useDispatch, useSelector } from 'react-redux'
 
 function TravelPage(props) {
@@ -13,6 +17,7 @@ function TravelPage(props) {
   const store = useSelector(store => store)
   const userId = store.user.user._id
   const [state, setState] = useState({})
+  const user = useSelector(store => store.user.user)
 
   useEffect(async () => {
     const response = await fetch(`/travels/${id}`, {
@@ -30,14 +35,16 @@ function TravelPage(props) {
     history.push('/travels')
   }
 
-  const sendMailHandler = (e) => {
-    console.log(e.target.messageEmail.value);
+  const sendMailHandler = e => {
+    console.log(e.target.messageEmail.value)
     e.preventDefault()
-    fetch("/api/contact", {
-      method: "POST",
+    fetch('/api/contact', {
+      method: 'POST',
       headers: {
-     "Content-Type": "Application/json", 'Authorization': `Bearer ${token}`
+        'Content-Type': 'Application/json',
+        Authorization: `Bearer ${token}`,
       },
+
       body: JSON.stringify(
         {message: e.target.messageEmail.value, ownerId: state?.travel?.owner, from: `${store.user.user.name} ${store.user.user.surname}`, userEmail: store.user.user.email }
       )
@@ -49,6 +56,18 @@ function TravelPage(props) {
         alert("Сообщение не отправлено!")
       }
     })
+      .then(res => res.json())
+      .then(data => {
+        alert('Сообщение отправлено!')
+      })
+  }
+
+  const joinHandler = () => {
+    dispatch(fetchJoinToTravel(userId, state.travel._id))
+  }
+
+  const unJoinHandler = () => {
+    dispatch(fetchUnjoinToTravel(userId, state.travel._id))
   }
 
   return (
@@ -72,7 +91,7 @@ function TravelPage(props) {
           </div>
           <p>{state?.travel?.description}</p>
           <ul className="actions fit small">
-            {state?.travel?.owner === userId ? (
+            {state?.travel?.owner._id === userId ? (
               <li>
                 <a href={`/travels/${id}/edit`} className="button fit small">
                   Edit travel
@@ -81,7 +100,7 @@ function TravelPage(props) {
             ) : (
               <a></a>
             )}
-            {state?.travel?.owner === userId ? (
+            {state?.travel?.owner._id === userId ? (
               <li>
                 <a onClick={deleteHandler} className="button fit small">
                   Delete travel
@@ -91,13 +110,26 @@ function TravelPage(props) {
               <a></a>
             )}
           </ul>
-          <div>
-            <h2>Let's go with {state?.travel?.owner.name}</h2>
-            <input type="checkbox" id="demo-join" name="demo-join" />
-            <label htmlFor="demo-join">
-              Join to the journey. This trip will be add to your future travels.{' '}
-            </label>
-          </div>
+          {state?.travel?.owner._id !== userId && (
+            <div>
+              <h2>Let's go with {state?.travel?.owner.name}</h2>
+              {user.futureTravels.find(travel => travel._id === id) ? (
+                <>
+                  <button onClick={unJoinHandler} className="button">
+                    Unjoin from the travel
+                  </button>
+                  <p>
+                    You already joined to the journey. If your plans change, please inform{' '}
+                    {state?.travel?.owner.name} about it.
+                  </p>
+                </>
+              ) : (
+                <button onClick={joinHandler} className="button primary">
+                  Join to the travel
+                </button>
+              )}
+            </div>
+          )}
         </section>
       </div>
       <footer id="footer" className="footer-post">
@@ -106,10 +138,12 @@ function TravelPage(props) {
           <form onSubmit={sendMailHandler} method="post">
             <div className="fields">
               <div className="field">
-
                 <label htmlFor="message">Message to {state?.travel?.owner.name}</label>
-                <textarea placeholder={`${state?.travel?.owner.name} will get your message by email`} name="messageEmail" id="message" rows="3"></textarea>
-
+                <textarea
+                  placeholder={`${state?.travel?.owner.name} will get your message by email.`}
+                  name="messageEmail"
+                  id="message"
+                  rows="3"></textarea>
               </div>
             </div>
             <ul className="actions">

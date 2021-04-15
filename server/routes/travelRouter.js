@@ -128,4 +128,30 @@ router.delete('/travels', verToken, async function (req, res, next) {
   }
 })
 
+router.post('/travels/:id/join', async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.body.id })
+
+    if (!user.futureTravels.includes(req.params.id)) {
+      const newTravel = await Travel.findOne({ _id: req.params.id })
+
+      await User.findByIdAndUpdate(req.body.id, { $push: { futureTravels: newTravel } })
+      return res.status(200).json(newTravel)
+    }
+  } catch (e) {
+    console.error(e.message)
+    res.status(400).json({ message: 'Join to travel error' })
+  }
+})
+
+router.delete('/travels/:id/join', async (req, res) => {
+  try {
+    await User.findByIdAndUpdate(req.body.id, { $pull: { futureTravels: req.params.id } })
+    return res.status(200).json({ success: true })
+  } catch (e) {
+    console.error(e.message)
+    res.status(404).json({ message: 'unjoin from travel error' })
+  }
+})
+
 export default router

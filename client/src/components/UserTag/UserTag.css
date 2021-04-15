@@ -10,19 +10,19 @@ input[type="button"].tags:hover {
   box-shadow: inset 0 0 0 2px #18bfef;
 }
 
-input[type="button"].tags:active.active {
+input[type="button"].tags:active {
   outline: none ;
   box-shadow: inset 0 0 0 2px #18bfef !important;
   color: #18bfef !important;
 }
 
-/* input[type="button"].active {
+input[type="button"].active {
   outline: none ;
   box-shadow: inset 0 0 0 2px #18bfef !important;
   color: #18bfef !important;
-} */
+}
 
-input[type="button"].tags:focus {
+/* input[type="button"].tags:focus {
   outline: none ;
   box-shadow: inset 0 0 0 2px #18bfef;
-}
+} */

@@ -11,7 +11,8 @@ import './Hangouts.css'
 
 function Hangouts() {
 
-  // текущее положение в координаты
+  // функция текущее определения координат
+
   const autoCoord = () => {
     navigator.geolocation.getCurrentPosition(res =>
       fetch('/map/new-coords', {
@@ -26,38 +27,63 @@ function Hangouts() {
         }),
       })
         .then(res => res.json())
+
         .then(data => dispatch({
-          type: 'MY_COORDS', payload: {
-            lat: res.coords.latitude,
-            lng: res.coords.longitude,
-            id: data._id
-          }
+          type: 'MY_COORDS', payload:
+            data
         }))
     )
   }
 
   const { user } = useSelector(store => store.user);
-  const { coords } = useSelector(store => store.map);
-  console.log(coords);
+  const { coords, markers } = useSelector(store => store.map);
+  // console.log(coords?.user); // ???
+  // console.log(user, user);
+  // console.log(markers, 'markers');
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchInitUser())
-  }, [dispatch]);
+  }, [dispatch])
 
-  useEffect(() => (user?.visibility && !coords.lat) && autoCoord(), []);
+  // формирорвание markers
+  useEffect(() => {
+    fetch('/map')
+      .then(res => res.json())
 
-  // let visCheck = useRef();
-  console.log(user?.visibility);
+      .then(markers => dispatch({
+        type: 'INIT_VISIBLES_MARKS', payload: { markers, currentUserId: user._id }
+      }))
 
+    // (el) => (el.userId.visibility && !user._id) el.coords
+  }, [])
+
+  // console.log(coords._id);
+  // console.log(user?.visibility);
+  // console.log(coords?.user?._id, 'coords.user._id');
+  // console.log(user._id, 'user._id');
+  // добавление маркера на текущее местоположение
+  useEffect(() => user?.visibility && coords?.user?._id != user._id && autoCoord(), [user?.visibility]); //???
+
+
+  // console.log(coords._id);
+  // console.log(!coords._id);
+  // добавление маркера на текущее местоположение
+  useEffect(() => user?.visibility && !coords?._id && autoCoord(), []) //???
+
+  // console.log(user?.visibility);
+
+  const verChecked = event => {
+    return user?.visibility && 'default'
+  }
 
   const verChecked = (event) => {
     return user?.visibility && 'default'
   }
 
+  // запись в базу изменения свойства visibility
   const changeVisibility = (event) => {
-    // запись в базу изменений
     fetch('/profile', {
       method: 'PATCH',
       headers: {
@@ -68,29 +94,11 @@ function Hangouts() {
       .then(res => res.json())
       .then(data => dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: data.visibility }))
 
-    // текущее положение в координаты
-    autoCoord()
-    // navigator.geolocation.getCurrentPosition(res =>
-    //   fetch('/map/new-coords', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'Application/json' },
-    //     body: JSON.stringify({
-    //       coords: {
-    //         lat: res.coords.latitude,
-    //         lng: res.coords.longitude,
-    //       },
-    //       userId: user._id,
-    //     }),
-    //   })
-    //     .then(res => res.json())
-    //     .then(data => dispatch({
-    //       type: 'MY_COORDS', payload: {
-    //         lat: res.coords.latitude,
-    //         lng: res.coords.longitude,
-    //         id: data._id
-    //       }
-    //     }))
-    // )
+    // задать текущее положение в координаты
+
+    // console.log(user?.visibility);
+    // user?.visibility && autoCoord()
+
   }
 
   return (
@@ -104,6 +112,7 @@ function Hangouts() {
             </div>
             <div className="col-9 col-12-small">
 
+
               <div>
                 <h2>Let's hangout with someone</h2>
                 {/* слайдер */}
@@ -111,12 +120,13 @@ function Hangouts() {
                   <input type="checkbox" value="None" id="slideThree" name="check" checked />
                   <label htmlFor="slideThree"></label>
                 </div> */}
-                <input type="checkbox" id="demo-copy" name="demo-copy"
+                <input type="checkbox" id="demo-map" name="demo-map"
+
                   // ref={visCheck}
                   defaultChecked={verChecked()}
                   onChange={changeVisibility}
                 />
-                <label htmlFor="demo-copy">Become available for others</label>
+                <label htmlFor="demo-map">Become available for others</label>
               </div>
               {/* <MapSwitch /> */}
               <div>
