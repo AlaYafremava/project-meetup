@@ -1,0 +1,32 @@
+ul.actions {
+  margin-left: 0rem ;
+}
+
+input[type="submit"].userTags {
+  border-radius: 10px;
+  background-color: transparent;
+  box-shadow: inset 0 0 0 2px #18bfef !important;
+  color: #18bfef !important;
+  cursor: default;
+
+}
+
+input[type="submit"].userTags:active {
+  box-shadow: inset 0 0 0 2px #18bfef;
+  color: #18bfef ;
+}
+
+input[type="submit"].userTags:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px #18bfef;
+
+}
+
+.actions-interests {
+  display: flex;
+  flex-wrap: wrap
+}
+
+ul.actions-interests > li {
+  padding-bottom: 1rem;
+}

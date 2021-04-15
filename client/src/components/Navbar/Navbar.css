@@ -1,0 +1,24 @@
+.nav_btn {
+  box-shadow: none;
+}
+
+.nav_btn:hover {
+  box-shadow: none;
+  border-bottom: solid 2px;
+}
+
+.nav_div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.nav-ul_editbtn {
+  margin-right: 0;
+}
+
+.nav-actions {
+  display: flex;
+  flex-flow: row wrap;
+}
