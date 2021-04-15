@@ -7,6 +7,7 @@ import {
   MarkerClusterer,
 } from '@react-google-maps/api'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from "react-router-dom";
 
 const containerStyle = {
   width: '47vw',
@@ -32,29 +33,37 @@ function Map({ visibility }) {
   const store = useSelector((store) => store)
 
   // формирорвание markers
-//   useEffect(() => {
-//     fetch('/users')
-//       .then(res => res.json())
-//       .then(users => dispatch({ type: 'INIT_VISIBLES_MARKS', payload: { users, id: user?._id } }))
-//     // (el) => (el.userId.visibility && !user._id) el.coords 
-//   }, [])
+  // useEffect(() => {
+  //   fetch('/users')
+  //     .then(res => res.json())
+  //     .then(users => dispatch({ type: 'INIT_VISIBLES_MARKS', payload: { users, id: user?._id } }))
+  //   // (el) => (el.userId.visibility && !user._id) el.coords 
+  // }, [])
 
-// console.log(coords);
+  // console.log(coords);
 
+  // console.log(!visibility, 'для делита');
 
   //удалить метку, если user невидим
   useEffect(() => {
-    console.log('удаление', coords?._id); //???
-    !visibility &&
-      fetch('/map/del-coords', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'Application/json' },
-        body: JSON.stringify({
-          id: coords?._id
-        }),
-      });
+    console.log('попал в на делит Map useEffect'); //???
+    !visibility && coords?.user?._id != user._id &&
 
-    !visibility && dispatch({ type: 'DEL_COORDS' })
+      (() => {
+        fetch('/map/del-coords', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'Application/json' },
+          body: JSON.stringify({
+            id: coords?._id
+          }),
+        });
+        console.log('удаление из базы');
+      })()
+
+    !visibility && coords?.user?._id != user._id && (() => {
+      dispatch({ type: 'DEL_COORDS' });
+      console.log("удаление из Store")
+    })()
   }, [visibility]);
 
 
@@ -100,7 +109,7 @@ function Map({ visibility }) {
       <GoogleMap
         zoom={13}
         mapContainerStyle={containerStyle}
-        center={coords?.coords.lat ? coords?.coords : { lat: 59.96, lng: 30.312481 }}
+        center={coords?.coords?.lat ? coords?.coords : { lat: 59.96, lng: 30.312481 }}
         options={options}
         onClick={visibility && changeMarker}
       >
@@ -118,28 +127,28 @@ function Map({ visibility }) {
         {visibility && markers.length != 0 ? markers.map((marker) =>
           <Marker
             key={performance.now()}
-            // position={
-            //   marker.coords
-            // //   { lat: marker.lat, lng: marker.lng } //coords
-            // }
+            position={
+              { lat: marker.coords.lat, lng: marker.coords.lng } //coords
+            }
             onClick={(event) => {
-              console.log(coords.coords);
+              // console.log(marker.user.name);
               setSelected(marker);
+              console.log(marker);
             }}
           />) : null}
 
         {/* создаем информационное окно на каждый маркер */}
         {selected ? (
           <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
+            position={{ lat: selected.coords.lat, lng: selected.coords.lng }}
             onCloseClick={() => {
               setSelected(null);
             }}
           >
             <div>
-              <h2>
-                {selected.user}
-              </h2>
+              <p>
+                <Link to="/profile">{selected.user.name}</Link>
+              </p>
             </div>
           </InfoWindow>
         ) : null}

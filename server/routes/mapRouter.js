@@ -52,7 +52,7 @@ router
   .delete('/map/del-coords', async (req, res) => {
     // console.log(req.body, 'req.body');
     const { id } = req.body;
-    console.log(id, 'айди на делит');
+    console.log(id, 'роут на делит');
     try {
       await Map.findOneAndDelete({_id: id});
       res.status(200).json({ success: true })
