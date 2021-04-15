@@ -2,7 +2,15 @@ import React from 'react'
 // import { Link } from 'react-router-dom'
 import './Navbar.css'
 
-function Navbar({ navAboutHandler, navMyTravelsHandler, navMyFriendsHandler,stateAbout,stateMyTravels,stateMyFriends, otherPeople }) {
+function Navbar({
+  navAboutHandler,
+  navMyTravelsHandler,
+  navMyFriendsHandler,
+  stateAbout,
+  stateMyTravels,
+  stateMyFriends,
+  otherPeople,
+}) {
   return (
     <div className="nav_div nav-actions">
       <ul className="actions">
@@ -23,7 +31,6 @@ function Navbar({ navAboutHandler, navMyTravelsHandler, navMyFriendsHandler,stat
         </li>
       </ul>
       <div>
-
         {stateAbout && !otherPeople ? (
           <a href="/profile/edit" className="button primary">
             Edit profile
@@ -32,16 +39,15 @@ function Navbar({ navAboutHandler, navMyTravelsHandler, navMyFriendsHandler,stat
 
         {stateMyTravels && !otherPeople ? (
           <a href="/travels/new" className="button primary">
-          Create new travel
-        </a>
+            Create new travel
+          </a>
         ) : null}
 
         {stateMyFriends && !otherPeople ? (
           <a href="/people" className="button primary">
-          Find new friends
-        </a>
+            Find new friends
+          </a>
         ) : null}
-
       </div>
     </div>
   )

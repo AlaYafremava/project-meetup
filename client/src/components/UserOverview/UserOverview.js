@@ -5,7 +5,7 @@ import './UserOverview.css'
 function UserOverview({ user, langs }) {
 
   let userAge = 2021 - user?.bday?.substr(0, 4)
-  // // console.log(userAge);
+  console.log(user);
 
   return (
     <div className="row">
@@ -15,13 +15,13 @@ function UserOverview({ user, langs }) {
             <span>
               <i className="element-icon fa-venus-mars"></i>
             </span>
-            &nbsp; {(!userAge.isNaN && userAge !== 0) ? userAge + ', ' : ''}{user.sex ? user.sex : 'No gender listed'}
+            &nbsp; {(user?.bday !== null || userAge < 0) ? userAge + ', ' : ' '}{user.sex ? user.sex : 'No gender listed'}
           </li>
           <li className="li-overview">
             <span>
               <i className="element-icon fa-comments-o"></i>
             </span>
-            &nbsp; {langs ? langs.map(lang => lang.title + ', ') : 'No languages listed'}
+            &nbsp; {langs?.length > 0 ? langs.map(lang => lang.title + ' ') : 'No languages listed'}
             {/* English, Russian */}
           </li>
           <li className="li-overview">

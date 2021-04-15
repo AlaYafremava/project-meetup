@@ -1,4 +1,4 @@
-import { INIT_PEOPLE, INIT_PERSON } from '../actionTypes/actionTypes'
+import { INIT_PEOPLE } from '../actionTypes/actionTypes'
 
 const initialState = { people: [] }
 
