@@ -39,7 +39,7 @@ function Map({ visibility }) {
     // (el) => (el.userId.visibility && !user._id) el.coords 
   }, [])
 
-console.log(coords);
+// console.log(coords);
 
 
   //удалить метку, если user невидим

@@ -30,12 +30,10 @@ router.patch('/profile/edit', async (req, res) => {
   // console.log(req.body);
   let user
   let { name, surname, sex, bday, phone, country, city, homeCountry, homeTown, occupation, education, description, telegram, instagram, facebook, tags, languages, avatar } = req.body
-  // console.log(bday);
+  console.log(avatar);
   if (name || surname || sex || bday || phone || country || city || homeCountry || homeTown || occupation || education || description || telegram || instagram || facebook || tags || languages || avatar) {
     // try {
     user = await User.findById(req.body.id)
-    // user = await User.findByIdAndUpdate({ _id: req.body.id }, { name: req.body.name, surname: req.body.surname })
-    // console.log(sex);
     user.name = name
     user.surname = surname
     user.sex = sex
@@ -47,23 +45,16 @@ router.patch('/profile/edit', async (req, res) => {
     user.homeTown = homeTown
     user.profession = occupation
     user.education = education
+    user.avatar = avatar
     user.about = description
     user.tags = tags
     user.languages = languages
-
-    // if (user.telegram.includes('https://t.me/') || user.telegram.includes('@')) {
     user.telegram = telegram
-
-      //user.telegram.substring(13) + telegram.substring(1)
-    // } else {
-    // user.telegram = 'https://t.me/' + telegram.substring(1)
-    // }
     user.instagram = instagram
     user.facebook = facebook
     await user.save()
-    // console.log(user);
     return res.status(201).json({ success: true, user })
-  } else if (!name || !surname || !sex || !bday || !phone || !country || !city || !homeCountry || !homeTown || !occupation || !education || !description || !telegram || !instagram || !facebook || !tags || !languages) {
+  } else if (!name || !surname || !sex || !bday || !phone || !country || !city || !homeCountry || !homeTown || !occupation || !education || !avatar || !description || !telegram || !instagram || !facebook || !tags || !languages) {
     user = await User.findById(req.body.id)
     return res.status(201).json({ success: true, user })
   } else {
