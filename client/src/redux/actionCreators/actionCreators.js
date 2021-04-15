@@ -1,4 +1,4 @@
-import { INIT_USER, INIT_TAGS,CHECK_TAG, LOGOUT, INIT_PEOPLE, INIT_PERSON } from '../actionTypes/actionTypes'
+import { INIT_USER, INIT_TAGS,CHECK_TAG, LOGOUT, INIT_PEOPLE, ADD_FRIEND, REMOVE_FRIEND } from '../actionTypes/actionTypes'
 import {INIT_TRAVELS, ADD_TRAVELS, DEL_TRAVELS, EDIT_TRAVELS} from "../actionTypes/actionTypes"
 
 export const initUserAC = (payload) => {
@@ -57,6 +57,18 @@ export const editTravelsAC = (payload) => {
 //PEOPLE
 export const initPeopleAC = (payload) => {
   return {type: INIT_PEOPLE,
+  payload
+  }
+}
+
+export const addFriendAC = (payload) => {
+  return {type: ADD_FRIEND,
+  payload
+  }
+}
+
+export const removeFriendAC = (payload) => {
+  return {type: REMOVE_FRIEND,
   payload
   }
 }
