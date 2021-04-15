@@ -2,18 +2,8 @@ import Router from "express"
 const router = new Router()
 import User from "../models/users.js"
 import mailgunloader from "mailgun-js"
-
-let mailgun = mailgunloader({
-  apiKey: "314dabc3ae21d45be364054925982401-a09d6718-049288a7",
-  domain: "sandboxd529c04ee6974ee48d97f3c76df3b7d1.mailgun.org"
-})
-
-const sendMail = (to,from,sub,content) => {
-  let data = {
-    to,from,sub,text: content
-  }
-  return mailgun.messages().send(data)
-}
+import nodemailer from "nodemailer"
+import verToken from '../middlware/auth.js'
 
 router.get('/users', async (req, res) => {
   try {
@@ -24,10 +14,30 @@ router.get('/users', async (req, res) => {
   }
 })
 
-router.post('/api/contact', async(req,res,next) => {
+router.post('/api/contact', verToken, async(req,res,next) => {
   try{
-      await sendMail("kristina.car@mail.ru", "no-reply@test.com", "Hello", "Helllllloooooo")
-  res.send("email sent")
+    const {message, ownerId, from} = req.body
+    console.log(message, ownerId, from);
+    const user = await User.findById(ownerId)
+    let transporter = nodemailer.createTransport({
+      host: "smtp.mail.ru",
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: "meet-up", 
+        pass: "Elbrus123", 
+      },
+    });
+  
+    // send mail with defined transport object
+    // let info = await transporter.sendMail({
+    //   from: 'meet-up@mail.ru', 
+    //   to: user.email,
+    //   subject: "Запрос на добавление MEETUP", 
+    //   text: `Сообщение от ${from}:
+    //   ${message}`, 
+    // });
+  res.send({status: "Message Sent!"})
   } catch (e) {
     console.log(e)
     res.status(500)

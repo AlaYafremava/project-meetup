@@ -30,6 +30,23 @@ function TravelPage(props) {
     history.push('/travels')
   }
 
+  const sendMailHandler = (e) => {
+    console.log(e.target.messageEmail.value);
+    e.preventDefault()
+    fetch("/api/contact", {
+      method: "POST",
+      headers: {
+     "Content-Type": "Application/json", 'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(
+        {message: e.target.messageEmail.value, ownerId: state?.travel?.owner, from: `${store.user.user.name} ${store.user.user.surname}` }
+      )
+    }).then(res => res.json())
+    .then(data => {
+      alert("Сообщение отправлено!")
+    })
+  }
+
   return (
     <>
       <Header />
@@ -81,11 +98,13 @@ function TravelPage(props) {
       </div>
       <footer id="footer" className="footer-post">
         <section className="footer-post-sect">
-          <form method="post">
+          <form onSubmit={sendMailHandler} method="post">
             <div className="fields">
               <div className="field">
-                <label htmlFor="message">Write message to {state?.travel?.owner.name}</label>
-                <textarea placeholder={`${state?.travel?.owner.name} will get your message by email`} name="message" id="message" rows="3"></textarea>
+
+                <label htmlFor="message">Message to {state?.travel?.owner.name}</label>
+                <textarea placeholder={`${state?.travel?.owner.name} will get your message by email`} name="messageEmail" id="message" rows="3"></textarea>
+
               </div>
             </div>
             <ul className="actions">
