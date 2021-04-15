@@ -325,8 +325,22 @@ function TravelPageCreate(props) {
                   <input type="number" name="number" min="1" max="100" required />
                 </div>
                 <div className="col-6 col-12-xsmall">
-                  <label>Upload photo</label>
-                  <p><input type="file" name="photo" accept="image/*,image/jpeg" onChange={(event) => { setImageSelected(event.target.files[0]) }} /></p>
+                <input
+                    type="file"
+                    name="photo"
+                    accept="image/*,image/jpeg"
+                    id="field__file-2"
+                    className="field field__file"
+                    multiple
+                    required
+                    onChange={event => {
+                      setImageSelected(event.target.files[0])
+                    }}
+                  />
+                  <label className="field__file-wrapper" for="field__file-2">
+                    <div className="field__file-fake">Choose a file</div>
+                    <div className="field__file-button">Choose</div>
+                  </label>
                 </div>
               </div>
 

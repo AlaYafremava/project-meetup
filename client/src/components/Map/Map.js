@@ -33,6 +33,7 @@ function Map({ visibility }) {
   const store = useSelector((store) => store)
 
   // формирорвание markers
+
   // useEffect(() => {
   //   fetch('/users')
   //     .then(res => res.json())
@@ -41,6 +42,7 @@ function Map({ visibility }) {
   // }, [])
 
   // console.log(!visibility, 'для делита');
+
 
   //удалить метку, если user невидим
   useEffect(() => {

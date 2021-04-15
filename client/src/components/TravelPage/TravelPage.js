@@ -44,11 +44,17 @@ function TravelPage(props) {
         'Content-Type': 'Application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        message: e.target.messageEmail.value,
-        ownerId: state?.travel?.owner,
-        from: `${store.user.user.name} ${store.user.user.surname}`,
-      }),
+
+      body: JSON.stringify(
+        {message: e.target.messageEmail.value, ownerId: state?.travel?.owner, from: `${store.user.user.name} ${store.user.user.surname}`, userEmail: store.user.user.email }
+      )
+    }).then(res => res.json())
+    .then(data => {
+      if (data.status === true){
+      alert("Сообщение отправлено!")
+      } else {
+        alert("Сообщение не отправлено!")
+      }
     })
       .then(res => res.json())
       .then(data => {
@@ -128,6 +134,7 @@ function TravelPage(props) {
       </div>
       <footer id="footer" className="footer-post">
         <section className="footer-post-sect">
+        {(state?.travel?.owner !== userId) ?
           <form onSubmit={sendMailHandler} method="post">
             <div className="fields">
               <div className="field">
@@ -144,7 +151,7 @@ function TravelPage(props) {
                 <input type="submit" value="Send Message" />
               </li>
             </ul>
-          </form>
+          </form> : <a></a>}
         </section>
         <section className="split contact footer-post-sect">
           <section className="alt">

@@ -1,7 +1,6 @@
 import Router from "express"
 const router = new Router()
 import User from "../models/users.js"
-import mailgunloader from "mailgun-js"
 import nodemailer from "nodemailer"
 import verToken from '../middlware/auth.js'
 
@@ -16,8 +15,7 @@ router.get('/users', async (req, res) => {
 
 router.post('/api/contact', verToken, async(req,res,next) => {
   try{
-    const {message, ownerId, from} = req.body
-    console.log(message, ownerId, from);
+    const {message, ownerId, from, userEmail} = req.body
     const user = await User.findById(ownerId)
     let transporter = nodemailer.createTransport({
       host: "smtp.mail.ru",
@@ -30,14 +28,15 @@ router.post('/api/contact', verToken, async(req,res,next) => {
     });
   
     // send mail with defined transport object
-    // let info = await transporter.sendMail({
-    //   from: 'meet-up@mail.ru', 
-    //   to: user.email,
-    //   subject: "Запрос на добавление MEETUP", 
-    //   text: `Сообщение от ${from}:
-    //   ${message}`, 
-    // });
-  res.send({status: "Message Sent!"})
+    let info = await transporter.sendMail({
+      from: 'meet-up@mail.ru', 
+      to: user.email,
+      subject: "Запрос на добавление MEETUP", 
+      text: `Сообщение от ${from}:
+      ${message}
+      Моя почта для связи: ${userEmail}`, 
+    });
+  res.send({status: true})
   } catch (e) {
     console.log(e)
     res.status(500)
