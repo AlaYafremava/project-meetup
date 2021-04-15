@@ -27,18 +27,20 @@ function Hangouts() {
       })
         .then(res => res.json())
         .then(data => dispatch({
-          type: 'MY_COORDS', payload: {
-            lat: res.coords.latitude,
-            lng: res.coords.longitude,
-            id: data._id
-          }
+          type: 'MY_COORDS', payload: 
+          data
+          // {
+          //   lat: res.coords.latitude,
+          //   lng: res.coords.longitude,
+          //   id: data._id
+          // }
         }))
     )
   }
 
   const { user } = useSelector(store => store.user);
   const { coords } = useSelector(store => store.map);
-  console.log(coords);
+  // console.log(coords);
 
   const dispatch = useDispatch();
 
@@ -46,10 +48,24 @@ function Hangouts() {
     dispatch(fetchInitUser())
   }, [dispatch]);
 
-  useEffect(() => (user?.visibility && !coords.lat) && autoCoord(), []);
+  // console.log(coords._id);
+  // console.log(!coords._id);
+  // добавление маркера на текущее местоположение
+  useEffect(() => user?.visibility && !coords._id && autoCoord(), []);
+
+  // формирорвание markers
+  useEffect(() => {
+    fetch('/map')
+      .then(res => res.json())
+      .then(markers => console.log(markers))
+        // dispatch({
+        //   type: 'INIT_VISIBLES_MARKS', payload: { users, id: user._id }
+        // }))
+    // (el) => (el.userId.visibility && !user._id) el.coords 
+  }, [])
 
   // let visCheck = useRef();
-  console.log(user?.visibility);
+  // console.log(user?.visibility);
 
   const verChecked = (event) => {
     return user?.visibility && 'default'

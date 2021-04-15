@@ -10,6 +10,7 @@ const mapReducer = (mapCoords, action) => {
       return { ...mapCoords, markers: arrCoords };
 
     case 'MY_COORDS':
+      console.log('reduser map');
       return { ...mapCoords, coords: action.payload };
 
     case 'DEL_COORDS':

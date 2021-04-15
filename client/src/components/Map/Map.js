@@ -27,33 +27,27 @@ function Map({ visibility }) {
   const { user } = useSelector(store => store.user);
 
   const [selected, setSelected] = useState(null);
-  
+
   const { coords, markers, id } = useSelector((store) => store.map)
   const store = useSelector((store) => store)
 
-  // формирорвание markers
-  useEffect(() => {
-    fetch('/users')
-      .then(res => res.json())
-      .then(users => dispatch({ type: 'INIT_VISIBLES_MARKS', payload: { users, id: user._id } }))
-    // (el) => (el.userId.visibility && !user._id) el.coords 
-  }, [])
-
-console.log(coords);
+  
+  // console.log(coords);
+  // console.log(coords?._id, 'map coords id');
 
   //удалить метку, если user невидим
   useEffect(() => {
-    console.log(123);
-    !visibility && 
-    fetch('/map/del-coords', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'Application/json' },
-      body: JSON.stringify({
-        id: coords?.id
-      }),
-    });
+    console.log('удаление', coords._id);
+    !visibility &&
+      fetch('/map/del-coords', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'Application/json' },
+        body: JSON.stringify({
+          id: coords?._id
+        }),
+      });
 
-    dispatch({ type: 'DEL_COORDS' })
+    !visibility && dispatch({ type: 'DEL_COORDS' })
   }, [visibility]);
 
 
@@ -68,20 +62,22 @@ console.log(coords);
           lat: event.latLng.lat(),
           lng: event.latLng.lng(),
         },
-        id: coords.id,
-        time: new Date(),
+        id: coords._id,
       }),
     })
       .then(res => res.json())
       .then(data =>
-        // console.log(data.editCoords))
+        // console.log(data.editCoords, 'data.editCoords'))
         dispatch({
-          type: 'MY_COORDS', payload: {
-            lat: data.editCoords.coords.lat,
-            lng: data.editCoords.coords.lng,
-            id: data.editCoords._id
-          }
-        }))
+          type: 'MY_COORDS', payload:
+            // {
+            data.editCoords
+          //   lat: data.editCoords.coords.lat,
+          //   lng: data.editCoords.coords.lng,
+          //   id: data.editCoords._id
+          // }
+        })
+      )
   }
 
   // установка ключа google
@@ -97,12 +93,12 @@ console.log(coords);
       <GoogleMap
         zoom={13}
         mapContainerStyle={containerStyle}
-        center={coords.lat ? coords : { lat: 59.96, lng: 30.312481 }}
+        center={coords.coords?.lat ? coords.coords : { lat: 59.96, lng: 30.312481 }}
         options={options}
         onClick={visibility && changeMarker}
       >
         {visibility && <Marker
-          position={coords}
+          position={coords.coords}
           icon={{
             url: '/me.png',
             scaledSize: new window.google.maps.Size(30, 30), // масштабировать иконку
@@ -118,7 +114,7 @@ console.log(coords);
             //   { lat: marker.lat, lng: marker.lng } //coords
             // }
             onClick={(event) => {
-              console.log(coords);
+              console.log(coords.coords);
               setSelected(marker);
             }}
           />) : null}
