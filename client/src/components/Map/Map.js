@@ -35,16 +35,19 @@ function Map({ visibility }) {
   useEffect(() => {
     fetch('/users')
       .then(res => res.json())
-      .then(users => dispatch({ type: 'INIT_VISIBLES_MARKS', payload: { users, id: user._id } }))
+      .then(users => dispatch({ type: 'INIT_VISIBLES_MARKS', payload: { users, id: user?._id } }))
     // (el) => (el.userId.visibility && !user._id) el.coords 
   }, [])
-// console.log(coords.id);
+
+// console.log(coords);
+
 
   //удалить метку, если user невидим
   useEffect(() => {
+    console.log(123);
     !visibility && 
     fetch('/map/del-coords', {
-      method: 'POST',
+      method: 'DELETE',
       headers: { 'Content-Type': 'Application/json' },
       body: JSON.stringify({
         id: coords?.id
@@ -77,7 +80,7 @@ function Map({ visibility }) {
           type: 'MY_COORDS', payload: {
             lat: data.editCoords.coords.lat,
             lng: data.editCoords.coords.lng,
-            id: data._id
+            id: data.editCoords._id
           }
         }))
   }

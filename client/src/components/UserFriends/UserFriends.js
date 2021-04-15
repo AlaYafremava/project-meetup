@@ -1,11 +1,34 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+
 import './UserFriends.css'
 
 function UserFriends({ user }) {
+  const { people } = useSelector(state => state.people)
+
+  function unique(arr) {
+    let result = []
+
+    for (let str of arr) {
+      if (!result.includes(str)) {
+        result.push(str)
+      }
+    }
+    return result
+  }
+
+  console.log('fffffffffffffffffffff', people)
   return (
     <section>
-      {user.friends ? (
-        user.friends.map(friend => {
+      <h2 className="title-h2-travels">Your friends in MEETUP</h2>
+      {user.friends.length < 1 && (
+        <h4>
+          You dont have here any friends for travelling yet:( <br /> Find them!
+        </h4>
+      )}
+      {user?.friends ? (
+        unique(user.friends).map(id => {
+          const [friend] = people.filter(el => el._id === id)
           return (
             <div className="card-friend">
               <div>
