@@ -32,6 +32,23 @@ const [state, setState] = useState({})
 
   }
 
+  const sendMailHandler = (e) => {
+    console.log(e.target.messageEmail.value);
+    e.preventDefault()
+    fetch("/api/contact", {
+      method: "POST",
+      headers: {
+     "Content-Type": "Application/json", 'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(
+        {message: e.target.messageEmail.value, ownerId: state?.travel?.owner, from: `${store.user.user.name} ${store.user.user.surname}` }
+      )
+    }).then(res => res.json())
+    .then(data => {
+      alert("Сообщение отправлено!")
+    })
+  }
+
   return (
     <>
       <Header />
@@ -69,11 +86,11 @@ const [state, setState] = useState({})
       </div>
       <footer id="footer" className="footer-post">
         <section className="footer-post-sect">
-          <form method="post">
+          <form onSubmit={sendMailHandler} method="post">
             <div className="fields">
               <div className="field">
                 <label htmlFor="message">Message</label>
-                <textarea name="message" id="message" rows="3"></textarea>
+                <textarea name="messageEmail" id="message" rows="3"></textarea>
               </div>
             </div>
             <ul className="actions">
