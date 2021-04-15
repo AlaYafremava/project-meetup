@@ -40,7 +40,7 @@ function Hangouts() {
 
   const { user } = useSelector(store => store.user);
   const { coords } = useSelector(store => store.map);
-  // console.log(coords);
+  console.log(coords.user);
 
   const dispatch = useDispatch();
 
@@ -66,6 +66,7 @@ function Hangouts() {
 
   // let visCheck = useRef();
   // console.log(user?.visibility);
+
 
   const verChecked = (event) => {
     return user?.visibility && 'default'
@@ -135,7 +136,7 @@ function Hangouts() {
               </div>
               {/* <MapSwitch /> */}
               <div>
-                <Map visibility={user.visibility} />
+                <Map visibility={user?.visibility} />
               </div>
 
             </div>

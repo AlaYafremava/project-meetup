@@ -31,9 +31,16 @@ function Map({ visibility }) {
   const { coords, markers, id } = useSelector((store) => store.map)
   const store = useSelector((store) => store)
 
-  
-  // console.log(coords);
-  // console.log(coords?._id, 'map coords id');
+  // формирорвание markers
+//   useEffect(() => {
+//     fetch('/users')
+//       .then(res => res.json())
+//       .then(users => dispatch({ type: 'INIT_VISIBLES_MARKS', payload: { users, id: user?._id } }))
+//     // (el) => (el.userId.visibility && !user._id) el.coords 
+//   }, [])
+
+// console.log(coords);
+
 
   //удалить метку, если user невидим
   useEffect(() => {
