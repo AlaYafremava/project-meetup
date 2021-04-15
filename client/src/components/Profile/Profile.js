@@ -11,9 +11,9 @@ import { fetchInitUser } from '../../redux/reduxThunk/asyncFuncs'
 
 function Profile(props) {
   const user = useSelector(store => store.user.user)
-  const langs = useSelector(store => store.user.user.languages.filter(lang => lang.check))
+  const langs = useSelector(store => store.user.user.languages?.filter(lang => lang.check))
   // console.log(langs);
-  const tags = useSelector(store => store.user.user.tags.filter(tag => tag.check))
+  const tags = useSelector(store => store.user.user.tags?.filter(tag => tag.check))
   // console.log(tags);
 
   const dispatch = useDispatch()

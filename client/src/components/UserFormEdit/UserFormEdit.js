@@ -41,7 +41,7 @@ function UserFormEdit() {
 
   const formHandler = (e) => {
     e.preventDefault();
-    let { name, surname, sex, bday, phone, country, city, homeCountry, homeTown, occupation, education, description, telegram, instagram, facebook } = e.target
+    let { name, surname, sex, bday, phone, country, city, homeCountry, homeTown, occupation, education, photo, description, telegram, instagram, facebook } = e.target
     // console.log(name.value, surname.value, sex.value, bday.value, phone.value, country.value, city.value, homeCountry.value, homeTown.value, profession.value, education.value, about.value, socials.value)
 
     console.log(user);
@@ -51,7 +51,7 @@ function UserFormEdit() {
     data.append('upload_preset', 'im0obtej')
     Axios.post('https://api.cloudinary.com/v1_1/dde0fkiet/image/upload', data).then(res => {
       let imageUrl = res.data.secure_url
-
+// console.log(imageUrl);
     fetch('/profile/edit', {
       method: 'PATCH',
       headers: {
@@ -690,7 +690,9 @@ function UserFormEdit() {
                 <label>Your interests or hobbies</label>
               </div>
               <ul>
-                {user.tags && user?.tags?.map(el => <UserTag key={uuidv4()} el={el} changeStatusHandler={changeStatusHandler} />)}
+                {console.log(document.querySelectorAll('.tags'))}
+                {/* {document.querySelectorAll('.tags').forEach(el => el.onFocus()) ? 'tags active' : 'tags'} */}
+                {user.tags && user?.tags?.map(el => <UserTag key={uuidv4()} className='tags' el={el} changeStatusHandler={changeStatusHandler} />)}
               </ul>
 
               <div className="col-12">
@@ -700,18 +702,6 @@ function UserFormEdit() {
                 {user.languages && user?.languages?.map(el => <UserLang el={el} selectLangHandler={selectLangHandler} />)}
 
               </ul>
-              {/* <div className="col-4 col-12-small">
-                <input type="checkbox" id="lang1" name="demo-languages" />
-                <label htmlFor="demo-copy">russian</label>
-              </div>
-              <div className="col-4 col-12-small">
-                <input type="checkbox" id="lang2" name="demo-languages" />
-                <label htmlFor="demo-copy">english</label>
-              </div>
-              <div className="col-4 col-12-small">
-                <input type="checkbox" id="lang3" name="demo-languages" />
-                <label htmlFor="demo-copy">spain</label>
-              </div> */}
 
               <div className="col-12">
                 <label>Your socials</label>
