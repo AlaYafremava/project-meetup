@@ -22,21 +22,21 @@ function UserCard({ user }) {
       <hr />
       <ul className="icons alt">
         {user.telegram && <li>
-          <Link to={user?.telegram} className="icon brands alt fa-telegram">
+          <a href={user?.telegram} className="icon brands alt fa-telegram">
             <span className="label">Telegram</span>
-          </Link>
+          </a>
         </li>}
 
         {user.facebook && <li>
-          <Link to={user?.facebook} className="icon brands alt fa-facebook-f">
+          <a href={user?.facebook} className="icon brands alt fa-facebook-f">
             <span className="label">Facebook</span>
-          </Link>
+          </a>
         </li>}
         
         {user.instagram && <li>
-          <Link to={user?.instagram} className="icon brands alt fa-instagram">
+          <a href={user?.instagram} className="icon brands alt fa-instagram">
             <span className="label">Instagram</span>
-          </Link>
+          </a>
         </li>}
         
       </ul>

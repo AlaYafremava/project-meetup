@@ -4882,5 +4882,5 @@ input[type='button']:active,
 input[type='button']:focus 
 button:active,
 button:focus {
-  outline: none;
+  outline: none !important;
 }

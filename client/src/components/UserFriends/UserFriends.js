@@ -57,23 +57,23 @@ function UserFriends({ user }) {
               <ul className="icons alt last-icons">
                 <li>
                   {friend.telegram && (
-                    <Link to={friend.telegram} className="icon brands alt fa-telegram">
+                    <a href={friend.telegram} className="icon brands alt fa-telegram">
                       <span className="label">Telegram</span>
-                    </Link>
+                    </a>
                   )}
                 </li>
                 <li>
                   {friend.facebook && (
-                    <Link to={friend.facebook} className="icon brands alt fa-facebook-f">
+                    <a href={friend.facebook} className="icon brands alt fa-facebook-f">
                       <span className="label">Facebook</span>
-                    </Link>
+                    </a>
                   )}
                 </li>
                 <li>
                   {friend.instagram && (
-                    <Link to={friend.instagram} className="icon brands alt fa-instagram">
+                    <a href={friend.instagram} className="icon brands alt fa-instagram">
                       <span className="label">Instagram</span>
-                    </Link>
+                    </a>
                   )}
                 </li>
               </ul>
