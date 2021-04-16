@@ -46,23 +46,23 @@ function PeopleCard({ person, user }) {
       <ul className="icons alt last-icons">
         <li>
           {person.telegram && (
-            <Link to={person.telegram} className="icon brands alt fa-telegram">
+            <a href={person.telegram} className="icon brands alt fa-telegram">
               <span className="label">Telegram</span>
-            </Link>
+            </a>
           )}
         </li>
         <li>
           {person.facebook && (
-            <Link to={person.facebook} className="icon brands alt fa-facebook-f">
+            <a href={person.facebook} className="icon brands alt fa-facebook-f">
               <span className="label">Facebook</span>
-            </Link>
+            </a>
           )}
         </li>
         <li>
           {person.instagram && (
-            <Link to={person.instagram} className="icon brands alt fa-instagram">
+            <a href={person.instagram} className="icon brands alt fa-instagram">
               <span className="label">Instagram</span>
-            </Link>
+            </a>
           )}
         </li>
       </ul>
