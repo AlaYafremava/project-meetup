@@ -27,7 +27,7 @@ function Travels(props) {
             </div>
             <div className="col-9 col-12-small">
               <h2>All plans for travelling from meetupers</h2>
-              {store.travels?.travels.length < 1 && (
+              {store.travels?.travels?.length < 1 && (
                 <h4>
                   There are not any plans yet... <br /> Be first! Add some adventure!
                 </h4>
