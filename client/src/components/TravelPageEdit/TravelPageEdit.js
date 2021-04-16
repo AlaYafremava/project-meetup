@@ -21,14 +21,16 @@ function TravelPageEdit(props) {
   const [travels] = store.travels.travels.filter(travel => travel._id === id)
   const [imageSelected, setImageSelected] = useState('')
 
-  const editTravelHandler = e => {
+  const editTravelHandler = async(e) => {
     e.preventDefault()
+    let imageUrl
+    if (imageSelected !== "") {
     const data = new FormData()
     data.append('file', imageSelected)
     data.append('upload_preset', 'im0obtej')
-    Axios.post('https://api.cloudinary.com/v1_1/dde0fkiet/image/upload', data).then(res => {
-      let imageUrl = res.data.secure_url
-      if (inputStartDate.current.value <= inputEndDate.current.value) {
+    const response = await Axios.post('https://api.cloudinary.com/v1_1/dde0fkiet/image/upload', data)
+       imageUrl = response.data.secure_url
+       if (inputStartDate.current.value <= inputEndDate.current.value) {
         dispatch(
           fetchEditTravels(
             id,
@@ -46,7 +48,26 @@ function TravelPageEdit(props) {
       } else {
         alert('Enter the end date later than the start date!')
       }
-    })
+    } else {
+      if (inputStartDate.current.value <= inputEndDate.current.value) {
+        dispatch(
+          fetchEditTravels(
+            id,
+            inputTitle.current.value,
+            inputDescription.current.value,
+            inputCountry.current.value,
+            inputCity.current.value,
+            inputStartDate.current.value,
+            inputEndDate.current.value,
+            inputNumber.current.value,
+            travels?.src[0]
+          )
+        )
+        history.push('/travels')
+      } else {
+        alert('Enter the end date later than the start date!')
+      }
+    }
   }
 
   return (
@@ -391,7 +412,7 @@ function TravelPageEdit(props) {
               <button type="submit" className="button large">
                 Save changes
               </button>
-            </div>
+            </div>cloudinary
           </form>
         </section>
       </div>

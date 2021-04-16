@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// import { Link } from 'react-router-dom'
 import Header from '../Header/Header'
 import Navbar from '../Navbar/Navbar'
 import UserAbout from '../UserAbout/UserAbout'
@@ -11,11 +10,11 @@ import { fetchInitUser } from '../../redux/reduxThunk/asyncFuncs'
 
 function Profile(props) {
   const user = useSelector(store => store.user.user)
-  const langs = useSelector(store => store.user.user.languages?.filter(lang => lang.check))
+  const langs = useSelector(store => store.user?.user?.languages?.filter(lang => lang.check))
  //const langs = user?.languages.filter(lang => lang.check)
 
   // console.log(langs);
-  const tags = useSelector(store => store.user.user.tags?.filter(tag => tag.check))
+  const tags = useSelector(store => store.user?.user?.tags?.filter(tag => tag.check))
    //const tags = user?.languages.filter(tags => tags.check)
 
   // console.log(tags);

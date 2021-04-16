@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom'
 import './App.css'
 import Profile from './components/Profile/Profile'
 import Auth from './components/Auth/Auth'
@@ -34,7 +34,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            {isAuth === false ? <Auth /> : <Redirect to="/hangouts" />}
+            {isAuth === false ? <Auth /> : <Redirect to="/profile" />}
           </Route>
 
           <Route path="/hangouts">{isAuth === true ? <Hangouts /> : <Redirect to="/" />}</Route>
@@ -76,11 +76,11 @@ function App() {
             <ul>
               <li>&copy; MEETUP</li>
               <li>
-                Design: <a href="https://html5up.net">HTML5 UP</a>
+                Design: <Link to="https://html5up.net">HTML5 UP</Link>
               </li>
               <li>
                 Created by:{' '}
-                <a href="https://github.com/Alla-Yefremova/project-meetup">MEETUP Team</a>
+                <Link to="https://github.com/Alla-Yefremova/project-meetup">MEETUP Team</Link>
               </li>
             </ul>
           </div>

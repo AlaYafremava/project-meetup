@@ -1,6 +1,10 @@
 import { INIT_USER, INIT_TAGS,CHECK_TAG, LOGOUT, INIT_PEOPLE, ADD_FRIEND, REMOVE_FRIEND, INIT_VISIBLES_MARKS, CHANGE_VISIBILITY_USER } from '../actionTypes/actionTypes'
 import {INIT_TRAVELS, ADD_TRAVELS, DEL_TRAVELS, EDIT_TRAVELS, MY_COORDS, DEL_COORDS } from "../actionTypes/actionTypes"
 
+//import { INIT_USER, INIT_TAGS,CHECK_TAG, LOGOUT, INIT_PEOPLE, ADD_FRIEND, REMOVE_FRIEND, JOIN, UNJOIN } from '../actionTypes/actionTypes'
+//import {INIT_TRAVELS, ADD_TRAVELS, DEL_TRAVELS, EDIT_TRAVELS} from "../actionTypes/actionTypes"
+
+
 export const initUserAC = (payload) => {
   return {
     type: INIT_USER,
@@ -75,14 +79,11 @@ export const removeFriendAC = (payload) => {
 
 //MAP
 export const setCoordsAC = (payload) => {
-  return {type: MY_COORDS,
-  payload
-  }
+  return {type: MY_COORDS, payload  }
 }
 
 export const initVisibleMarksAC = (payload) => {
-  return {type: INIT_VISIBLES_MARKS,
-  payload
+  return {type: INIT_VISIBLES_MARKS,  payload
   }
 }
 
@@ -97,3 +98,16 @@ export const delCoordsAC = (payload) => {
   payload
   }
 }
+
+export const joindAC = (payload) => {
+  return {type: JOIN,
+  payload
+  }
+}
+
+export const unJoinAC = (payload) => {
+  return {type: UNJOIN,
+  payload
+  }
+}
+

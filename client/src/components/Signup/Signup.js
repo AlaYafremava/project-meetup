@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import './Signup.css'
 import { SIGNUP } from '../../redux/actionTypes/actionTypes.js'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 function Signup({ authHandler }) {
 
@@ -29,11 +29,11 @@ function Signup({ authHandler }) {
           dispatch({ type: SIGNUP, payload: data.user });
           return history.push('/profile')
         } else {
-          alert('Не удалось зарегистрировать пользователя')
+          alert('Failed to register user')
         }
       })
     } else {
-      alert("Пароли не совпадают!")
+      alert("Password mismatch!")
     }
   }
 
@@ -77,11 +77,11 @@ function Signup({ authHandler }) {
             <input type="submit" value="SignUp" />
           </li>
           <li className='loginLi'>
-            <a className='loginA'
-              href="#!"
+            <Link className='loginA'
+              to="#!"
               onClick={authHandler}>
               LogIn
-            </a>
+            </Link>
           </li>
         </ul>
       </form>

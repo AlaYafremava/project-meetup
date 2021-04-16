@@ -1,5 +1,5 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './Navbar.css'
 
 function Navbar({
@@ -32,21 +32,21 @@ function Navbar({
       </ul>
       <div>
         {stateAbout && !otherPeople ? (
-          <a href="/profile/edit" className="button primary">
+          <Link to="/profile/edit" className="button primary">
             Edit profile
-          </a>
+          </Link>
         ) : null}
 
         {stateMyTravels && !otherPeople ? (
-          <a href="/travels/new" className="button primary">
+          <Link to="/travels/new" className="button primary">
             Create new travel
-          </a>
+          </Link>
         ) : null}
 
         {stateMyFriends && !otherPeople ? (
-          <a href="/people" className="button primary">
+          <Link to="/people" className="button primary">
             Find new friends
-          </a>
+          </Link>
         ) : null}
       </div>
     </div>

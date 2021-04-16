@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './UserCard.css'
 
 function UserCard({ user }) {
@@ -6,7 +7,7 @@ function UserCard({ user }) {
   return (
     <div className="card">
 
-      <img src={user?.avatar ? user.avatar : "avatar.jpeg"} style={{height: '250px'}} alt="avatar" className="avatar" />
+      <img src={user?.avatar ? user?.avatar : "avatar.jpeg"} alt="avatar" className="avatar" />
 
       <p className="userName">
         <i>{user?.name} {user?.surname}</i>

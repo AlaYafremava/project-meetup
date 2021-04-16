@@ -39,11 +39,11 @@ function TravelPageCreate(props) {
               if (data.success === true) {
                 return history.push(`/travels`)
               } else {
-                alert('Не удалось cоздать travel')
+                alert('Failed to create the travel')
               }
             })
         } else {
-          alert("Введите дату окончания позже даты старта!")
+          alert("Enter the end date later than the start date!")
         }
       })}
 
@@ -325,8 +325,23 @@ function TravelPageCreate(props) {
                   <input type="number" name="number" min="1" max="100" required />
                 </div>
                 <div className="col-6 col-12-xsmall">
-                  <label>Upload photo</label>
-                  <p><input type="file" name="photo" accept="image/*,image/jpeg" onChange={(event) => { setImageSelected(event.target.files[0]) }} /></p>
+                <label>Upload your photo</label>   
+                <input
+                    type="file"
+                    name="photo"
+                    accept="image/*,image/jpeg"
+                    id="field__file-2"
+                    className="field field__file"
+                    multiple
+                    required
+                    onChange={event => {
+                      setImageSelected(event.target.files[0])
+                    }}
+                  />
+                  <label className="field__file-wrapper" for="field__file-2">
+                    <div className="field__file-fake">Choose a file</div>
+                    <div className="field__file-button">Choose</div>
+                  </label>
                 </div>
               </div>
 

@@ -21,7 +21,7 @@ function Auth(props) {
           </button>
         </h1>
         <p>
-          A free app that connects members to a global community of travelers.
+          A free app that connects members to a global community of travelers. 
           <br />
           Use MEETUP to find new friends and places.
         </p>

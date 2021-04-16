@@ -12,6 +12,8 @@ import {
   changeVisiblesUserAC,
   delCoordsAC,
   initVisibleMarksAC,
+  joindAC,
+  unJoinAC,
 } from '../../redux/actionCreators/actionCreators'
 
 export const fetchInitUser = () => {
@@ -222,5 +224,32 @@ export const fetchinitVisibleMarksAC = (markers, currentUserId) => {
     fetch('/map')
     .then(res => res.json())
     .then(markers => dispatch(initVisibleMarksAC({ markers, currentUserId })))
+
+export const fetchJoinToTravel = (id, idTravel) => {
+  return dispatch => {
+    fetch(`/travels/${idTravel}/join`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/json',
+      },
+      body: JSON.stringify({ id }),
+    })
+      .then(response => response.json())
+      .then(travel => dispatch(joindAC(travel)))
+  }
+}
+
+export const fetchUnjoinToTravel = (id, idTravel) => {
+  return dispatch => {
+    fetch(`/travels/${idTravel}/join`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'Application/json',
+      },
+      body: JSON.stringify({ id }),
+    })
+      .then(response => response.json())
+      .then(msg => dispatch(unJoinAC(idTravel)))
+
   }
 }

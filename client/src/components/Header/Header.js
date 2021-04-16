@@ -19,9 +19,9 @@ function Header({ navAboutHandler }) {
       <header id="header">
         <nav id="nav">
           <div className="linkLogo">
-            <a href="/hangouts" className="logo">
+            <Link to="/hangouts" className="logo">
               Meetup
-            </a>
+            </Link>
           </div>
           <ul className="links headersLinks">
             <li className={history.location.pathname === "/hangouts" && 'active'}>

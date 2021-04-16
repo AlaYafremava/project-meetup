@@ -13,6 +13,7 @@ import { changeVisiblesUserAC, initVisibleMarksAC, setCoordsAC } from '../../red
 function Hangouts() {
 
   // функция текущее определения координат
+
   const autoCoord = () => {
     navigator.geolocation.getCurrentPosition(res =>
       dispatch(fetchSetCoordsAC(res, user?._id))
@@ -25,11 +26,11 @@ function Hangouts() {
   // console.log(user, user);
   // console.log(markers, 'markers');
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchInitUser())
-  }, [dispatch]);
+  }, [dispatch])
 
   // формирорвание markers
   useEffect(() => {
@@ -40,7 +41,6 @@ function Hangouts() {
   // console.log(user._id, 'user._id');
   // console.log(user?.visibility, coords?.user?._id != user._id, 'выполнение условия на добавление координат');
   // console.log(user?.visibility && coords?.user?._id != user._id ? 'true' : 'false', 'выполнение условия на добавление координат');
-
 
   // добавление текущего пользователя
   console.log(previosCoords, 'previosCoords');
@@ -62,6 +62,7 @@ function Hangouts() {
     dispatch(fetchChangeVisibleEserAC(user._id, event.target.checked))
   }
 
+  }
   return (
     <>
       <Header />
@@ -72,9 +73,11 @@ function Hangouts() {
               <UserCardSmall user={user} />
             </div>
             <div className="col-9 col-12-small">
+
               <div>
                 <h2>Let's hangout with someone</h2>
                 <input type="checkbox" id="demo-map" name="demo-map"
+
                   defaultChecked={verChecked()}
                   onChange={changeVisibility}
                 />

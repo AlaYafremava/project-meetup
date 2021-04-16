@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { fetchInitTags } from '../../redux/reduxThunk/asyncFuncs'
 import { UPDATE_USER } from '../../redux/actionTypes/actionTypes'
-import { v4 as uuidv4 } from 'uuid';
 import './UserFormEdit.css'
 import UserTag from '../../components/UserTag/UserTag'
 import UserLang from '../../components/UserLang/UserLang'
@@ -17,6 +16,7 @@ function UserFormEdit() {
   const [imageSelected, setImageSelected] = useState('')
   const dispatch = useDispatch();
   const history = useHistory();
+  // console.log(user);
 
   const changeStatusHandler = (tagTitle) => {
     setTagList((prevState) => prevState.map(el => {
@@ -39,54 +39,90 @@ function UserFormEdit() {
     }))
   }
 
-  const formHandler = (e) => {
+  const formHandler = async (e) => {
     e.preventDefault();
     let { name, surname, sex, bday, phone, country, city, homeCountry, homeTown, occupation, education, photo, description, telegram, instagram, facebook } = e.target
     // console.log(name.value, surname.value, sex.value, bday.value, phone.value, country.value, city.value, homeCountry.value, homeTown.value, profession.value, education.value, about.value, socials.value)
-
     console.log(user);
-
+    let imageUrl
+    if (imageSelected !== '') {
     const data = new FormData()
     data.append('file', imageSelected)
     data.append('upload_preset', 'im0obtej')
-    Axios.post('https://api.cloudinary.com/v1_1/dde0fkiet/image/upload', data).then(res => {
-      let imageUrl = res.data.secure_url
-// console.log(imageUrl);
-    fetch('/profile/edit', {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        id: user._id,
-        name: name.value,
-        surname: surname.value,
-        sex: sex.value,
-        bday: bday.value,
-        phone: phone.value,
-        country: country.value,
-        city: city.value,
-        homeCountry: homeCountry.value,
-        homeTown: homeTown.value,
-        occupation: occupation.value,
-        education: education.value,
-        description: description.value,
-        telegram: telegram.value,
-        instagram: instagram.value,
-        facebook: facebook.value,
-        tags: tagList,
-        languages: langList,
-        avatar: imageUrl
+    const response = await Axios.post('https://api.cloudinary.com/v1_1/dde0fkiet/image/upload', data)
+      imageUrl = response.data.secure_url
+      // console.log(imageUrl);
+      fetch('/profile/edit', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: user._id,
+          name: name.value,
+          surname: surname.value,
+          sex: sex.value,
+          bday: bday.value,
+          phone: phone.value,
+          country: country.value,
+          city: city.value,
+          homeCountry: homeCountry.value,
+          homeTown: homeTown.value,
+          occupation: occupation.value,
+          education: education.value,
+          description: description.value,
+          telegram: telegram.value,
+          instagram: instagram.value,
+          facebook: facebook.value,
+          tags: tagList,
+          languages: langList,
+          avatar: imageUrl
+        })
       })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            // console.log(data);
+            dispatch({ type: UPDATE_USER, payload: data })
+            history.push('/profile')
+          }
+    })} else {
+      fetch('/profile/edit', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: user._id,
+          name: name.value,
+          surname: surname.value,
+          sex: sex.value,
+          bday: bday.value,
+          phone: phone.value,
+          country: country.value,
+          city: city.value,
+          homeCountry: homeCountry.value,
+          homeTown: homeTown.value,
+          occupation: occupation.value,
+          education: education.value,
+          description: description.value,
+          telegram: telegram.value,
+          instagram: instagram.value,
+          facebook: facebook.value,
+          tags: tagList,
+          languages: langList,
+          avatar: user.avatar
+        })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            // console.log(data);
+            dispatch({ type: UPDATE_USER, payload: data })
+            history.push('/profile')
+          }
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          // console.log(data);
-          dispatch({ type: UPDATE_USER, payload: data })
-          history.push('/profile')
-        }
-      })})
+    }
   }
 
   return (
@@ -121,8 +157,7 @@ function UserFormEdit() {
                   name="bday"
                   min="1949-12-31"
                   max={Date.now()}
-                  defaultValue={user.bday}
-
+                  defaultValue={user.bday?.slice(0, 10)}
                 />
               </div>
 
@@ -666,6 +701,8 @@ function UserFormEdit() {
                     id="field__file-2"
                     className="field field__file"
                     multiple
+                    
+                    // setValue={user?.avatar || ''}
                     onChange={event => {
                       setImageSelected(event.target.files[0])
                     }}
@@ -690,9 +727,7 @@ function UserFormEdit() {
                 <label>Your interests or hobbies</label>
               </div>
               <ul>
-                {console.log(document.querySelectorAll('.tags'))}
-                {/* {document.querySelectorAll('.tags').forEach(el => el.onFocus()) ? 'tags active' : 'tags'} */}
-                {user.tags && user?.tags?.map(el => <UserTag key={uuidv4()} className='tags' el={el} changeStatusHandler={changeStatusHandler} />)}
+                {user.tags && user?.tags?.map(el => <UserTag key={el.id} el={el} changeStatusHandler={changeStatusHandler} />)}
               </ul>
 
               <div className="col-12">
