@@ -5,7 +5,7 @@ import User from "../models/users.js"
 
 router
   .get('/map', async (req, res) => {
-    // console.log('GET MAP');
+    console.log('получени всех маркеров');
     const markers = await Map.find().populate("user")
     try {
       return res.status(200).json(markers)
