@@ -27,13 +27,13 @@ function UserCard({ user }) {
           </a>
         </li>}
 
-        {user.facebook && <li>
+        {user?.facebook && <li>
           <a href={user?.facebook} className="icon brands alt fa-facebook-f">
             <span className="label">Facebook</span>
           </a>
         </li>}
         
-        {user.instagram && <li>
+        {user?.instagram && <li>
           <a href={user?.instagram} className="icon brands alt fa-instagram">
             <span className="label">Instagram</span>
           </a>
