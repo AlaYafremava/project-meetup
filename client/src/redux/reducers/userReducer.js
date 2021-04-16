@@ -11,7 +11,7 @@ import {
   UNJOIN,
 } from '../actionTypes/actionTypes'
 
-const initialState = { user: {}, isAuth: false }
+const initialState = { user: {}, isAuth: false, visibility: false }
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
