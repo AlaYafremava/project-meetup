@@ -74,7 +74,7 @@ function Signup({ authHandler }) {
         </div>
         <ul className="actions">
           <li>
-            <input type="submit" value="SignUp" />
+            <input type="submit" value="SignUp" style={{outline: 'none'}} />
           </li>
           <li className='loginLi'>
             <Link className='loginA'
