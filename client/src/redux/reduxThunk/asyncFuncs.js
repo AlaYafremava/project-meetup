@@ -168,7 +168,7 @@ export const fetchSetCoordsAC = (res, userId) => {
           lat: res.coords.latitude,
           lng: res.coords.longitude,
         },
-        userId
+        userId,
       }),
     })
       .then(res => res.json())
@@ -181,26 +181,28 @@ export const fetchChangeVisibleEserAC = (id, visibility) => {
     fetch('/profile', {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ id, visibility })
+      body: JSON.stringify({ id, visibility }),
     })
       .then(res => res.json())
       .then(data => dispatch(changeVisiblesUserAC(data.visibility)))
   }
 }
 
-export const fetchdelCoordsAC = (id) => {
+export const fetchdelCoordsAC = id => {
   return dispatch => {
     fetch('/map/del-coords', {
       method: 'DELETE',
       headers: { 'Content-Type': 'Application/json' },
       body: JSON.stringify({
-        id
+        id,
       }),
     })
       .then(res => res.json())
-      .then(data => (data.success == true) && dispatch(delCoordsAC()) && console.log("удаление из Store"))
+      .then(
+        data => data.success == true && dispatch(delCoordsAC()) && console.log('удаление из Store')
+      )
   }
 }
 
@@ -222,8 +224,10 @@ export const fetchsetCoordsAC = (lat, lng, id) => {
 export const fetchinitVisibleMarksAC = (markers, currentUserId) => {
   return dispatch => {
     fetch('/map')
-    .then(res => res.json())
-    .then(markers => dispatch(initVisibleMarksAC({ markers, currentUserId })))
+      .then(res => res.json())
+      .then(markers => dispatch(initVisibleMarksAC({ markers, currentUserId })))
+  }
+}
 
 export const fetchJoinToTravel = (id, idTravel) => {
   return dispatch => {
@@ -250,6 +254,5 @@ export const fetchUnjoinToTravel = (id, idTravel) => {
     })
       .then(response => response.json())
       .then(msg => dispatch(unJoinAC(idTravel)))
-
   }
 }
