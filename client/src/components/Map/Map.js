@@ -96,7 +96,7 @@ console.log(markers);
             }}
           >
             <div className="gm-style .gm-style-iw-c"  style={{ paddingRight: "0px", paddingBottom: "0px", maxWidth: "648px", maxHeight: "152px", minWidth: "0px"}}>
-                <div className="title full-width"><Link to="/profile">{selected.user.name}</Link></div>
+                <div className="title full-width"><Link to={`/people/${user._id}`}>{selected.user.name}</Link></div>
                 
             </div>
           </InfoWindow>
