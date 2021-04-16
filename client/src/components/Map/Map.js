@@ -1,13 +1,14 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow,
-  MarkerClusterer,
 } from '@react-google-maps/api'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
+import { delCoordsAC, setCoordsAC } from "../../redux/actionCreators/actionCreators";
+import { fetchdelCoordsAC, fetchsetCoordsAC } from "../../redux/reduxThunk/asyncFuncs";
 
 const containerStyle = {
   width: '47vw',
@@ -29,68 +30,22 @@ function Map({ visibility }) {
 
   const [selected, setSelected] = useState(null);
 
-  const { coords, markers, id } = useSelector((store) => store.map)
-  const store = useSelector((store) => store)
-
-  // формирорвание markers
-  // useEffect(() => {
-  //   fetch('/users')
-  //     .then(res => res.json())
-  //     .then(users => dispatch({ type: 'INIT_VISIBLES_MARKS', payload: { users, id: user?._id } }))
-  //   // (el) => (el.userId.visibility && !user._id) el.coords 
-  // }, [])
-
-  // console.log(!visibility, 'для делита');
+  const { coords, markers } = useSelector((store) => store.map)
 
   //удалить метку, если user невидим
   useEffect(() => {
-    console.log('попал в на делит Map useEffect'); //???
-    !visibility && coords?.user?._id != user._id &&
+    // console.log('попал в на делит Map useEffect');
+    // console.log(!visibility, 'DEL');
+    // console.log(coords?.user?._id == user._id, 'DEL');
+    // !visibility && coords?.user?._id == user._id &&
 
-      (() => {
-        fetch('/map/del-coords', {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'Application/json' },
-          body: JSON.stringify({
-            id: coords?._id
-          }),
-        });
-        console.log('удаление из базы');
-      })()
-
-    !visibility && coords?.user?._id != user._id && (() => {
-      dispatch({ type: 'DEL_COORDS' });
-      console.log("удаление из Store")
-    })()
+      dispatch(fetchdelCoordsAC(coords?._id))
   }, [visibility]);
 
 
   // установка координат по клику и запись в store
-  // Callback
   const changeMarker = (event) => {
-    fetch('/map/edit-coords', {
-      method: 'POST',
-      headers: { 'Content-Type': 'Application/json' },
-      body: JSON.stringify({
-        coords: {
-          lat: event.latLng.lat(),
-          lng: event.latLng.lng(),
-        },
-        id: coords._id,
-      }),
-    })
-      .then(res => res.json())
-      .then(data =>
-        dispatch({
-          type: 'MY_COORDS', payload:
-            // {
-            data.editCoords
-          //   lat: data.editCoords.coords.lat,
-          //   lng: data.editCoords.coords.lng,
-          //   id: data.editCoords._id
-          // }
-        })
-      )
+    dispatch(fetchsetCoordsAC(event.latLng.lat(), event.latLng.lng(), coords._id))
   }
 
   // установка ключа google
@@ -128,7 +83,6 @@ function Map({ visibility }) {
               { lat: marker.coords.lat, lng: marker.coords.lng } //coords
             }
             onClick={(event) => {
-              // console.log(marker.user.name);
               setSelected(marker);
               console.log(marker);
             }}

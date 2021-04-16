@@ -21,3 +21,12 @@ export const INIT_MY_TRAVELS = 'INIT_MY_TRAVELS'
 export const INIT_PEOPLE = 'INIT_PEOPLE'
 export const ADD_FRIEND = 'ADD_FRIEND'
 export const REMOVE_FRIEND = 'REMOVE_FRIEND'
+
+export const MY_COORDS = 'MY_COORDS'
+export const INIT_VISIBLES_MARKS = 'INIT_VISIBLES_MARKS'
+export const DEL_COORDS = 'DEL_COORDS'
+
+
+
+
+

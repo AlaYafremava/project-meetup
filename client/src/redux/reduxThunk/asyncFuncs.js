@@ -8,6 +8,10 @@ import {
   initPeopleAC,
   addFriendAC,
   removeFriendAC,
+  setCoordsAC,
+  changeVisiblesUserAC,
+  delCoordsAC,
+  initVisibleMarksAC,
 } from '../../redux/actionCreators/actionCreators'
 
 export const fetchInitUser = () => {
@@ -148,5 +152,75 @@ export const fetchRemoveFriend = (idMy, idFriend) => {
     })
       .then(response => response.json())
       .then(msg => dispatch(removeFriendAC(idFriend)))
+  }
+}
+
+// fetch MAP
+export const fetchSetCoordsAC = (res, userId) => {
+  return dispatch => {
+    fetch('/map/new-coords', {
+      method: 'POST',
+      headers: { 'Content-Type': 'Application/json' },
+      body: JSON.stringify({
+        coords: {
+          lat: res.coords.latitude,
+          lng: res.coords.longitude,
+        },
+        userId
+      }),
+    })
+      .then(res => res.json())
+      .then(data => dispatch(setCoordsAC(data)) && console.log('создал координаты'))
+  }
+}
+
+export const fetchChangeVisibleEserAC = (id, visibility) => {
+  return dispatch => {
+    fetch('/profile', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id, visibility })
+    })
+      .then(res => res.json())
+      .then(data => dispatch(changeVisiblesUserAC(data.visibility)))
+  }
+}
+
+export const fetchdelCoordsAC = (id) => {
+  return dispatch => {
+    fetch('/map/del-coords', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'Application/json' },
+      body: JSON.stringify({
+        id
+      }),
+    })
+      .then(res => res.json())
+      .then(data => (data.success == true) && dispatch(delCoordsAC()) && console.log("удаление из Store"))
+  }
+}
+
+export const fetchsetCoordsAC = (lat, lng, id) => {
+  return dispatch => {
+    fetch('/map/edit-coords', {
+      method: 'POST',
+      headers: { 'Content-Type': 'Application/json' },
+      body: JSON.stringify({
+        coords: { lat, lng },
+        id,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => dispatch(setCoordsAC(data.editCoords)))
+  }
+}
+
+export const fetchinitVisibleMarksAC = (markers, currentUserId) => {
+  return dispatch => {
+    fetch('/map')
+    .then(res => res.json())
+    .then(markers => dispatch(initVisibleMarksAC({ markers, currentUserId })))
   }
 }

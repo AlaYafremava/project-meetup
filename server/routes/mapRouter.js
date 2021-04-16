@@ -5,7 +5,7 @@ import User from "../models/users.js"
 
 router
   .get('/map', async (req, res) => {
-    console.log('GET MAP');
+    // console.log('GET MAP');
     const markers = await Map.find().populate("user")
     try {
       return res.status(200).json(markers)
@@ -16,8 +16,9 @@ router
 
 router
   .post('/map/new-coords', async (req, res) => {
+    console.log('create coords');
     const { coords, userId } = req.body;
-    const userAddNewCoords = await (await User.findById(userId))
+    const userAddNewCoords = await (await User.findById(userId)).populate("user")
     try {
       const newCoords = await Map.create({
         coords,
@@ -34,9 +35,9 @@ router
     // console.log('edit-coords');
     const { coords, id } = req.body;
     // console.log(id, 'id');
-    console.log(coords, 'coords');
+    // console.log(coords, 'coords');
 
-    const editCoords = await Map.findOne({ _id: id })
+    const editCoords = await Map.findOne({ _id: id }).populate("user")
     // console.log(editCoords);
     try {
       // editCoords.coords = coords;
@@ -54,7 +55,7 @@ router
     const { id } = req.body;
     console.log(id, 'роут на делит');
     try {
-      await Map.findOneAndDelete({_id: id});
+      await Map.findOneAndDelete({ _id: id });
       res.status(200).json({ success: true })
     } catch {
       res.status(404).json({ message: 'coords delete error' })
