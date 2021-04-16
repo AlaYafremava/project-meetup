@@ -21,7 +21,7 @@ function UserCard({ user }) {
    
       <hr />
       <ul className="icons alt">
-        {user.telegram && <li>
+        {user?.telegram && <li>
           <a href={user?.telegram} className="icon brands alt fa-telegram">
             <span className="label">Telegram</span>
           </a>
