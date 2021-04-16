@@ -39,11 +39,11 @@ function TravelPageCreate(props) {
               if (data.success === true) {
                 return history.push(`/travels`)
               } else {
-                alert('Не удалось cоздать travel')
+                alert('Failed to create the travel')
               }
             })
         } else {
-          alert("Введите дату окончания позже даты старта!")
+          alert("Enter the end date later than the start date!")
         }
       })}
 
@@ -325,6 +325,7 @@ function TravelPageCreate(props) {
                   <input type="number" name="number" min="1" max="100" required />
                 </div>
                 <div className="col-6 col-12-xsmall">
+                <label>Upload your photo</label>   
                 <input
                     type="file"
                     name="photo"

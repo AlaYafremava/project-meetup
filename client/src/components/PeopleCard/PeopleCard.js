@@ -30,18 +30,18 @@ function PeopleCard({ person, user }) {
         <div className="title-people">
           <p>
             <i>
-              <b>{person.name + ' ' + person.surname}</b>
+              <b>{person.name}</b>
             </i>
           </p>
         </div>
       </Link>
-      <Link to={person._id === user._id ? `/profile` : `/people/${person._id}`}>
+      {/* <Link to={person._id === user._id ? `/profile` : `/people/${person._id}`}>
         <div className="title-people">
           <p>
             <i>{person.country ? person.country : 'Country not specified'}</i>
           </p>
         </div>
-      </Link>
+      </Link> */}
 
       <ul className="icons alt last-icons">
         <li>

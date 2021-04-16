@@ -2,7 +2,7 @@ import React from 'react'
 import './TravelPage.css'
 import Header from '../Header/Header'
 import { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import {
   fetchDelTravels,
   fetchJoinToTravel,
@@ -36,7 +36,6 @@ function TravelPage(props) {
   }
 
   const sendMailHandler = e => {
-    console.log(e.target.messageEmail.value)
     e.preventDefault()
     fetch('/api/contact', {
       method: 'POST',
@@ -46,20 +45,17 @@ function TravelPage(props) {
       },
 
       body: JSON.stringify(
-        {message: e.target.messageEmail.value, ownerId: state?.travel?.owner, from: `${store.user.user.name} ${store.user.user.surname}`, userEmail: store.user.user.email }
+        {message: e.target.messageEmail.value, ownerId: state?.travel?.owner._id, from: `${store.user.user.name} ${store.user.user.surname}`, userEmail: store.user.user.email }
       )
     }).then(res => res.json())
     .then(data => {
       if (data.status === true){
-      alert("Сообщение отправлено!")
+      alert("Message sent!")
       } else {
-        alert("Сообщение не отправлено!")
+        alert("Message not sent!")
       }
     })
-      .then(res => res.json())
-      .then(data => {
-        alert('Сообщение отправлено!')
-      })
+
   }
 
   const joinHandler = () => {
@@ -93,18 +89,18 @@ function TravelPage(props) {
           <ul className="actions fit small">
             {state?.travel?.owner._id === userId ? (
               <li>
-                <a href={`/travels/${id}/edit`} className="button fit small">
+                <Link to={`/travels/${id}/edit`} className="button fit small">
                   Edit travel
-                </a>
+                </Link>
               </li>
             ) : (
               <a></a>
             )}
             {state?.travel?.owner._id === userId ? (
               <li>
-                <a onClick={deleteHandler} className="button fit small">
+                <button onClick={deleteHandler} className="button fit small">
                   Delete travel
-                </a>
+                </button>
               </li>
             ) : (
               <a></a>
@@ -134,7 +130,7 @@ function TravelPage(props) {
       </div>
       <footer id="footer" className="footer-post">
         <section className="footer-post-sect">
-        {(state?.travel?.owner !== userId) ?
+        {state?.travel?.owner._id !== userId ?
           <form onSubmit={sendMailHandler} method="post">
             <div className="fields">
               <div className="field">
@@ -156,9 +152,9 @@ function TravelPage(props) {
         <section className="split contact footer-post-sect">
           <section className="alt">
             <h3>Creator</h3>
-            <a href="/people/:id" style={{ borderBottom: 'none' }}>
+            <Link to={`/people/${state?.travel?.owner._id}`} style={{ borderBottom: 'none' }}>
               <p>{state?.travel?.owner.name}</p>
-            </a>
+            </Link>
           </section>
           <section>
             <h3>Travel to</h3>

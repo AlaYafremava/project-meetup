@@ -1,42 +1,32 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import UserCardSmall from '../UserCardSmall/UserCardSmall'
 import Map from '../Map/Map'
 import Header from '../Header/Header'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchInitUser } from '../../redux/reduxThunk/asyncFuncs'
+import {
+  fetchChangeVisibleEserAC,
+  fetchInitUser,
+  fetchinitVisibleMarksAC,
+  fetchSetCoordsAC,
+} from '../../redux/reduxThunk/asyncFuncs'
 
 import './Hangouts.css'
-// import MapSwitch from '../MapSwitch/MapSwitch'
+import {
+  changeVisiblesUserAC,
+  initVisibleMarksAC,
+  setCoordsAC,
+} from '../../redux/actionCreators/actionCreators'
 
 function Hangouts() {
-
   // функция текущее определения координат
 
   const autoCoord = () => {
-    navigator.geolocation.getCurrentPosition(res =>
-      fetch('/map/new-coords', {
-        method: 'POST',
-        headers: { 'Content-Type': 'Application/json' },
-        body: JSON.stringify({
-          coords: {
-            lat: res.coords.latitude,
-            lng: res.coords.longitude,
-          },
-          userId: user._id,
-        }),
-      })
-        .then(res => res.json())
-
-        .then(data => dispatch({
-          type: 'MY_COORDS', payload:
-            data
-        }))
-    )
+    navigator.geolocation.getCurrentPosition(res => dispatch(fetchSetCoordsAC(res, user?._id)))
   }
 
-  const { user } = useSelector(store => store.user);
-  const { coords, markers } = useSelector(store => store.map);
+  const { user } = useSelector(store => store.user)
+  const { coords, markers, previosCoords } = useSelector(store => store.map)
   // console.log(coords?.user); // ???
   // console.log(user, user);
   // console.log(markers, 'markers');
@@ -49,56 +39,35 @@ function Hangouts() {
 
   // формирорвание markers
   useEffect(() => {
-    fetch('/map')
-      .then(res => res.json())
-
-      .then(markers => dispatch({
-        type: 'INIT_VISIBLES_MARKS', payload: { markers, currentUserId: user._id }
-      }))
-
-    // (el) => (el.userId.visibility && !user._id) el.coords
+    fetchinitVisibleMarksAC(markers, user?._id)
   }, [])
 
-  // console.log(coords._id);
-  // console.log(user?.visibility);
   // console.log(coords?.user?._id, 'coords.user._id');
   // console.log(user._id, 'user._id');
-  // добавление маркера на текущее местоположение
-  useEffect(() => user?.visibility && coords?.user?._id != user._id && autoCoord(), [user?.visibility]); //???
+  // console.log(user?.visibility, coords?.user?._id != user._id, 'выполнение условия на добавление координат');
+  // console.log(user?.visibility && coords?.user?._id != user._id ? 'true' : 'false', 'выполнение условия на добавление координат');
 
+  // добавление текущего пользователя
+  console.log(previosCoords, 'previosCoords')
+  console.log(previosCoords?.user._id, 'previosCoords?.user._id')
+  console.log(previosCoords?.user._id != user._id, 'previosCoords?.user._id != user._id')
+  useEffect(
+    () =>
+      user?.visibility && //если отображаем маркеры на карте
+      previosCoords?.user._id != user._id // если маркера не было создать новый, если был оставляем старый
+        ? autoCoord()
+        : dispatch(setCoordsAC(previosCoords)),
+    [user?.visibility]
+  )
 
-  // console.log(coords._id);
-  // console.log(!coords._id);
-  // добавление маркера на текущее местоположение
-  useEffect(() => user?.visibility && !coords?._id && autoCoord(), []) //???
-
-  // console.log(user?.visibility);
-
+  // запомнить значение checkBox
   const verChecked = event => {
     return user?.visibility && 'default'
   }
 
-  const verChecked = (event) => {
-    return user?.visibility && 'default'
-  }
-
   // запись в базу изменения свойства visibility
-  const changeVisibility = (event) => {
-    fetch('/profile', {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ id: user._id, visibility: event.target.checked })
-    })
-      .then(res => res.json())
-      .then(data => dispatch({ type: 'CHANGE_VISIBILITY_USER', payload: data.visibility }))
-
-    // задать текущее положение в координаты
-
-    // console.log(user?.visibility);
-    // user?.visibility && autoCoord()
-
+  const changeVisibility = event => {
+    dispatch(fetchChangeVisibleEserAC(user._id, event.target.checked))
   }
 
   return (
@@ -111,28 +80,20 @@ function Hangouts() {
               <UserCardSmall user={user} />
             </div>
             <div className="col-9 col-12-small">
-
-
               <div>
                 <h2>Let's hangout with someone</h2>
-                {/* слайдер */}
-                {/* <div class="slideThree">
-                  <input type="checkbox" value="None" id="slideThree" name="check" checked />
-                  <label htmlFor="slideThree"></label>
-                </div> */}
-                <input type="checkbox" id="demo-map" name="demo-map"
-
-                  // ref={visCheck}
+                <input
+                  type="checkbox"
+                  id="demo-map"
+                  name="demo-map"
                   defaultChecked={verChecked()}
                   onChange={changeVisibility}
                 />
                 <label htmlFor="demo-map">Become available for others</label>
               </div>
-              {/* <MapSwitch /> */}
               <div>
                 <Map visibility={user?.visibility} />
               </div>
-
             </div>
           </div>
         </section>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 // import { useDispatch } from 'react-redux'
 // import { fetchAddFriend, fetchRemoveFriend } from '../../redux/reduxThunk/asyncFuncs'
 
@@ -20,42 +21,38 @@ function UserFriends({ user }) {
   }
   return (
     <section>
-      <h2 className="title-h2-travels">Your friends in MEETUP</h2>
-      {user?.friends?.length < 1 && (
-        <h4>
-          You dont have here any friends for travelling yet:( <br /> Find them!
-        </h4>
-      )}
+      <h2 className="title-h2-travels">Friends in MEETUP</h2>
+      {user?.friends?.length < 1 && <h4>There are not any friends for travelling yet:(</h4>}
       {user?.friends ? (
         unique(user.friends).map(id => {
           const [friend] = people.filter(el => el._id === id)
           return (
             <div className="card-people">
-              <a href={friend._id === user._id ? `/profile` : `/people/${friend._id}`}>
+              <Link to={friend?._id === user._id ? `/profile` : `/people/${friend._id}`}>
                 <div>
                   <img
-                    src={friend.avatar ? friend.avatar : 'avatar.jpeg '}
+                    src={friend?.avatar ? friend.avatar : 'avatar.jpeg '}
                     alt="avatar"
                     className="avatar-people"
                   />
                 </div>
-              </a>
-              <a href={friend._id === user._id ? `/profile` : `/people/${friend._id}`}>
+              </Link>
+              <Link to={friend?._id === user._id ? `/profile` : `/people/${friend._id}`}>
                 <div className="title-people">
                   <p>
                     <i>
-                      <b>{friend.name + ' ' + friend.surname}</b>
+                      <b>{friend.name}</b>
                     </i>
                   </p>
                 </div>
-              </a>
-              <a href={friend._id === user._id ? `/profile` : `/people/${friend._id}`}>
+              </Link>
+              {/* <a href={friend._id === user._id ? `/profile` : `/people/${friend._id}`}>
                 <div className="title-people">
                   <p>
                     <i>{friend.country ? friend.country : 'Country not specified'}</i>
                   </p>
                 </div>
-              </a>
+              </a> */}
 
               <ul className="icons alt last-icons">
                 <li>

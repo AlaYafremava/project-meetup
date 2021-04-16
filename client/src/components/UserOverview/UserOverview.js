@@ -5,7 +5,7 @@ import './UserOverview.css'
 function UserOverview({ user, langs }) {
 
   let userAge = 2021 - user?.bday?.substr(0, 4)
-  console.log(user);
+  // console.log(user);
 
   return (
     <div className="row">
@@ -29,7 +29,7 @@ function UserOverview({ user, langs }) {
             <span>
               <i className="element-icon fa-user"></i>
             </span>
-            &nbsp; Member since {user.regDate ? user?.regDate?.substr(0, 4) : 2021}
+            &nbsp; Member since {user?.regDate ? user?.regDate?.substr(0, 4) : 2021}
           </li>
         </ul>
       </div>
@@ -39,19 +39,19 @@ function UserOverview({ user, langs }) {
             <span>
               <i className="element-icon fa-home"></i>
             </span>
-            &nbsp; {user.homeTown ? user.homeTown : 'No hometown listed'}
+            &nbsp; {user?.homeTown ? user.homeTown : 'No hometown listed'}
           </li>
           <li className="li-overview">
             <span>
               <i className="element-icon fa-graduation-cap"></i>
             </span>
-            &nbsp; {user.education ? user.education : 'No education listed'}
+            &nbsp; {user?.education ? user.education : 'No education listed'}
           </li>
           <li className="li-overview">
             <span>
               <i className="element-icon fa-suitcase"></i>
             </span>
-            &nbsp; {user.profession ? user.profession : 'No profession listed'}
+            &nbsp; {user?.profession ? user.profession : 'No profession listed'}
           </li>
         </ul>
       </div>

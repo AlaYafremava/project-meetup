@@ -16,7 +16,7 @@ function UserFormEdit() {
   const [imageSelected, setImageSelected] = useState('')
   const dispatch = useDispatch();
   const history = useHistory();
-  console.log(user);
+  // console.log(user);
 
   const changeStatusHandler = (tagTitle) => {
     setTagList((prevState) => prevState.map(el => {
