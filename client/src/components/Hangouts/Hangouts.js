@@ -39,7 +39,7 @@ function Hangouts() {
 
   // формирорвание markers
   useEffect(() => {
-    fetchinitVisibleMarksAC(markers, user?._id)
+    dispatch(fetchinitVisibleMarksAC(markers, user?._id))
   }, [])
 
   // console.log(coords?.user?._id, 'coords.user._id');
