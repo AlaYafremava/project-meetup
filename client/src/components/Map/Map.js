@@ -37,12 +37,11 @@ function Map({ visibility }) {
     // console.log('попал в на делит Map useEffect');
     // console.log(!visibility, 'DEL');
     // console.log(coords?.user?._id == user._id, 'DEL');
-    // !visibility && coords?.user?._id == user._id &&
-
+    !visibility && coords?.user?._id == user._id &&
       dispatch(fetchdelCoordsAC(coords?._id))
   }, [visibility]);
 
-
+console.log(markers); 
   // установка координат по клику и запись в store
   const changeMarker = (event) => {
     dispatch(fetchsetCoordsAC(event.latLng.lat(), event.latLng.lng(), coords._id))
@@ -96,10 +95,9 @@ function Map({ visibility }) {
               setSelected(null);
             }}
           >
-            <div>
-              <p>
-                <Link to="/profile">{selected.user.name}</Link>
-              </p>
+            <div className="gm-style .gm-style-iw-c"  style={{ paddingRight: "0px", paddingBottom: "0px", maxWidth: "648px", maxHeight: "152px", minWidth: "0px"}}>
+                <div className="title full-width"><Link to={`/people/${user._id}`}>{selected.user.name}</Link></div>
+                
             </div>
           </InfoWindow>
         ) : null}
